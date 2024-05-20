@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="main_screen_white">#FEFEFE</color>
+    <color name="primary_main">#43D17E</color>
+    <color name="main_white">#E7E8E8</color>
+    <color name="bottom_appbar">#050505</color>
+    <color name="text_main">#373C53</color>
+    <color name="cardview">#F9F9FA</color>
+    <color name="primary_auth">#5AB8CD</color>
+    <color name="bg">#F0F0F0</color>
+    <color name="nav_bar_bg">#F9F9F9</color>
+    <color name="text">#1C2121</color>
+    <color name="selected">#FBECEC</color>
+    <color name="btn_main">#43D17E</color>
+    <color name="green">#43D17E</color>
+    <color name="nav_bar_border">#40000000</color>
+    <color name="nav_bar_ripple">#0D007AFF</color>
+    <color name="blue">#4E94F8</color>
+    <color name="gray">#8E8E92</color>
+    <color name="yellow">#F7CE45</color>
+    <color name="red">#EB4D3D</color>
+    <color name="hint">#858585</color>
+    <color name="eventPrevious">#FF7272</color>
+    <color name="eventOngoing">#91FF72</color>
+    <color name="eventComing">#8572FF</color>
+    <color name="eventIconWrapper">#80FFFFFF</color>
+    <color name="ic_launcher_background">#8E50A2</color>
+</resources>
