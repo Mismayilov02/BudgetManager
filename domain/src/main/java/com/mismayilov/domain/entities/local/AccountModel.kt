@@ -3,9 +3,12 @@ package com.mismayilov.domain.entities.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.mismayilov.common.unums.AccountType
+import com.mismayilov.domain.entities.converters.AccountTypeConverters
 
-@Entity(tableName = "transaction_account")
-data class TransactionAccount(
+@Entity(tableName = "account")
+data class AccountModel(
     @ColumnInfo(name = "name")
     val name: String,
     @ColumnInfo(name = "currency")
@@ -17,7 +20,11 @@ data class TransactionAccount(
     @ColumnInfo(name = "icon")
     val icon: String,
     @ColumnInfo(name = "type")
-    val type: String,
+//    @TypeConverters(AccountTypeConverters::class)
+    var type: AccountType,
+    @ColumnInfo(name = "is_pinned")
+    val isPinned: Boolean = false,
+    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0
 )

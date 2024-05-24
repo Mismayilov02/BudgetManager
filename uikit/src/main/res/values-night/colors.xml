@@ -8,6 +8,8 @@
     <color name="bottom_appbar">#050505</color>
     <color name="text_main">#373C53</color>
     <color name="cardview">#F9F9FA</color>
+    <color name="btn_default">#234438</color>
+    <color name="default_card_view">#1F332C</color>
     <color name="primary_auth">#5AB8CD</color>
     <color name="bg">#F0F0F0</color>
     <color name="nav_bar_bg">#F9F9F9</color>

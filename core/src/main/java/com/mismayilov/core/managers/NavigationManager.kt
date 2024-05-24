@@ -1,5 +1,7 @@
 package com.mismayilov.core.managers
 interface NavigationManager {
+    fun bottomNavigationVisibility(isVisible: Boolean)
     fun navigateToMain()
-    fun navigateToAuth()
+    fun navigateByBottomNavigation(navigationName: String)
+    fun back()
 }

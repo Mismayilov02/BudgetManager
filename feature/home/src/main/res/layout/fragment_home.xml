@@ -5,52 +5,52 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_white"
+    android:background="@color/main_screen_white"
     tools:context=".fragment.HomeFragment">
 
     <com.mismayilov.uikit.views.CustomServiceView
-        android:id="@+id/customServicesasView"
+        android:id="@+id/btnTransfer"
         android:layout_width="75dp"
         android:layout_height="0dp"
         app:icon="@drawable/transfer"
         app:iconColor="@color/text_main"
-        app:layout_constraintBottom_toBottomOf="@+id/customServiceView2"
-        app:layout_constraintEnd_toStartOf="@+id/customServiceasView"
+        app:layout_constraintBottom_toBottomOf="@+id/btnIncome"
+        app:layout_constraintEnd_toStartOf="@+id/btnHistory"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/customServiceView2"
-        app:layout_constraintTop_toTopOf="@+id/customServiceView2"
+        app:layout_constraintStart_toEndOf="@+id/btnIncome"
+        app:layout_constraintTop_toTopOf="@+id/btnIncome"
         app:text="@string/transfer" />
 
     <com.mismayilov.uikit.views.CustomServiceView
-        android:id="@+id/customServiceViews"
+        android:id="@+id/btnExpense"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginTop="4dp"
         app:iconColor="@color/text_main"
-        app:layout_constraintEnd_toStartOf="@+id/customServiceView2"
+        app:layout_constraintEnd_toStartOf="@+id/btnIncome"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
-        app:text="@string/send" />
+        app:text="@string/expense" />
 
     <com.mismayilov.uikit.views.CustomServiceView
-        android:id="@+id/customServiceasView"
+        android:id="@+id/btnHistory"
         android:layout_width="75dp"
         android:layout_height="0dp"
         app:icon="@drawable/time"
         app:iconColor="@color/text_main"
-        app:layout_constraintBottom_toBottomOf="@+id/customServiceView2"
+        app:layout_constraintBottom_toBottomOf="@+id/btnIncome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/customServicesasView"
-        app:layout_constraintTop_toTopOf="@+id/customServiceView2"
+        app:layout_constraintStart_toEndOf="@+id/btnTransfer"
+        app:layout_constraintTop_toTopOf="@+id/btnIncome"
         app:text="@string/history" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:text="@string/available_balance"
         android:textColor="@color/text_main"
         android:textSize="16sp"
@@ -216,18 +216,18 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <com.mismayilov.uikit.views.CustomServiceView
-        android:id="@+id/customServiceView2"
+        android:id="@+id/btnIncome"
         android:layout_width="75dp"
         android:layout_height="0dp"
         app:iconColor="@color/text_main"
         app:iconRotation="180"
-        app:layout_constraintBottom_toBottomOf="@+id/customServiceViews"
-        app:layout_constraintEnd_toStartOf="@+id/customServicesasView"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExpense"
+        app:layout_constraintEnd_toStartOf="@+id/btnTransfer"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/customServiceViews"
-        app:layout_constraintTop_toTopOf="@+id/customServiceViews"
+        app:layout_constraintStart_toEndOf="@+id/btnExpense"
+        app:layout_constraintTop_toTopOf="@+id/btnExpense"
         app:layout_constraintVertical_bias="0.0"
-        app:text="@string/receive" />
+        app:text="@string/income" />
 
     <TextView
         android:id="@+id/textView6"
@@ -239,24 +239,13 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/customServiceViews" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:text="@string/see_all"
-        android:textColor="@color/text_main"
-        app:layout_constraintBottom_toBottomOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnExpense" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactionHistoryRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:paddingBottom="25dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

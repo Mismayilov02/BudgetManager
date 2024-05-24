@@ -7,7 +7,9 @@
     <string name="onboarding_title_2">You can now easily send or receive money without any transaction charge Forgot your wallet?? Don\'t worry scani and pay</string>
     <string name="available_balance">Available Balance</string>
     <string name="income">Income</string>
+    <string name="Income_now">Income Now</string>
     <string name="expense">Expense</string>
+    <string name="expense_now">Expense Now</string>
     <string name="service">Services</string>
     <string name="fast_action">Fast Action</string>
     <string name="transaction">Transactions</string>
@@ -18,6 +20,47 @@
     <string name="send">Send</string>
     <string name="receive">Receive</string>
     <string name="transfer">Transfer</string>
+    <string name="transfer_now">Transfer Now</string>
+    <string name="enter_amount">Enter the Amount</string>
+    <string name="send_to">Send to</string>
+    <string name="from">From</string>
     <string name="scan">Scan</string>
     <string name="top_up">Top Up</string>
+
+    <array name="expense_icon_name">
+        <item>beauty</item>
+        <item>car</item>
+        <item>child</item>
+        <item>clothing</item>
+        <item>decor</item>
+        <item>education</item>
+        <item>electronic</item>
+        <item>food</item>
+        <item>fruit</item>
+        <item>gift</item>
+        <item>health</item>
+        <item>home</item>
+        <item>liquor</item>
+        <item>pet</item>
+        <item>repair</item>
+        <item>shopping</item>
+        <item>smoking</item>
+        <item>snacks</item>
+        <item>social</item>
+        <item>sport</item>
+        <item>telephone</item>
+        <item>transport</item>
+        <item>travel</item>
+        <item>vegetable</item>
+    </array>
+
+    <array name="income_icon_name">
+        <item>award</item>
+        <item>bank</item>
+        <item>investment</item>
+        <item>part_time</item>
+        <item>salary</item>
+        <item>tik_tok</item>
+    </array>
+
 </resources>

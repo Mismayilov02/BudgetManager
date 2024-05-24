@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.mismayilov.domain.entities.local.TransactionCategory
-import com.mismayilov.domain.entities.local.TransactionHistory
+import com.mismayilov.common.unums.TransactionType
+import com.mismayilov.core.managers.NavigationManager
+import com.mismayilov.domain.entities.local.CategoryModel
+import com.mismayilov.domain.entities.local.TransactionModel
 import com.mismayilov.home.adapter.RecentTransactionAdapter
 import com.mismayilov.home.databinding.FragmentHomeBinding
 
@@ -24,45 +26,53 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val category = TransactionCategory("Salary", "send_money", "income", 1)
-        val category2 = TransactionCategory("Salary", "send_money", "ressd", 1)
+        (activity as? NavigationManager)?.bottomNavigationVisibility(true)
+
+        initClickListeners()
+
+        val category = CategoryModel("Salary", "salary", TransactionType.INCOME, 1)
+        val category2 = CategoryModel("Salary", "education", TransactionType.EXPENSE, 1)
+        val category3 = CategoryModel("Salary", "tik_tok", TransactionType.INCOME, 1)
+        val category4 = CategoryModel("Salary", "health", TransactionType.EXPENSE, 1)
+        val category5 = CategoryModel("Salary", "part_time", TransactionType.INCOME, 1)
+
         val data = listOf(
-            TransactionHistory(
+            TransactionModel(
                 1.0,
                 1.0,
                 null,
                 56516552451,
                 category,
                 "Salary"),
-            TransactionHistory(
+            TransactionModel(
                 1.0,
                 1.0,
                 null,
                 56516552451,
                 category2,
                 "Salary"),
-            TransactionHistory(
+            TransactionModel(
                 1.0,
                 1.0,
                 null,
                 56516552451,
-                category,
+                category3,
                 "Salary"),
-            TransactionHistory(
+            TransactionModel(
                 1.0,
                 1.0,
                 null,
                 56516552451,
-                category2,
+                category4,
                 "Salary"),
-            TransactionHistory(
+            TransactionModel(
                 1.0,
                 1.0,
                 null,
                 56516552451,
-                category,
+                category5,
                 "Salary"),
-            TransactionHistory(
+            TransactionModel(
                 1.0,
                 1.0,
                 null,
@@ -76,6 +86,18 @@ class HomeFragment : Fragment() {
             transactionHistoryRecyclerView.adapter = adapter
         }
         adapter.submitList(data)
+    }
+
+    private fun initClickListeners() {
+        binding!!.btnIncome.setOnClickListener {
+            (activity as NavigationManager).navigateByBottomNavigation("create_navigation")
+        }
+        binding!!.btnExpense.setOnClickListener {
+            (activity as NavigationManager).navigateByBottomNavigation("create_navigation")
+        }
+        binding!!.btnTransfer.setOnClickListener {
+            (activity as NavigationManager).navigateByBottomNavigation("create_navigation")
+        }
     }
 
     override fun onDestroyView() {
