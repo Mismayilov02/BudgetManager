@@ -1,11 +1,11 @@
 package com.abbtech.firstabbtechapp.modules
 
-import com.abbtech.firstabbtechapp.data.repository.AccountRepositoryImpl
+import com.mismayilov.data.repository.AccountRepositoryImpl
 import com.abbtech.firstabbtechapp.data.repository.CategoryRepositoryImpl
-import com.abbtech.firstabbtechapp.data.repository.TransactionRepositoryImpl
-import com.abbtech.firstabbtechapp.domain.repositories.TransactionRepository
+import com.mismayilov.data.repository.TransactionRepositoryImpl
+import com.mismayilov.domain.repositories.TransactionRepository
 import com.mismayilov.domain.repositories.AccountRepository
-import com.mismayilov.domain.repositories.CategoryRepository
+import com.mismayilov.domain.repositories.IconRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,5 +21,5 @@ interface RepositoryModule {
     fun bindAccountRepository(accountRepositoryImpl: AccountRepositoryImpl): AccountRepository
 
     @Binds
-    fun bindCategoryRepository(categoryRepositoryImpl: CategoryRepositoryImpl): CategoryRepository
+    fun bindCategoryRepository(categoryRepositoryImpl: CategoryRepositoryImpl): IconRepository
 }

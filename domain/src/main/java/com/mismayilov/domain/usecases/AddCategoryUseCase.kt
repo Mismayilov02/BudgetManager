@@ -1,15 +1,13 @@
 package com.abbtech.firstabbtechapp.domain.usecases
 
-import com.mismayilov.domain.entities.local.AccountModel
-import com.mismayilov.domain.entities.local.CategoryModel
-import com.mismayilov.domain.repositories.AccountRepository
-import com.mismayilov.domain.repositories.CategoryRepository
+import com.mismayilov.domain.entities.local.IconModel
+import com.mismayilov.domain.repositories.IconRepository
 import javax.inject.Inject
 
 class AddCategoryUseCase @Inject constructor(
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: IconRepository
 ) {
-     operator fun invoke(category: CategoryModel) {
-         categoryRepository.addCategory(category)
+     operator fun invoke(category: IconModel) {
+         categoryRepository.addIcon(category)
      }
 }

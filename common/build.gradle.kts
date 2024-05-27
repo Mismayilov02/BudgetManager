@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -37,11 +40,18 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(project(":domain"))
+    implementation(project(":core"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
 //    implementation ("androidx.activity:activity-ktx:1.8.2")
 //    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+
+    // Security
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
+    // Lottie
+    implementation ("com.airbnb.android:lottie:4.2.2")
 }

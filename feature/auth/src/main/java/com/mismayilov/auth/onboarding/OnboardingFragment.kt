@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.mismayilov.auth.databinding.FragmentOnboardingBinding
 import com.mismayilov.core.managers.NavigationManager
+import com.mismayilov.data.local.SharedPreferencesManager
 
 class OnboardingFragment : Fragment() {
 
@@ -22,6 +23,7 @@ class OnboardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.btnGetStarted?.setOnClickListener {
+            SharedPreferencesManager.setValue("isUserLoggedIn", true)
             (activity as NavigationManager).navigateToMain()
         }
     }

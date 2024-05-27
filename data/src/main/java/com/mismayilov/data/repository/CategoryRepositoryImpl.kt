@@ -1,33 +1,30 @@
 package com.abbtech.firstabbtechapp.data.repository
 
-import com.mismayilov.data.database.dao.CategoryDao
-import com.mismayilov.domain.entities.local.AccountModel
-import com.mismayilov.domain.entities.local.CategoryModel
-import com.mismayilov.domain.repositories.AccountRepository
-import com.mismayilov.domain.repositories.CategoryRepository
+import com.mismayilov.data.database.dao.IconModelDao
+import com.mismayilov.domain.entities.local.IconModel
+import com.mismayilov.domain.repositories.IconRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
-    private val categoryDao: CategoryDao
+    private val iconModelDao: IconModelDao
 //    private val noteService: NoteService
-)
-    : CategoryRepository {
+) : IconRepository {
 
-    override fun getCategories(): Flow<List<CategoryModel>> {
-        return categoryDao.getAll()
+    override fun getIcons(): Flow<List<IconModel>> {
+        return iconModelDao.getAll()
     }
 
-    override fun addCategory(transactionCategory: CategoryModel) {
-        categoryDao.insert(transactionCategory)
+    override fun addIcon(transactionCategory: IconModel) {
+        iconModelDao.insert(transactionCategory)
     }
 
-    override fun removeCategory(id: Long) {
-        categoryDao.deleteById(id)
+    override fun removeIcon(id: Long) {
+        iconModelDao.deleteById(id)
     }
 
-    override fun updateCategory(transactionCategory: CategoryModel) {
-        categoryDao.update(transactionCategory)
+    override fun updateIcon(transactionCategory: IconModel) {
+        iconModelDao.update(transactionCategory)
     }
 
 }

@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt")
+    id ("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 }
 
@@ -35,8 +35,6 @@ android {
 }
 
 dependencies {
-
-    implementation(project(":common"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -44,10 +42,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Database
-    implementation("androidx.room:room-runtime:2.6.1")
-    annotationProcessor("androidx.room:room-compiler:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    // Room components
+    implementation( "androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation( "androidx.room:room-ktx:2.6.1")
+    androidTestImplementation ("androidx.room:room-testing:2.6.1")
 
     // Converter
     implementation("com.google.code.gson:gson:2.10.1")

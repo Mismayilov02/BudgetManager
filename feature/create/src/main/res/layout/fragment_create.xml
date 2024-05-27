@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_screen_white"
-    tools:context=".CreateFragment">
+    tools:context=".fragment.CreateFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -25,7 +25,6 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/text_main"
         app:tabTextColor="@color/hint_text">
-<!--
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,8 +38,7 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/transfer" />-->
-
+            android:text="@string/transfer" />
     </com.google.android.material.tabs.TabLayout>
 
     <ImageButton
@@ -58,7 +56,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/iconCardview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardBackgroundColor="@color/default_card_view"
@@ -147,7 +145,7 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/custom_button_backround"
-                android:text="·"
+                android:text="."
                 android:textColor="@color/white"
                 android:textSize="34sp"
                 app:backgroundTint="@null"
@@ -265,7 +263,7 @@
                 app:layout_constraintTop_toTopOf="@+id/btnFinish">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/iconImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="15dp"
@@ -313,12 +311,12 @@
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
+                android:id="@+id/bottomCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout4"
+                app:layout_constraintEnd_toStartOf="@+id/btnReverseCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView3">
 
@@ -329,7 +327,7 @@
                     android:layout_marginStart="8dp"
                     android:rotation="180"
                     android:src="@drawable/send_money"
-                    app:layout_constraintBottom_toTopOf="@+id/texatView5a"
+                    app:layout_constraintBottom_toTopOf="@+id/bottomCardTitle"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout5"
                     app:tint="@color/hint_text" />
@@ -348,7 +346,7 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/texatView5a"
+                    android:id="@+id/bottomCardTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Home Decor"
@@ -373,7 +371,7 @@
                     app:layout_constraintVertical_bias="0.5">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/bottomCardIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:padding="10dp"
@@ -386,12 +384,12 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+                android:id="@+id/topCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout4"
+                app:layout_constraintEnd_toStartOf="@+id/btnReverseCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -407,7 +405,7 @@
                     app:layout_constraintVertical_bias="0.5">
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/topCardIcon"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:padding="8dp"
@@ -424,7 +422,7 @@
                     android:layout_height="15dp"
                     android:layout_marginStart="8dp"
                     android:src="@drawable/send_money"
-                    app:layout_constraintBottom_toTopOf="@+id/textView5"
+                    app:layout_constraintBottom_toTopOf="@+id/topCardTitle"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout3"
                     app:tint="@color/hint_text" />
@@ -443,7 +441,7 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/topCardTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Muhammed Ismayilov"
@@ -458,7 +456,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
+                android:id="@+id/btnReverseCard"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:background="@color/black_10"
@@ -487,7 +485,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/horizontal_rule"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/constraintLayout4"
+                app:layout_constraintEnd_toStartOf="@+id/btnReverseCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/hint_text" />

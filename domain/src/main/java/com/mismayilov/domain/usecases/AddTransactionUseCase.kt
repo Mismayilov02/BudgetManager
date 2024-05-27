@@ -1,6 +1,6 @@
-package com.abbtech.firstabbtechapp.domain.usecases
+package com.mismayilov.domain.usecases
 
-import com.abbtech.firstabbtechapp.domain.repositories.TransactionRepository
+import com.mismayilov.domain.repositories.TransactionRepository
 import com.mismayilov.domain.entities.local.TransactionModel
 import javax.inject.Inject
 

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_marginBottom="45dp"
-        android:background="@drawable/main_button_backround"
+        android:background="@drawable/green_button_backround"
         android:drawableEnd="@drawable/arrow_right"
         android:drawablePadding="15dp"
         android:drawableTint="@color/white"

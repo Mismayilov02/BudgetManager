@@ -1,4 +1,4 @@
-package com.abbtech.firstabbtechapp.domain.usecases
+package com.mismayilov.domain.usecases
 
 import com.mismayilov.domain.entities.local.AccountModel
 import com.mismayilov.domain.repositories.AccountRepository
@@ -8,7 +8,8 @@ import javax.inject.Inject
 class GetAllAccountUseCase @Inject constructor(
     private val accountRepository: AccountRepository
 ) {
-    operator fun invoke(): Flow<List<AccountModel>> {
+    operator fun invoke(isPinned:Boolean = false): Flow<List<AccountModel>> {
+        if (isPinned) return accountRepository.getAccountByPin(true)
         return accountRepository.getAccounts()
     }
 }

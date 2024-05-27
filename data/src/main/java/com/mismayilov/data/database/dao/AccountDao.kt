@@ -19,6 +19,9 @@ interface AccountDao {
     @Query("SELECT * FROM account WHERE id = :id")
     fun getById(id: Long): Flow<AccountModel>
 
+    @Query("SELECT * FROM account WHERE is_pinned = :isPinned")
+    fun getAccountByPin(isPinned: Boolean): Flow<List<AccountModel>>
+
     @Query("DELETE FROM account WHERE id = :id")
     fun deleteById(id: Long)
 

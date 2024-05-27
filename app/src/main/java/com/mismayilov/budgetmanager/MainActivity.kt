@@ -3,14 +3,16 @@ package com.mismayilov.budgetmanager
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mismayilov.core.managers.NavigationManager
 import com.mismayilov.data.local.SharedPreferencesManager
+import com.mismayilov.uikit.util.getResourceIdByName
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +30,6 @@ class MainActivity : AppCompatActivity(), NavigationManager {
             R.id.fragmentContainerView
         ) as NavHostFragment).navController
 
-
     }
 
     override fun bottomNavigationVisibility(isVisible: Boolean) {
@@ -40,17 +41,25 @@ class MainActivity : AppCompatActivity(), NavigationManager {
         bottomNavigationView.setupWithNavController(navController!!)
     }
 
-    override fun navigateByBottomNavigation(navigationName: String) {
-        val res = resources.getIdentifier(
-            navigationName,
-            "id",
-            packageName
-        )
-        navController?.navigate(res)
+    override fun navigateByNavigationName(navigationName: String, startDestination: String?) {
+        val res = getResourceIdByName(this, navigationName, "id")
+        if (startDestination != null) {
+            val startDestinationRes = getResourceIdByName(this, startDestination, "id")
+            navController?.navigate(
+                res,
+                null,
+                NavOptions.Builder().setPopUpTo(startDestinationRes, true).build()
+            )
+        } else navController?.navigate(res)
     }
 
+    override fun navigateByDirection(direction: Any) {
+        navController?.navigate(direction as NavDirections)
+    }
+
+
     override fun back() {
-        onBackPressed()
+        navController?.popBackStack()
     }
 
 }

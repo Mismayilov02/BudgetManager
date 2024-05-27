@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+        android:id="@+id/iconCardview"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="25dp"
@@ -212,8 +212,8 @@
         android:textColor="@color/text_main"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintStart_toStartOf="@+id/iconCardview"
+        app:layout_constraintTop_toBottomOf="@+id/iconCardview" />
 
     <com.mismayilov.uikit.views.CustomServiceView
         android:id="@+id/btnIncome"

@@ -2,19 +2,23 @@ package com.mismayilov.data.modules
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.mismayilov.common.unums.AccountType
+import com.mismayilov.common.unums.IconType
+import com.mismayilov.data.R
 import com.mismayilov.data.database.dao.AccountDao
-import com.mismayilov.data.database.dao.CategoryDao
+import com.mismayilov.data.database.dao.IconModelDao
 import com.mismayilov.data.database.db.AppDatabase
-import com.mismayilov.domain.entities.converters.AccountModelConverters
-import com.mismayilov.domain.entities.converters.AccountTypeConverters
-import com.mismayilov.domain.entities.converters.CategoryModelConverters
-import com.mismayilov.domain.entities.converters.TransactionTypeConverters
-import com.theternal.data.database.dao.TransactionDao
+import com.mismayilov.domain.entities.local.IconModel
+import com.mismayilov.data.database.dao.TransactionDao
+import com.mismayilov.domain.entities.local.AccountModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.Executors
 import javax.inject.Singleton
 
 @Module
@@ -24,19 +28,20 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideRoomDatabase(
-        @ApplicationContext context: Context,
-//        accountTypeConverters: Class<AccountTypeConverters>,
-        accountModelConverters: Class<AccountModelConverters>,
-        categoryModelConverters: Class<CategoryModelConverters>,
-//        transactionTypeConverters: Class<TransactionTypeConverters>
+        @ApplicationContext context: Context
     ): AppDatabase {
         return Room.databaseBuilder(
-            context.applicationContext, AppDatabase::class.java, "budgett.db"
-        )/*.addTypeConverter(accountTypeConverters)*/.addTypeConverter(accountModelConverters)
-            .addTypeConverter(categoryModelConverters)/*.addTypeConverter(transactionTypeConverters)*/
-            .build()
+            context.applicationContext, AppDatabase::class.java, "budget.db"
+        ).addCallback(object : RoomDatabase.Callback() {
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+                ioThread {
+                    val database = provideRoomDatabase(context)
+                    insertInitialData(database, context)
+                }
+            }
+        }).build()
     }
-
 
     @Provides
     @Singleton
@@ -48,10 +53,10 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideCategoryDao(
+    fun provideIconsDao(
         appDatabase: AppDatabase
-    ): CategoryDao {
-        return appDatabase.categoryDao()
+    ): IconModelDao {
+        return appDatabase.iconModelDao()
     }
 
     @Provides
@@ -62,28 +67,51 @@ object DatabaseModule {
         return appDatabase.accountDao()
     }
 
-    @Provides
-    @Singleton
-    fun provideAccountTypeConverters(): Class<AccountTypeConverters> {
-        return AccountTypeConverters::class.java
+    private fun insertInitialData(database: AppDatabase, context: Context) {
+        val iconModelDao = database.iconModelDao()
+        val accountDao = database.accountDao()
+
+        val incomeIcons = prepopulateCategoryData(context, IconType.INCOME)
+        val expenseIcons = prepopulateCategoryData(context, IconType.EXPENSE)
+        val transferIcons = prepopulateCategoryData(context, IconType.ACCOUNT)
+        val initialAccount = prepopulateAccountData()
+
+        iconModelDao.insertAll(incomeIcons + expenseIcons + transferIcons)
+        accountDao.insert(initialAccount)
     }
 
-    @Provides
-    @Singleton
-    fun provideAccountModelConverters(): Class<AccountModelConverters> {
-        return AccountModelConverters::class.java
+    private fun prepopulateCategoryData(context: Context, type: IconType): List<IconModel> {
+        val resourceArray = when (type) {
+            IconType.INCOME -> com.mismayilov.common.R.array.income_icons
+            IconType.EXPENSE -> com.mismayilov.common.R.array.expense_icons
+            IconType.ACCOUNT -> com.mismayilov.common.R.array.transfer_icons
+        }
+
+        val categoryNames = context.resources.getStringArray(resourceArray)
+        return categoryNames.map { name ->
+            IconModel(
+                name = name.split("_").joinToString(" ") { it.capitalize() },
+                icon = name,
+                type = type.name
+            )
+        }
     }
 
-    @Provides
-    @Singleton
-    fun provideCategoryModelConverters(): Class<CategoryModelConverters> {
-        return CategoryModelConverters::class.java
+    private fun prepopulateAccountData(): AccountModel {
+        return AccountModel(
+            name = "Cash",
+            currency = "USD",
+            amount = 0.0,
+            amountUsd = 0.0,
+            icon = "salary",
+            type = AccountType.CASH.name,
+            isPinned = true
+        )
     }
+}
 
-    @Provides
-    @Singleton
-    fun provideTransactionTypeConverters(): Class<TransactionTypeConverters> {
-        return TransactionTypeConverters::class.java
-    }
+private val IO_EXECUTOR = Executors.newSingleThreadExecutor()
 
+fun ioThread(f: () -> Unit) {
+    IO_EXECUTOR.execute(f)
 }

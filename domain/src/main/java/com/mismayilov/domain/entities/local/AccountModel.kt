@@ -3,9 +3,6 @@ package com.mismayilov.domain.entities.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.mismayilov.common.unums.AccountType
-import com.mismayilov.domain.entities.converters.AccountTypeConverters
 
 @Entity(tableName = "account")
 data class AccountModel(
@@ -21,9 +18,9 @@ data class AccountModel(
     val icon: String,
     @ColumnInfo(name = "type")
 //    @TypeConverters(AccountTypeConverters::class)
-    var type: AccountType,
+    var type: String,
     @ColumnInfo(name = "is_pinned")
-    val isPinned: Boolean = false,
+    var isPinned: Boolean = false,
     @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0

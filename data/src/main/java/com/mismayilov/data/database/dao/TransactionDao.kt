@@ -1,4 +1,4 @@
-package com.theternal.data.database.dao
+package com.mismayilov.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -13,13 +13,19 @@ import kotlinx.coroutines.flow.Flow
 interface TransactionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(note: TransactionModel)
+    fun insert(vararg note: TransactionModel)
 
     @Query("SELECT * FROM 'transaction'")
     fun getAll(): Flow<List<TransactionModel>>
 
     @Query("SELECT * FROM 'transaction' WHERE id=:id")
     fun getById(id: Long): Flow<TransactionModel>
+
+    @Query("SELECT * FROM 'transaction' LIMIT :limit")
+    fun getWithLimit(limit: Int): Flow<List<TransactionModel>>
+
+    @Query("SELECT * FROM 'transaction' WHERE date >= :startDate AND date <= :endDate")
+    fun getTransactionByTimeRange(startDate: Long, endDate: Long): Flow<List<TransactionModel>>
 
     @Delete
     fun delete(note: TransactionModel)
