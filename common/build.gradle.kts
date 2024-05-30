@@ -52,6 +52,5 @@ dependencies {
     // Security
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
-    // Lottie
-    implementation ("com.airbnb.android:lottie:4.2.2")
+
 }

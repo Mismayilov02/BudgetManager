@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 interface AccountRepository {
     fun getAccounts(): Flow<List<AccountModel>>
     fun getAccountByPin(isPinned: Boolean): Flow<List<AccountModel>>
-    fun addAccount(accountModel: AccountModel)
-    fun deleteAccount(id: Long)
-    fun updateAccount(accountModel: AccountModel)
+    fun getAccountById(id: Long): Flow<AccountModel>
+    suspend fun addAccount(accountModel: AccountModel)
+    suspend fun deleteAccount(id: Long)
+    suspend fun updateAccount(accountModel: AccountModel)
+    suspend fun updateAccountPin(pinedAccountId: Long)
 }

@@ -4,22 +4,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mismayilov.core.generics.MyDiffUtil
 import com.mismayilov.account.databinding.AccountItemDesignBinding
+import com.mismayilov.core.generics.MyDiffUtil
 import com.mismayilov.domain.entities.local.AccountModel
 import com.mismayilov.uikit.util.getResourceIdByName
 
 class AccountListAdapter constructor(
     private val onEditClick: ((Long) -> Unit),
     private val onDeleteClick: ((Long) -> Unit),
-    private val onViewClick: ((Long) -> Unit)
+    private val onViewClick: ((Long) -> Unit),
+    private val onPinClick: ((Long) -> Unit)
 ) :
     ListAdapter<AccountModel, AccountListAdapter.AccountViewHolder>(MyDiffUtil<AccountModel>(
         itemsTheSame = { oldItem, newItem -> oldItem == newItem },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
     )) {
 
-    public var pinningPosition = 0
+    private var pinningPosition = 0
+    fun getPinnedPosition() = pinningPosition
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -44,11 +46,9 @@ class AccountListAdapter constructor(
                         getResourceIdByName(itemView.context, "unpin")
                     }
                 )
+
                 btnPin.setOnClickListener {
-                    if (account.isPinned) return@setOnClickListener
-                    notifyItemChanged(pinningPosition)
-                    pinningPosition = layoutPosition
-                    notifyItemChanged(pinningPosition)
+                    onPinClick.invoke(account.id)
                 }
                 btnEdit.setOnClickListener {
                     onEditClick.invoke(account.id)

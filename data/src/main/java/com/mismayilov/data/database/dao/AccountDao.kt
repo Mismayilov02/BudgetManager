@@ -11,20 +11,26 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface AccountDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(transactionAccount: AccountModel)
+    suspend fun insert(transactionAccount: AccountModel)
 
-    @Query("SELECT * FROM account")
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+     fun insertNoSuspend(transactionAccount: AccountModel)
+
+    @Query("SELECT * FROM account ORDER BY is_pinned DESC, id DESC")
     fun getAll():Flow<List<AccountModel>>
 
     @Query("SELECT * FROM account WHERE id = :id")
-    fun getById(id: Long): Flow<AccountModel>
+     fun getById(id: Long): Flow<AccountModel>
 
     @Query("SELECT * FROM account WHERE is_pinned = :isPinned")
     fun getAccountByPin(isPinned: Boolean): Flow<List<AccountModel>>
 
     @Query("DELETE FROM account WHERE id = :id")
-    fun deleteById(id: Long)
+   suspend fun deleteById(id: Long)
 
     @Update
-    fun update(transactionAccount: AccountModel)
+    suspend fun update(transactionAccount: AccountModel)
+
+    @Query("UPDATE account SET is_pinned = CASE WHEN id = :id THEN 1 ELSE 0 END")
+    suspend fun updateAccountPin(id: Long)
 }

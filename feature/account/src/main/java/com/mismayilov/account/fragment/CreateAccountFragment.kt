@@ -1,20 +1,100 @@
 package com.mismayilov.account.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mismayilov.account.R
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import com.mismayilov.account.databinding.FragmentCreateAccountBinding
+import com.mismayilov.account.viewmodel.CreateAccountViewModel
+import com.mismayilov.core.base.fragment.BaseFragment
+import com.mismayilov.account.flow.create_account.CreateAccountEffect
+import com.mismayilov.account.flow.create_account.CreateAccountEvent
+import com.mismayilov.account.flow.create_account.CreateAccountState
+import com.mismayilov.core.managers.NavigationManager
+import com.mismayilov.domain.entities.local.AccountModel
+import com.mismayilov.uikit.adapter.IconListRecyclerAdapter
+import com.mismayilov.uikit.util.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
-class CreateAccountFragment : Fragment() {
+@AndroidEntryPoint
+class CreateAccountFragment :
+    BaseFragment<FragmentCreateAccountBinding, CreateAccountViewModel, CreateAccountState, CreateAccountEvent, CreateAccountEffect>() {
+    override fun getViewModelClass(): Class<CreateAccountViewModel> =
+        CreateAccountViewModel::class.java
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_account, container, false)
+    private val args: CreateAccountFragmentArgs by navArgs()
+    private val adapter = IconListRecyclerAdapter(false)
+
+    override val inflateBinding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCreateAccountBinding =
+        { inflater, container, attachToRoot ->
+            FragmentCreateAccountBinding.inflate(inflater, container, attachToRoot)
+        }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initClickListeners()
+        initSpinner()
+        initRecyclerView()
+        checkIsEdit()
     }
 
+    private fun checkIsEdit() {
+        setEvent(CreateAccountEvent.GetAccount(args.id))
+    }
+
+    private fun initRecyclerView() {
+        binding.apply {
+            recyclerView.setHasFixedSize(true)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
+            recyclerView.adapter = adapter
+        }
+    }
+
+    private fun initSpinner() {
+
+    }
+
+    private fun initClickListeners() {
+        binding.apply {
+            btnSave.setOnClickListener {
+                setEvent(CreateAccountEvent.CreateAccount(
+                    accountName = accountNameTxt.text.toString(),
+                    accountType = accountTypeSpinner.spinnerText,
+                    iconPosition = adapter.selectedPosition,
+                    currency = currencySpinner.spinnerText,
+                    balance = accountAmountTxt.text.toString(),
+                    isUpdate = args.id != -1L
+                ))
+            }
+        }
+    }
+
+    override fun renderEffect(effect: CreateAccountEffect) {
+        when (effect) {
+            is CreateAccountEffect.ShowToast -> showToast(effect.message)
+            is CreateAccountEffect.CloseFragment-> (activity as NavigationManager).back()
+        }
+    }
+
+    override fun renderState(state: CreateAccountState) {
+        state.apply {
+            icons?.let { adapter.submitList(it) }
+            accountTypeList?.let { binding.accountTypeSpinner.setSpinnerData(it) }
+            currencyData?.let { binding.currencySpinner.setSpinnerData(it) }
+            account?.let { setAccountData(it) }
+        }
+
+    }
+
+    private fun setAccountData(it: AccountModel) {
+        binding.apply {
+            accountNameTxt.setText(it.name)
+            accountTypeSpinner.setSelection(it.type)
+            currencySpinner.setSelection(it.currency)
+            accountAmountTxt.setText(it.amount.toString())
+            adapter.setSelectedPosition(it.icon)
+        }
+    }
 }

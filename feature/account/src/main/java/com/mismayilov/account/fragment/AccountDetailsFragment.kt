@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.mismayilov.account.databinding.FragmentAccountDetailsBinding
 import com.mismayilov.core.base.fragment.BaseFragment
-import com.mismayilov.settings.flow.create_account.AccountDetailsEffect
-import com.mismayilov.settings.flow.create_account.AccountDetailsEvent
-import com.mismayilov.settings.flow.create_account.AccountDetailsState
-import com.mismayilov.account.viewmodel.AccountDetailsViewModel
+import com.mismayilov.account.flow.create_account.CreateAccountEffect
+import com.mismayilov.account.flow.create_account.CreateAccountEvent
+import com.mismayilov.account.flow.create_account.CreateAccountState
+import com.mismayilov.account.viewmodel.CreateAccountViewModel
 import com.mismayilov.core.managers.NavigationManager
 
-class AccountDetailsFragment : BaseFragment<FragmentAccountDetailsBinding, AccountDetailsViewModel, AccountDetailsState, AccountDetailsEvent, AccountDetailsEffect>() {
-    override fun getViewModelClass(): Class<AccountDetailsViewModel> = AccountDetailsViewModel::class.java
+class AccountDetailsFragment : BaseFragment<FragmentAccountDetailsBinding, CreateAccountViewModel, CreateAccountState, CreateAccountEvent, CreateAccountEffect>() {
+    override fun getViewModelClass(): Class<CreateAccountViewModel> = CreateAccountViewModel::class.java
     override val inflateBinding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAccountDetailsBinding =
         { inflater, container, attachToRoot ->
             FragmentAccountDetailsBinding.inflate(inflater, container, attachToRoot)

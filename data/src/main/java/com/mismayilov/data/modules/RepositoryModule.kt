@@ -1,7 +1,7 @@
 package com.abbtech.firstabbtechapp.modules
 
 import com.mismayilov.data.repository.AccountRepositoryImpl
-import com.abbtech.firstabbtechapp.data.repository.CategoryRepositoryImpl
+import com.mismayilov.data.repository.CategoryRepositoryImpl
 import com.mismayilov.data.repository.TransactionRepositoryImpl
 import com.mismayilov.domain.repositories.TransactionRepository
 import com.mismayilov.domain.repositories.AccountRepository

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/icon_navigation"
+    app:startDestination="@id/iconManagerFragment">
+    <fragment
+        android:id="@+id/iconManagerFragment"
+        android:name="com.mismayilov.icon.fragment.IconManagerFragment"
+        android:label="fragment_icon_manager"
+        tools:layout="@layout/fragment_icon_manager" >
+        <action
+            android:id="@+id/action_iconManagerFragment_to_createIconFragment"
+            app:destination="@id/createIconFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createIconFragment"
+        android:name="com.mismayilov.icon.fragment.CreateIconFragment"
+        android:label="fragment_create_icon"
+        tools:layout="@layout/fragment_create_icon" >
+        <argument
+            android:name="iconType"
+            app:argType="string" />
+        <argument
+            android:name="isEdit"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="icon"
+            app:argType="string"
+            android:defaultValue=" " />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue=" " />
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+</navigation>

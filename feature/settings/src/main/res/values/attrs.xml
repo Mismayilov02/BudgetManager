@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSettingsView">
+        <attr name="itemText" format="string" />
+        <attr name="iconImage" format="reference" />
+        <attr name="rightIcon" format="reference" />
+        <attr name="showSwitch" format="boolean" />
+        <attr name="showTimer" format="boolean" />
+    </declare-styleable>
+</resources>

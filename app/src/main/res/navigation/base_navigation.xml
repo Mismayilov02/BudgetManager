@@ -9,5 +9,6 @@
     <include app:graph="@navigation/reports_navigation" />
     <include app:graph="@navigation/create_navigation" />
     <include app:graph="@navigation/account_navigation" />
+    <include app:graph="@navigation/icon_navigation" />
 
 </navigation>

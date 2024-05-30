@@ -39,6 +39,7 @@ android {
 
 dependencies {
 
+    implementation(project(":uikit"))
     implementation(project(":core"))
     implementation(project(":domain"))
     implementation(project(":common"))

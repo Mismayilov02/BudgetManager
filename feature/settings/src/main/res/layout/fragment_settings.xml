@@ -8,62 +8,43 @@
     android:background="@color/main_screen_white"
     tools:context=".fragment.SettingsFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btnAccounts"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="24dp"
-        app:cardBackgroundColor="@color/cardview"
-        app:cardCornerRadius="12dp"
+    <com.mismayilov.settings.view.CustomItemView
+        android:id="@+id/accountItemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        app:iconImage="@drawable/account"
+        app:itemText="@string/accounts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:rightIcon="@drawable/angle_left"
+        app:showSwitch="false" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <com.mismayilov.settings.view.CustomItemView
+        android:id="@+id/iconItemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:iconImage="@drawable/star"
+        app:itemText="@string/icons"
+        app:rightIcon="@drawable/angle_left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountItemView" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="12dp"
-                android:src="@drawable/account"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                app:tint="@color/green" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="12dp"
-                android:rotation="180"
-                android:src="@drawable/angle_left"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <TextView
-                android:id="@+id/dialogMessageTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="@string/accounts"
-                android:textColor="@color/text_main"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    <com.mismayilov.settings.view.CustomItemView
+        android:id="@+id/reminderItemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:iconImage="@drawable/calendar"
+        app:itemText="@string/reminder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconItemView"
+        app:showTimer="true"
+        app:showSwitch="true" />
 
     <TextView
         android:id="@+id/textView5"

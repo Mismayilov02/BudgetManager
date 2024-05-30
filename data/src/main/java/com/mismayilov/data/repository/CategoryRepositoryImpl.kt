@@ -1,4 +1,4 @@
-package com.abbtech.firstabbtechapp.data.repository
+package com.mismayilov.data.repository
 
 import com.mismayilov.data.database.dao.IconModelDao
 import com.mismayilov.domain.entities.local.IconModel
@@ -15,15 +15,19 @@ class CategoryRepositoryImpl @Inject constructor(
         return iconModelDao.getAll()
     }
 
-    override fun addIcon(transactionCategory: IconModel) {
+    override fun getIconByType(type: String): Flow<List<IconModel>> {
+        return iconModelDao.getByType(type)
+    }
+
+    override suspend fun addIcon(transactionCategory: IconModel) {
         iconModelDao.insert(transactionCategory)
     }
 
-    override fun removeIcon(id: Long) {
+    override suspend fun deleteIcon(id: Long) {
         iconModelDao.deleteById(id)
     }
 
-    override fun updateIcon(transactionCategory: IconModel) {
+    override suspend fun updateIcon(transactionCategory: IconModel) {
         iconModelDao.update(transactionCategory)
     }
 

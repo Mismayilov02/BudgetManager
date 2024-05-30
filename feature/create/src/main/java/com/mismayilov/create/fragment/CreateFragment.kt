@@ -28,8 +28,10 @@ import java.text.SimpleDateFormat
 class CreateFragment :
     BaseFragment<FragmentCreateBinding, CreateViewModel, CreateState, CreateEvent, CreateEffect>() {
 
-    private var topCardIconList = mutableListOf<IconModel>()
-    private var bottomCardIconList = mutableListOf<IconModel>()
+//    private var topCardIconList = mutableListOf<IconModel>()
+//    private var bottomCardIconList = mutableListOf<IconModel>()
+    private var selectedTabLayoutPosition = 0
+    private var isNavigatedBack: Boolean = false
 
     override fun getViewModelClass(): Class<CreateViewModel> = CreateViewModel::class.java
 
@@ -72,8 +74,15 @@ class CreateFragment :
         }
     }
 
-    private fun showBottomSheet(icons: List<IconModel>, onSelected: ((Long) -> Unit)) {
-        val bottomSheet = CustomBottomSheetDialog(icons, onSelected)
+    private fun showBottomSheet(
+        icons: List<IconModel>,
+        onSelected: ((Long) -> Unit)
+    ) {
+        val bottomSheet = CustomBottomSheetDialog(icons, onSelected) {
+                val iconType = icons.first().type
+                isNavigatedBack = true
+                (activity as NavigationManager).navigateByNavigationName(if (iconType == IconType.ACCOUNT.name) "account_navigation" else "icon_navigation")
+        }
         bottomSheet.show(parentFragmentManager, "CustomBottomSheet")
     }
 
@@ -83,32 +92,32 @@ class CreateFragment :
     }
 
     private fun initTabLayout() {
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                checkTabPosition(tab!!.position)
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
+        binding.tabLayout.onClickListener = {
+            selectedTabLayoutPosition = it
+            checkTabPosition(it)
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun checkTabPosition(position: Int) {
+        if (isNavigatedBack) {
+            isNavigatedBack = false
+            return
+        }
         when (position) {
             0 -> {
                 setEvent(CreateEvent.CategorySelected(IconType.EXPENSE))
-                binding.btnFinish.text = "Expense Now"
+                binding.btnTransfer.text = "Expense Now"
             }
 
             1 -> {
                 setEvent(CreateEvent.CategorySelected(IconType.INCOME))
-                binding.btnFinish.text = "Income Now"
+                binding.btnTransfer.text = "Income Now"
             }
 
             2 -> {
                 setEvent(CreateEvent.CategorySelected(IconType.ACCOUNT))
-                binding.btnFinish.text = "Transfer Now"
+                binding.btnTransfer.text = "Transfer Now"
             }
         }
     }
@@ -125,48 +134,66 @@ class CreateFragment :
                     txtDate.text = "$day $month\n$year"
                 }
             }
-            btnFinish.setOnClickListener {
+            btnTransfer.setOnClickListener {
                 /*showBottomSheet(bottomCardIconList) {
     //               setEvent(CreateEvent.CardSelectedId(it.toLong(), false))
                 }*/
             }
 
             topCard.setOnClickListener {
-                showBottomSheet(topCardIconList) {
+                setEvent(CreateEvent.SelectCardData(true))
+                /*showBottomSheet(topCardIconList) {
                     setEvent(CreateEvent.CardSelectedId(it, true))
-                }
+                }*/
             }
 
             bottomCard.setOnClickListener {
-                showBottomSheet(bottomCardIconList) {
+                setEvent(CreateEvent.SelectCardData(false))
+               /* showBottomSheet(bottomCardIconList) {
                     setEvent(CreateEvent.CardSelectedId(it, false))
-                }
+                }*/
             }
 
             btnReverseCard.setOnClickListener {
-                setEvent(CreateEvent.ReverseCards)
+                val position = tabLayout.currentSelectedTabPosition
+                if (position == 2) {
+                    setEvent(CreateEvent.ReverseCards)
+                } else tabLayout.selectTab(if (position == 0) 1 else 0)
+
+            }
+        }
+    }
+
+    override fun renderEffect(effect: CreateEffect) {
+        when (effect) {
+            is CreateEffect.SelectCardData -> {
+                showBottomSheet(effect.cardData) {
+                    setEvent(CreateEvent.CardSelectedId(it, effect.isTop))
+                }
             }
         }
     }
 
     override fun renderState(state: CreateState) {
-        super.renderState(state)
-        state.topCardData?.let { topCardIconList = it.toMutableList() }
-        state.bottomCardData?.let { bottomCardIconList = it.toMutableList() }
+//        state.topCardData?.let { topCardIconList = it.toMutableList() }
+//        state.bottomCardData?.let { bottomCardIconList = it.toMutableList() }
         state.selectedTopCard?.let {
             binding.topCardTitle.text = it.name
             binding.topCardIcon.setImageResource(getResourceIdByName(requireContext(), it.icon))
         }
         state.selectedBottomCard?.let {
             binding.bottomCardTitle.text = it.name
-            binding.bottomCardIcon.setImageResource(
-                getResourceIdByName(
-                    requireContext(),
-                    it.icon
-                )
-            )
+            binding.bottomCardIcon.setImageResource(getResourceIdByName(requireContext(), it.icon))
         }
         state.amount.let { binding.txtAmount.text = it }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (isNavigatedBack) {
+            (activity as NavigationManager).bottomNavigationVisibility(false)
+            binding.tabLayout.selectTab(selectedTabLayoutPosition)
+        }
     }
 
 }

@@ -67,6 +67,14 @@ object DatabaseModule {
         return appDatabase.accountDao()
     }
 
+    @Provides
+    @Singleton
+    fun provideContext(
+        @ApplicationContext context: Context
+    ): Context {
+        return context
+    }
+
     private fun insertInitialData(database: AppDatabase, context: Context) {
         val iconModelDao = database.iconModelDao()
         val accountDao = database.accountDao()
@@ -76,15 +84,15 @@ object DatabaseModule {
         val transferIcons = prepopulateCategoryData(context, IconType.ACCOUNT)
         val initialAccount = prepopulateAccountData()
 
-        iconModelDao.insertAll(incomeIcons + expenseIcons + transferIcons)
-        accountDao.insert(initialAccount)
+        iconModelDao.insertAll(incomeIcons + expenseIcons /*+ transferIcons*/)
+        accountDao.insertNoSuspend(initialAccount)
     }
 
     private fun prepopulateCategoryData(context: Context, type: IconType): List<IconModel> {
         val resourceArray = when (type) {
-            IconType.INCOME -> com.mismayilov.common.R.array.income_icons
-            IconType.EXPENSE -> com.mismayilov.common.R.array.expense_icons
-            IconType.ACCOUNT -> com.mismayilov.common.R.array.transfer_icons
+            IconType.INCOME -> com.mismayilov.uikit.R.array.income_icons
+            IconType.EXPENSE -> com.mismayilov.uikit.R.array.expense_icons
+            IconType.ACCOUNT -> com.mismayilov.uikit.R.array.transfer_icons
         }
 
         val categoryNames = context.resources.getStringArray(resourceArray)

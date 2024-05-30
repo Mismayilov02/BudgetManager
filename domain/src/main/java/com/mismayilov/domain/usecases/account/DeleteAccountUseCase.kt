@@ -6,7 +6,7 @@ import javax.inject.Inject
 class DeleteAccountUseCase @Inject constructor(
     private val accountRepository: AccountRepository
 ) {
-    operator fun invoke(accountId: Long) {
+    suspend operator fun invoke(accountId: Long) {
         accountRepository.deleteAccount(accountId)
     }
 }

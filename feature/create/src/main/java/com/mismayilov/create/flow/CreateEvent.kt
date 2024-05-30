@@ -6,6 +6,7 @@ sealed class CreateEvent {
     data class CategorySelected(val categoryType: IconType) : CreateEvent()
     data class CardSelectedId(val id: Long = 0, val isTopCard: Boolean = false) : CreateEvent()
     data class AmountChanged(val lastAmount: String, val newNumber: String) : CreateEvent()
+    data class SelectCardData(val isTop: Boolean) : CreateEvent()
     data object ReverseCards : CreateEvent()
     data object SaveData : CreateEvent()
 }

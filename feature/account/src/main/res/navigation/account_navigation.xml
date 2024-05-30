@@ -36,7 +36,8 @@
         tools:layout="@layout/fragment_create_account" >
         <argument
             android:name="id"
-            app:argType="long" />
+            app:argType="long"
+            android:defaultValue="-1L" />
     </fragment>
 
 </navigation>

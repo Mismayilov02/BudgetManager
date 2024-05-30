@@ -50,6 +50,8 @@ dependencies {
     implementation(project(":feature:reports"))
     implementation(project(":feature:create"))
     implementation(project(":feature:account"))
+    implementation(project(":feature:icon"))
+    implementation(project(":uikit"))
     implementation(project(":data"))
     implementation(project(":core"))
     implementation(libs.androidx.core.ktx)

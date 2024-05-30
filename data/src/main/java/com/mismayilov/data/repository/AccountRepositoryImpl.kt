@@ -19,17 +19,25 @@ class AccountRepositoryImpl @Inject constructor(
         return accountDao.getAccountByPin(isPinned)
     }
 
-    override fun addAccount(accountModel: AccountModel) {
+    override  fun getAccountById(id: Long): Flow<AccountModel> {
+        return accountDao.getById(id)
+    }
+
+    override suspend fun addAccount(accountModel: AccountModel) {
         accountDao.insert(accountModel)
     }
 
-    override fun deleteAccount(id: Long) {
+    override suspend fun deleteAccount(id: Long) {
         accountDao.deleteById(id)
     }
 
 
-    override fun updateAccount(accountModel: AccountModel) {
+    override suspend fun updateAccount(accountModel: AccountModel) {
         accountDao.update(accountModel)
+    }
+
+    override suspend fun updateAccountPin(pinedAccountId: Long) {
+        accountDao.updateAccountPin(pinedAccountId)
     }
 
 }

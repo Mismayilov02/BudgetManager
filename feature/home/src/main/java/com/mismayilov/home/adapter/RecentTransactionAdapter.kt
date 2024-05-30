@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mismayilov.common.databinding.TransactionHistoryItemDesignBinding
 import com.mismayilov.core.generics.MyDiffUtil
 import com.mismayilov.common.unums.IconType
 import com.mismayilov.common.utility.Util.Companion.DATE_TIME_FORMAT
 import com.mismayilov.domain.entities.local.TransactionModel
 import com.mismayilov.home.R
+import com.mismayilov.uikit.databinding.TransactionHistoryItemDesignBinding
 import com.mismayilov.uikit.util.getResourceIdByName
 import java.text.SimpleDateFormat
 
@@ -43,7 +43,7 @@ class RecentTransactionAdapter:ListAdapter<TransactionModel, RecentTransactionAd
                 historyTitle.text = transactionHistory.note?: transactionHistory.category.name
                 historyAmount.text = "${amountIcon}${transactionHistory.amount}"
 
-                val color = if (isIncome) com.mismayilov.common.R.color.btn_main else com.mismayilov.common.R.color.red
+                val color = if (isIncome) com.mismayilov.uikit.R.color.btn_main else com.mismayilov.uikit.R.color.red
                 historyAmount.setTextColor(ContextCompat.getColor(historyAmount.context, color))
                 historyCarview.setCardBackgroundColor(ContextCompat.getColor(historyCarview.context, color))
 

@@ -26,8 +26,11 @@ class SettingsFragment : Fragment() {
 
     private fun initClickListeners() {
         _binding?.apply {
-            btnAccounts.setOnClickListener {
+            accountItemView.setOnClickListener {
                 (activity as NavigationManager).navigateByNavigationName("account_navigation")
+            }
+            iconItemView.setOnClickListener {
+                (activity as NavigationManager).navigateByNavigationName("icon_navigation")
             }
         }
     }
