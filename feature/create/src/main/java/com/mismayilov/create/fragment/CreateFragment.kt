@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.tabs.TabLayout
 import com.mismayilov.common.unums.IconType
 import com.mismayilov.common.utility.Util.Companion.DAY_FORMAT
 import com.mismayilov.common.utility.Util.Companion.MONTH_FORMAT
+import com.mismayilov.common.utility.Util.Companion.MULTILINE_DATE_FORMAT
 import com.mismayilov.common.utility.Util.Companion.YEAR_FORMAT
 import com.mismayilov.common.utility.showDatePicker
 import com.mismayilov.core.base.fragment.BaseFragment
@@ -20,6 +20,7 @@ import com.mismayilov.create.flow.CreateState
 import com.mismayilov.create.viewmodel.CreateViewModel
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.uikit.util.getResourceIdByName
+import com.mismayilov.uikit.util.showToast
 import com.mismayilov.uikit.views.CustomBottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -28,8 +29,6 @@ import java.text.SimpleDateFormat
 class CreateFragment :
     BaseFragment<FragmentCreateBinding, CreateViewModel, CreateState, CreateEvent, CreateEffect>() {
 
-//    private var topCardIconList = mutableListOf<IconModel>()
-//    private var bottomCardIconList = mutableListOf<IconModel>()
     private var selectedTabLayoutPosition = 0
     private var isNavigatedBack: Boolean = false
 
@@ -48,7 +47,20 @@ class CreateFragment :
         initClickListeners()
         initNumberPad()
         initTabLayout()
+        selectDefaultTab()
+        checkIsUpdate()
+    }
 
+    private fun checkIsUpdate() {
+        val id = arguments?.getLong("id")
+        if (id != null) {
+            setEvent(CreateEvent.GetTransaction(id))
+        }
+    }
+
+    private fun selectDefaultTab() {
+        val selectedIndex = arguments?.getString("tabSelectedIndex")?.toInt() ?: 0
+        binding.tabLayout.selectTab(selectedIndex)
     }
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -122,7 +134,7 @@ class CreateFragment :
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun initClickListeners() {
         binding.apply {
             btnBack.setOnClickListener {
@@ -130,28 +142,22 @@ class CreateFragment :
             }
 
             btnDate.setOnClickListener {
-                showDatePicker(requireContext()) { day, month, year ->
-                    txtDate.text = "$day $month\n$year"
+                showDatePicker(requireContext()) {timeMillis ->
+                    txtDate.text = SimpleDateFormat(MULTILINE_DATE_FORMAT).format(timeMillis)
                 }
             }
             btnTransfer.setOnClickListener {
-                /*showBottomSheet(bottomCardIconList) {
-    //               setEvent(CreateEvent.CardSelectedId(it.toLong(), false))
-                }*/
+                val date = SimpleDateFormat(MULTILINE_DATE_FORMAT).parse(txtDate.text.toString())
+                val note = null
+                setEvent(CreateEvent.SaveData(date!!.time, note))
             }
 
             topCard.setOnClickListener {
-                setEvent(CreateEvent.SelectCardData(true))
-                /*showBottomSheet(topCardIconList) {
-                    setEvent(CreateEvent.CardSelectedId(it, true))
-                }*/
+                setEvent(CreateEvent.ClickCard(true))
             }
 
             bottomCard.setOnClickListener {
-                setEvent(CreateEvent.SelectCardData(false))
-               /* showBottomSheet(bottomCardIconList) {
-                    setEvent(CreateEvent.CardSelectedId(it, false))
-                }*/
+                setEvent(CreateEvent.ClickCard(false))
             }
 
             btnReverseCard.setOnClickListener {
@@ -166,17 +172,21 @@ class CreateFragment :
 
     override fun renderEffect(effect: CreateEffect) {
         when (effect) {
-            is CreateEffect.SelectCardData -> {
+            is CreateEffect.ShowBottomSheet -> {
                 showBottomSheet(effect.cardData) {
                     setEvent(CreateEvent.CardSelectedId(it, effect.isTop))
                 }
+            }
+            is CreateEffect.CloseScreen -> {
+                (activity as NavigationManager).back()
+            }
+            is CreateEffect.ShowToast -> {
+                showToast(effect.message)
             }
         }
     }
 
     override fun renderState(state: CreateState) {
-//        state.topCardData?.let { topCardIconList = it.toMutableList() }
-//        state.bottomCardData?.let { bottomCardIconList = it.toMutableList() }
         state.selectedTopCard?.let {
             binding.topCardTitle.text = it.name
             binding.topCardIcon.setImageResource(getResourceIdByName(requireContext(), it.icon))

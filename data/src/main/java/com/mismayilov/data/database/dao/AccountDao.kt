@@ -33,4 +33,7 @@ interface AccountDao {
 
     @Query("UPDATE account SET is_pinned = CASE WHEN id = :id THEN 1 ELSE 0 END")
     suspend fun updateAccountPin(id: Long)
+
+    @Query("UPDATE account SET amount = amount + :amount WHERE id = :id")
+    suspend fun updateAccountAmount(id: Long, amount: Double)
 }

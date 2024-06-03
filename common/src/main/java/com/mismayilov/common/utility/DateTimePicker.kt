@@ -1,21 +1,19 @@
 package com.mismayilov.common.utility
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-fun showDatePicker(context:Context, lambda: (String,String,String) -> Unit) {
+fun showDatePicker(context: Context, onDateSelected: (Long) -> Unit) {
     val calendar = Calendar.getInstance()
     val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        val day:String  = SimpleDateFormat("dd", Locale.getDefault()).format(calendar.time)
-        val month:String  = SimpleDateFormat("MMM", Locale.getDefault()).format(calendar.time)
-        val year:String  = SimpleDateFormat("yyyy", Locale.getDefault()).format(calendar.time)
-        lambda(day,month,year)
+        onDateSelected(calendar.timeInMillis)
     }
     DatePickerDialog(
         context,
@@ -24,4 +22,26 @@ fun showDatePicker(context:Context, lambda: (String,String,String) -> Unit) {
         calendar.get(Calendar.MONTH),
         calendar.get(Calendar.DAY_OF_MONTH)
     ).show()
+}
+
+fun showTimePicker(context: Context, onTimeSelected: (Long) -> Unit, onCancel: () -> Unit = {}) {
+    val calendar = Calendar.getInstance()
+    val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
+        calendar.set(Calendar.MINUTE, minute)
+        onTimeSelected(calendar.timeInMillis)
+    }
+    val timePickerDialog = TimePickerDialog(
+        context,
+        timeSetListener,
+        calendar.get(Calendar.HOUR_OF_DAY),
+        calendar.get(Calendar.MINUTE),
+        true
+    )
+
+    timePickerDialog.setOnCancelListener {
+        onCancel()
+    }
+
+    timePickerDialog.show()
 }

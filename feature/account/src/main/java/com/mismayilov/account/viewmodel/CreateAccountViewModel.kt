@@ -116,10 +116,11 @@ class CreateAccountViewModel @Inject constructor(
         isUpdate: Boolean
     ) {
         viewModelScope.launch(Dispatchers.IO) {
+            val currencyName = CurrencyType.entries.find { it.value == currency }?.name!!
             createAccountUseCase(
                 AccountModel(
                     name = name,
-                    currency = currency,
+                    currency = currencyName,
                     amount = balance.toDouble(),
                     amountUsd = balance.toDouble(),
                     icon = _icons.value[iconPosition].icon,

@@ -6,5 +6,5 @@ data class CreateState (
     val selectedTopCard:IconModel?=null,
     val selectedBottomCard:IconModel?=null,
     var amount:String="0",
-    val isLoading:Boolean=false,
+    val note :String?=null,
 )

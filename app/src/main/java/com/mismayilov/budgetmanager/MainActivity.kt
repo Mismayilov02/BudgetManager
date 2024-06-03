@@ -57,6 +57,11 @@ class MainActivity : AppCompatActivity(), NavigationManager {
         navController?.navigate(direction as NavDirections)
     }
 
+    override fun navigateByBundle(navigationName: String, bundle: Bundle) {
+        val res = getResourceIdByName(this, navigationName, "id")
+        navController?.navigate(res, bundle)
+    }
+
 
     override fun back() {
         navController?.popBackStack()

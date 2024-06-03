@@ -5,6 +5,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.mismayilov.common.unums.AccountType
+import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.common.unums.IconType
 import com.mismayilov.data.R
 import com.mismayilov.data.database.dao.AccountDao
@@ -81,7 +82,6 @@ object DatabaseModule {
 
         val incomeIcons = prepopulateCategoryData(context, IconType.INCOME)
         val expenseIcons = prepopulateCategoryData(context, IconType.EXPENSE)
-        val transferIcons = prepopulateCategoryData(context, IconType.ACCOUNT)
         val initialAccount = prepopulateAccountData()
 
         iconModelDao.insertAll(incomeIcons + expenseIcons /*+ transferIcons*/)
@@ -108,7 +108,7 @@ object DatabaseModule {
     private fun prepopulateAccountData(): AccountModel {
         return AccountModel(
             name = "Cash",
-            currency = "USD",
+            currency = CurrencyType.USD.name,
             amount = 0.0,
             amountUsd = 0.0,
             icon = "salary",

@@ -20,6 +20,10 @@ class TransactionRepositoryImpl @Inject constructor(
         return transactionDao.getAll()
     }
 
+    override fun getTransactionById(id: Long): Flow<TransactionModel> {
+        return transactionDao.getById(id)
+    }
+
     override fun getTransactionByTimeRange(
         startDate: Long,
         endDate: Long
@@ -27,7 +31,7 @@ class TransactionRepositoryImpl @Inject constructor(
         return transactionDao.getTransactionByTimeRange(startDate, endDate)
     }
 
-    override fun addTransaction(transaction: TransactionModel) {
+    override suspend fun addTransaction(transaction: TransactionModel) {
         transactionDao.insert(transaction)
     }
 
@@ -37,6 +41,14 @@ class TransactionRepositoryImpl @Inject constructor(
 
     override fun updateTransaction(transaction: TransactionModel) {
         transactionDao.update(transaction)
+    }
+
+    override suspend fun deleteTransaction(id: Long) {
+        transactionDao.deleteTransaction(id)
+    }
+
+    override  fun getSum(type: String): Double {
+        return transactionDao.getSum(type)
     }
 
 }

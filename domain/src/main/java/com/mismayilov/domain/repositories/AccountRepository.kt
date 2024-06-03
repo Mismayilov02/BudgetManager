@@ -11,4 +11,5 @@ interface AccountRepository {
     suspend fun deleteAccount(id: Long)
     suspend fun updateAccount(accountModel: AccountModel)
     suspend fun updateAccountPin(pinedAccountId: Long)
+    suspend fun updateAccountAmount(id: Long, amount: Double)
 }

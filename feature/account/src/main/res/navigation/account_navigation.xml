@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/accountManagerFragment"
-        android:name="com.mismayilov.account.fragment.AccountDetailsFragment"
+        android:name="com.mismayilov.account.fragment.AccountManagerFragment"
         android:label="fragment_accounts_manager"
         tools:layout="@layout/fragment_account_details" >
         <argument

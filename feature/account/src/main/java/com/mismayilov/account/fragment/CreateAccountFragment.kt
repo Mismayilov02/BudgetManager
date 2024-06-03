@@ -12,6 +12,7 @@ import com.mismayilov.core.base.fragment.BaseFragment
 import com.mismayilov.account.flow.create_account.CreateAccountEffect
 import com.mismayilov.account.flow.create_account.CreateAccountEvent
 import com.mismayilov.account.flow.create_account.CreateAccountState
+import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.core.managers.NavigationManager
 import com.mismayilov.domain.entities.local.AccountModel
 import com.mismayilov.uikit.adapter.IconListRecyclerAdapter
@@ -35,7 +36,6 @@ class CreateAccountFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initClickListeners()
-        initSpinner()
         initRecyclerView()
         checkIsEdit()
     }
@@ -52,13 +52,10 @@ class CreateAccountFragment :
         }
     }
 
-    private fun initSpinner() {
-
-    }
 
     private fun initClickListeners() {
         binding.apply {
-            btnSave.setOnClickListener {
+            customTopBar.rightClickListener= {
                 setEvent(CreateAccountEvent.CreateAccount(
                     accountName = accountNameTxt.text.toString(),
                     accountType = accountTypeSpinner.spinnerText,
@@ -67,6 +64,9 @@ class CreateAccountFragment :
                     balance = accountAmountTxt.text.toString(),
                     isUpdate = args.id != -1L
                 ))
+            }
+            customTopBar.setOnClickListener {
+                (activity as NavigationManager).back()
             }
         }
     }
@@ -92,7 +92,7 @@ class CreateAccountFragment :
         binding.apply {
             accountNameTxt.setText(it.name)
             accountTypeSpinner.setSelection(it.type)
-            currencySpinner.setSelection(it.currency)
+            currencySpinner.setSelection(CurrencyType.valueOf(it.currency).value)
             accountAmountTxt.setText(it.amount.toString())
             adapter.setSelectedPosition(it.icon)
         }

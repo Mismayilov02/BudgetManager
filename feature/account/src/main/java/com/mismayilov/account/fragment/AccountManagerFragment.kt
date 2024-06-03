@@ -12,7 +12,7 @@ import com.mismayilov.account.flow.create_account.CreateAccountState
 import com.mismayilov.account.viewmodel.CreateAccountViewModel
 import com.mismayilov.core.managers.NavigationManager
 
-class AccountDetailsFragment : BaseFragment<FragmentAccountDetailsBinding, CreateAccountViewModel, CreateAccountState, CreateAccountEvent, CreateAccountEffect>() {
+class AccountManagerFragment : BaseFragment<FragmentAccountDetailsBinding, CreateAccountViewModel, CreateAccountState, CreateAccountEvent, CreateAccountEffect>() {
     override fun getViewModelClass(): Class<CreateAccountViewModel> = CreateAccountViewModel::class.java
     override val inflateBinding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentAccountDetailsBinding =
         { inflater, container, attachToRoot ->

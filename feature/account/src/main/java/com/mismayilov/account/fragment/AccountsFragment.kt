@@ -51,7 +51,7 @@ class AccountsFragment :
         }, onViewClick = { id ->
             val directions =
                 AccountsFragmentDirections.actionSettingsFragmentToAccountManagerFragment(id)
-            (activity as NavigationManager).navigateByDirection(directions)
+//            (activity as NavigationManager).navigateByDirection(directions)
         },
             onPinClick = {
                 setEvent(AccountsEvent.PinAccount(it))
@@ -68,11 +68,10 @@ class AccountsFragment :
 
     private fun initClickListeners() {
         binding.apply {
-           /* customTopBar.backClickListener= {
+            customTopBar.backClickListener= {
                 (activity as NavigationManager).back()
-                (activity as NavigationManager).bottomNavigationVisibility(true)
-            }*/
-            btnSave.setOnClickListener {
+            }
+            btnAdd.setOnClickListener {
                 (activity as NavigationManager).navigateByNavigationName("createAccountFragment")
             }
         }

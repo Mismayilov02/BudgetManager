@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_screen_white"
+    tools:context=".fragment.TransactionViewFragment">
+
+    <TextView
+        android:id="@+id/transaction_account"
+        style="@style/text_input_style"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/margin_xsmall"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:background="@drawable/textview_backround"
+        android:gravity="center|start|left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textViesw3" />
+
+    <TextView
+        android:id="@+id/textViesw3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:text="@string/account"
+        android:textColor="@color/text_main"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_type" />
+
+    <TextView
+        android:id="@+id/transaction_note"
+        style="@style/text_input_style"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:background="@drawable/textview_backround"
+        android:gravity="center|start|left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textVsiews3" />
+
+    <TextView
+        android:id="@+id/textVsiews3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:text="@string/note"
+        android:textColor="@color/text_main"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_date" />
+
+    <TextView
+        android:id="@+id/transaction_date"
+        style="@style/text_input_style"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:background="@drawable/textview_backround"
+        android:gravity="center|start|left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textViews3" />
+
+    <TextView
+        android:id="@+id/textViews3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:text="@string/date"
+        android:textColor="@color/text_main"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_amount" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="@dimen/margin_xxlarge"
+        android:layout_marginTop="@dimen/margin_xxlarge"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_top_bar">
+
+        <ImageView
+            android:id="@+id/iconImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:srcCompat="@drawable/bank"
+            app:tint="@color/white" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textViesw6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:text="@string/amount"
+        android:textColor="@color/text_main"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/transaction_account"
+        app:layout_constraintTop_toBottomOf="@+id/transaction_account" />
+
+    <TextView
+        android:id="@+id/transaction_amount"
+        style="@style/text_input_style"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/textview_backround"
+        android:gravity="center|start|left"
+        app:layout_constraintEnd_toEndOf="@+id/transaction_account"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textViesw6" />
+
+
+    <TextView
+        android:id="@+id/transaction_type"
+        style="@style/text_input_style"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/margin_xsmall"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:background="@drawable/textview_backround"
+        android:gravity="center|start|left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:text="@string/type"
+        android:textColor="@color/text_main"
+        android:textSize="@dimen/text_size_xlarge"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+    <com.mismayilov.uikit.views.CustomTopBar
+        android:id="@+id/custom_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rightIcon="@drawable/pencil"
+        app:topText="@string/transaction_detail" />
+
+    <TextView
+        android:id="@+id/transactionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:text="@string/expense"
+        android:textColor="@color/text_main"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+        app:layout_constraintStart_toEndOf="@+id/cardView2"
+        app:layout_constraintTop_toTopOf="@+id/cardView2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

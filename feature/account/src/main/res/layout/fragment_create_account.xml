@@ -54,12 +54,13 @@
         app:layout_constraintTop_toBottomOf="@+id/currency_spinner" />
 
     <com.mismayilov.uikit.views.CustomTopBar
-        android:id="@+id/customTopBar2"
+        android:id="@+id/custom_top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:rightIcon="@drawable/check"
         app:topText="@string/create_account" />
 
     <EditText
@@ -73,18 +74,6 @@
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <ImageButton
-        android:id="@+id/btnSave"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/back_button_backround"
-        android:padding="10dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/check"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
@@ -97,7 +86,7 @@
         android:textSize="@dimen/text_size_xlarge"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customTopBar2" />
+        app:layout_constraintTop_toBottomOf="@+id/custom_top_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

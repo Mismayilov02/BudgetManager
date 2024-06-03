@@ -17,8 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:topText="@string/manage_account" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSave"
+    <Button
+        android:id="@+id/btnAdd"
         android:layout_width="0dp"
         app:backgroundTint="@null"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSave"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/customTopBar"

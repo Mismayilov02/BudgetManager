@@ -2,6 +2,7 @@ package com.mismayilov.core.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mismayilov.domain.remote.ResultWrapper
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlin.reflect.KSuspendFunction0
 
 abstract class BaseViewModel<State, Event, Effect>: ViewModel() {
     private val viewState: State by lazy { getInitialState() }
@@ -52,26 +54,24 @@ abstract class BaseViewModel<State, Event, Effect>: ViewModel() {
         }
     }
 
-    /*suspend fun <T> invoke(
-        kSuspendFunction0: KSuspendFunction0<T>,
-        onError: ((e: Exception) -> Unit)?= null,
+    suspend fun <T> invoke(
+        kSuspendFunction: suspend () -> T,
+        onError: ((e: Exception) -> Unit)? = null,
         onSuccess: (T) -> Unit
     ) {
-        when (val result = invokeRequest(kSuspendFunction0)) {
-            is ResultWrapper.Error -> {
-                onError?.invoke(result.exception)
-            }
-            is ResultWrapper.Success<*> -> onSuccess(result.value as T)
+        when (val result = invokeRequest(kSuspendFunction)) {
+            is ResultWrapper.Error -> onError?.invoke(result.exception)
+            is ResultWrapper.Success -> onSuccess(result.value)
         }
     }
 
-    private suspend fun <T> invokeRequest(kSuspendFunction0: KSuspendFunction0<T>): ResultWrapper {
+    private suspend fun <T> invokeRequest(kSuspendFunction: suspend () -> T): ResultWrapper<T> {
         return try {
-            ResultWrapper.Success(kSuspendFunction0.invoke())
+            ResultWrapper.Success(kSuspendFunction())
         } catch (e: Exception) {
             ResultWrapper.Error(e)
         }
-    }*/
+    }
 
 
     open fun onEventChanged(event: Event) {}

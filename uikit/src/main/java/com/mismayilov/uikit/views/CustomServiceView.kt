@@ -38,6 +38,7 @@ class CustomServiceView @JvmOverloads constructor(
             imageView.rotation = iconRotation
         }
     }
+    public fun getTextView() = binding.textView.text.toString()
 
     override fun setOnClickListener(l: OnClickListener?) {
         binding.root.setOnClickListener(l)

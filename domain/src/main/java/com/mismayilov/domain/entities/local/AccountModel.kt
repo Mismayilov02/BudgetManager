@@ -17,7 +17,6 @@ data class AccountModel(
     @ColumnInfo(name = "icon")
     val icon: String,
     @ColumnInfo(name = "type")
-//    @TypeConverters(AccountTypeConverters::class)
     var type: String,
     @ColumnInfo(name = "is_pinned")
     var isPinned: Boolean = false,

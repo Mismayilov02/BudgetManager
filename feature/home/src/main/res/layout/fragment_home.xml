@@ -8,12 +8,25 @@
     android:background="@color/main_screen_white"
     tools:context=".fragment.HomeFragment">
 
+    <ImageView
+        android:id="@+id/history_not_found_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/folder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/transactionHistoryRecyclerView"
+        app:tint="@color/text_main" />
+
     <com.mismayilov.uikit.views.CustomServiceView
         android:id="@+id/btnTransfer"
         android:layout_width="75dp"
         android:layout_height="0dp"
         app:icon="@drawable/transfer"
         app:iconColor="@color/text_main"
+        android:tag="TRANSFER"
         app:layout_constraintBottom_toBottomOf="@+id/btnIncome"
         app:layout_constraintEnd_toStartOf="@+id/btnHistory"
         app:layout_constraintHorizontal_bias="0.5"
@@ -26,6 +39,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginTop="4dp"
+        android:tag="EXPENSE"
         app:iconColor="@color/text_main"
         app:layout_constraintEnd_toStartOf="@+id/btnIncome"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,7 +74,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/historyAmount"
+        android:id="@+id/amountPinnedAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="-4dp"
@@ -84,14 +98,14 @@
         app:cardCornerRadius="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/historyAmount">
+        app:layout_constraintTop_toBottomOf="@+id/amountPinnedAccount">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/historyDate"
+                android:id="@+id/expenseTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -178,7 +192,7 @@
                 app:layout_constraintTop_toTopOf="@+id/historyCarview" />
 
             <TextView
-                android:id="@+id/textViwew4"
+                android:id="@+id/incomeTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="$515411.351"
@@ -221,6 +235,7 @@
         android:layout_height="0dp"
         app:iconColor="@color/text_main"
         app:iconRotation="180"
+        android:tag="INCOME"
         app:layout_constraintBottom_toBottomOf="@+id/btnExpense"
         app:layout_constraintEnd_toStartOf="@+id/btnTransfer"
         app:layout_constraintHorizontal_bias="0.5"

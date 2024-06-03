@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
-//    private val noteService: NoteService
 )
     : AccountRepository {
     override fun getAccounts(): Flow<List<AccountModel>> {
@@ -38,6 +37,10 @@ class AccountRepositoryImpl @Inject constructor(
 
     override suspend fun updateAccountPin(pinedAccountId: Long) {
         accountDao.updateAccountPin(pinedAccountId)
+    }
+
+    override suspend fun updateAccountAmount(id: Long, amount: Double) {
+        accountDao.updateAccountAmount(id, amount)
     }
 
 }

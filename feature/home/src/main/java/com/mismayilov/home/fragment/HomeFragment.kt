@@ -1,22 +1,22 @@
 package com.mismayilov.home.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.mismayilov.common.unums.IconType
+import androidx.recyclerview.widget.ItemTouchHelper
+import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.core.base.fragment.BaseFragment
 import com.mismayilov.core.managers.NavigationManager
-import com.mismayilov.domain.entities.local.IconModel
-import com.mismayilov.domain.entities.local.TransactionModel
 import com.mismayilov.home.adapter.RecentTransactionAdapter
+import com.mismayilov.home.adapter.SwipeToDeleteCallback
 import com.mismayilov.home.databinding.FragmentHomeBinding
 import com.mismayilov.home.flow.home.HomeEffect
 import com.mismayilov.home.flow.home.HomeEvent
 import com.mismayilov.home.flow.home.HomeState
 import com.mismayilov.home.viewmodel.HomeViewModel
+import com.mismayilov.uikit.util.showDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,13 +28,40 @@ class HomeFragment :
             FragmentHomeBinding.inflate(inflater, container, attachToRoot)
         }
 
-    private val adapter = RecentTransactionAdapter()
+    private lateinit var adapter: RecentTransactionAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? NavigationManager)?.bottomNavigationVisibility(true)
 
         initClickListeners()
+        initAdapter()
+        initRecyclerView()
+    }
+
+    private fun initAdapter() {
+        adapter = RecentTransactionAdapter(
+            deleteItem = {
+                showDialog(positiveButton = {
+                    setEvent(HomeEvent.DeleteTransaction(it))
+                },
+                    negativeButton = {
+                        adapter.cancelDeleteItem()
+                    }
+                )
+            },
+            viewItem = {
+                val directions =
+                    HomeFragmentDirections.actionHomeFragmentToEditTransactionFragment(it)
+                (activity as NavigationManager).navigateByDirection(directions)
+            }
+        )
+        val swipeHandler = SwipeToDeleteCallback(requireContext(), adapter)
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.transactionHistoryRecyclerView)
+    }
+
+    private fun initRecyclerView() {
         binding.apply {
             transactionHistoryRecyclerView.setHasFixedSize(true)
             transactionHistoryRecyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
@@ -46,7 +73,14 @@ class HomeFragment :
         binding.apply {
             val transactionBtn = mutableListOf(btnExpense, btnIncome, btnTransfer)
             transactionBtn.forEach {
-                it.setOnClickListener { (activity as NavigationManager).navigateByNavigationName("create_navigation") }
+                it.setOnClickListener { view ->
+                    val bundle = Bundle()
+                    bundle.putString("tabSelectedIndex", transactionBtn.indexOf(it).toString())
+                    (activity as NavigationManager).navigateByBundle(
+                        "create_navigation",
+                        bundle
+                    )
+                }
             }
             btnHistory.setOnClickListener {
                 (activity as NavigationManager).navigateByNavigationName(
@@ -57,6 +91,24 @@ class HomeFragment :
     }
 
     override fun renderState(state: HomeState) {
+        binding.historyNotFoundImage.visibility =
+            if (state.transactionList.isNullOrEmpty()) View.VISIBLE else View.GONE
         state.transactionList?.let { adapter.submitList(it) }
+        state.accountData?.let {
+            setAccountData(state)
+        }
+    }
+
+    private fun setAccountData(homeState: HomeState) {
+        binding.apply {
+            val accountModel = homeState.accountData!!
+            val incomeSum = homeState.incomeSum
+            val expenseSum = homeState.expenseSum
+            val transferSum = homeState.transferSum
+            val currencySymbol = CurrencyType.valueOf(accountModel.currency).symbol
+            amountPinnedAccount.text = "${accountModel.amount} $currencySymbol"
+            incomeTxt.text = "${incomeSum} $currencySymbol"
+            expenseTxt.text = "${expenseSum+transferSum} $currencySymbol"
+        }
     }
 }

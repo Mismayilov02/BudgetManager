@@ -6,8 +6,11 @@ import kotlinx.coroutines.flow.Flow
 interface TransactionRepository {
     fun getTransactionWithLimit(limit: Int): Flow<List<TransactionModel>>
     fun getAllTransactions(): Flow<List<TransactionModel>>
+     fun getTransactionById(id: Long): Flow<TransactionModel>
     fun getTransactionByTimeRange(startDate: Long, endDate: Long): Flow<List<TransactionModel>>
-    fun addTransaction(transaction: TransactionModel)
+    suspend fun addTransaction(transaction: TransactionModel)
     fun removeTransaction(transaction: TransactionModel)
     fun updateTransaction(transaction: TransactionModel)
+    suspend fun deleteTransaction(id: Long)
+     fun getSum(type: String): Double
 }

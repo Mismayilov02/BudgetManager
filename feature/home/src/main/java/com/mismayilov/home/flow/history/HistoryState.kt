@@ -1,7 +1,7 @@
 package com.mismayilov.home.flow.history
 
+import com.mismayilov.domain.entities.local.TransactionModel
+
 data class HistoryState (
-    val isLoading: Boolean = false,
-    val history: List<String> = emptyList()
-) {
-}
+    val history: List<TransactionModel>? = null
+)

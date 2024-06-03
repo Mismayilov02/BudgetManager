@@ -1,4 +1,4 @@
-package com.abbtech.firstabbtechapp.domain.usecases
+package com.mismayilov.domain.usecases.transaction
 
 import com.mismayilov.domain.repositories.TransactionRepository
 import com.mismayilov.domain.entities.local.TransactionModel
@@ -12,7 +12,7 @@ class GetAllTransactionUseCase @Inject constructor(
         starDate: Long? = null,
         endDate: Long? = null
     ): Flow<List<TransactionModel>> {
-        if (starDate == null || endDate == null) return transactionRepository.getTransactionWithLimit(20)
+        if (starDate == null || endDate == null) return transactionRepository.getTransactionWithLimit(15)
         return transactionRepository.getTransactionByTimeRange(starDate, endDate)
     }
 }

@@ -32,6 +32,7 @@
     <string name="manage_account">Manage Account</string>
     <string name="manage_icon">Manage Icon</string>
     <string name="accounts">Accounts</string>
+    <string name="account">Account</string>
     <string name="settings">Settings</string>
     <string name="details">Details</string>
     <string name="edit">Edit</string>
@@ -51,17 +52,23 @@
     <string name="currency">Currency</string>
     <string name="amount">Amount</string>
     <string name="update">Update</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="date">Date</string>
+    <string name="note">Note</string>
+    <string name="type">Type</string>
+    <string name="transaction_detail">Transaction Details</string>
 
 
     <array name="tab_titles_three">
-        <item>Income</item>
         <item>Expense</item>
+        <item>Income</item>
         <item>Transfer</item>
     </array>
 
     <array name="tab_titles_two">
-        <item>Income</item>
         <item>Expense</item>
+        <item>Income</item>
     </array>
 
 

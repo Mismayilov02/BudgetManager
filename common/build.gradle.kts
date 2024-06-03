@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -42,12 +44,19 @@ dependencies {
     implementation(libs.material)
     implementation(project(":domain"))
     implementation(project(":core"))
+    implementation(libs.androidx.work.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
 //    implementation ("androidx.activity:activity-ktx:1.8.2")
 //    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+
+    // Dependency Injection
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-android-compiler:2.50")
+
+    implementation ("androidx.work:work-runtime-ktx:2.7.0-alpha01")
 
     // Security
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
