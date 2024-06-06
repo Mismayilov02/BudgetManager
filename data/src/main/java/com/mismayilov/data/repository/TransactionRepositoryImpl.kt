@@ -3,12 +3,12 @@ package com.mismayilov.data.repository
 import com.mismayilov.domain.repositories.TransactionRepository
 import com.mismayilov.domain.entities.local.TransactionModel
 import com.mismayilov.data.database.dao.TransactionDao
+import com.mismayilov.domain.entities.local.TransactionAmountsModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class TransactionRepositoryImpl @Inject constructor(
     private val transactionDao: TransactionDao
-//    private val noteService: NoteService
 ) : TransactionRepository {
 
 
@@ -39,16 +39,33 @@ class TransactionRepositoryImpl @Inject constructor(
         transactionDao.delete(transaction)
     }
 
-    override fun updateTransaction(transaction: TransactionModel) {
+    override suspend fun updateTransaction(transaction: TransactionModel) {
         transactionDao.update(transaction)
     }
 
     override suspend fun deleteTransaction(id: Long) {
-        transactionDao.deleteTransaction(id)
+        transactionDao.deleteTransactionAndUpdateAccount(id)
     }
 
-    override  fun getSum(type: String): Double {
-        return transactionDao.getSum(type)
+    override fun getSumExpenseByAccount(): Flow<Double> {
+        return transactionDao.getSumExpense()
     }
+
+    override fun getSumIncomeByAccount(): Flow<Double> {
+        return transactionDao.getSumIncome()
+    }
+
+    override fun getSumExpense(): Flow<Double> {
+        return transactionDao.getExpenseAmount()
+    }
+
+    override fun getSumIncome(): Flow<Double> {
+        return transactionDao.getIncomeAmount()
+    }
+
+    override fun getSumTransfer(): Flow<Double> {
+        return transactionDao.getTransferAmount()
+    }
+
 
 }

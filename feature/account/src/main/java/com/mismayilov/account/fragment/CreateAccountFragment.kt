@@ -55,15 +55,17 @@ class CreateAccountFragment :
 
     private fun initClickListeners() {
         binding.apply {
-            customTopBar.rightClickListener= {
-                setEvent(CreateAccountEvent.CreateAccount(
-                    accountName = accountNameTxt.text.toString(),
-                    accountType = accountTypeSpinner.spinnerText,
-                    iconPosition = adapter.selectedPosition,
-                    currency = currencySpinner.spinnerText,
-                    balance = accountAmountTxt.text.toString(),
-                    isUpdate = args.id != -1L
-                ))
+            customTopBar.rightClickListener = {
+                setEvent(
+                    CreateAccountEvent.CreateAccount(
+                        accountName = accountNameTxt.text.toString(),
+                        accountType = accountTypeSpinner.spinnerText,
+                        iconPosition = adapter.selectedPosition,
+                        currency = currencySpinner.spinnerText,
+                        balance = accountAmountTxt.text.toString(),
+                        isUpdate = args.id != -1L
+                    )
+                )
             }
             customTopBar.setOnClickListener {
                 (activity as NavigationManager).back()
@@ -74,7 +76,7 @@ class CreateAccountFragment :
     override fun renderEffect(effect: CreateAccountEffect) {
         when (effect) {
             is CreateAccountEffect.ShowToast -> showToast(effect.message)
-            is CreateAccountEffect.CloseFragment-> (activity as NavigationManager).back()
+            is CreateAccountEffect.CloseFragment -> (activity as NavigationManager).back()
         }
     }
 
@@ -90,6 +92,7 @@ class CreateAccountFragment :
 
     private fun setAccountData(it: AccountModel) {
         binding.apply {
+            currencySpinner.setSpinnerEnabled(false)
             accountNameTxt.setText(it.name)
             accountTypeSpinner.setSelection(it.type)
             currencySpinner.setSelection(CurrencyType.valueOf(it.currency).value)

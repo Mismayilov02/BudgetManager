@@ -13,7 +13,7 @@ data class AccountModel(
     @ColumnInfo(name = "amount")
     val amount: Double,
     @ColumnInfo(name = "amount_usd")
-    val amountUsd: Double,
+    var amountUsd: Double,
     @ColumnInfo(name = "icon")
     val icon: String,
     @ColumnInfo(name = "type")

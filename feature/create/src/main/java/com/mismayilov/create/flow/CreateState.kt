@@ -7,4 +7,7 @@ data class CreateState (
     val selectedBottomCard:IconModel?=null,
     var amount:String="0",
     val note :String?=null,
-)
+    val selectTabPosition:Int?=null,
+) {
+
+}

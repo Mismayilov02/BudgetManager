@@ -44,6 +44,8 @@ dependencies {
     implementation(libs.material)
     implementation(project(":common"))
     implementation(project(":core"))
+    implementation(libs.androidx.hilt.common)
+    implementation(libs.androidx.work.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

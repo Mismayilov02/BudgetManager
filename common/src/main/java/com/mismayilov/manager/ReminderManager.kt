@@ -1,19 +1,13 @@
 package com.mismayilov.manager
 
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
-import android.os.Build
-import androidx.core.app.NotificationCompat
+import androidx.work.Constraints
+import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import com.mismayilov.common.R
-import com.mismayilov.common.helpers.NotificationHelper
-import com.mismayilov.worker.ReminderBroadcastReceiver
+import com.mismayilov.common.worker.ReminderWorker
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -23,46 +17,25 @@ import javax.inject.Singleton
 
 @Singleton
 class ReminderManager @Inject constructor(
-    private val alarmManager: AlarmManager,
-    private val notificationHelper: NotificationHelper,
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) {
+    private val constraints = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+        .setRequiresCharging(false)
+        .build()
+    fun scheduleDailyReminder(time:Long) {
 
-    private var pendingIntent: PendingIntent? = null
-
-    fun scheduleDailyReminder(hourOfDay: Int, minute: Int) {
-        val calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, hourOfDay)
-            set(Calendar.MINUTE, minute)
-            set(Calendar.SECOND, 0)
-        }
-
-        val intent = Intent(context, ReminderBroadcastReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        alarmManager.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = time
+        val dailyWorkRequest = PeriodicWorkRequestBuilder<ReminderWorker>(24, TimeUnit.HOURS)
+            .addTag(ReminderWorker::class.java.simpleName)
+            .setConstraints(constraints)
+            .setInitialDelay(calendar.timeInMillis - System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+            .build()
+        WorkManager.getInstance(context).enqueue(dailyWorkRequest)
     }
 
     fun cancelDailyReminder() {
-        pendingIntent?.run {
-            alarmManager.cancel(this)
-            cancel()
-            pendingIntent = null
-        }
-    }
-
-    fun showNotification(message: String) {
-        notificationHelper.showNotification("Başlık", message)
+        WorkManager.getInstance(context).cancelAllWorkByTag(ReminderWorker::class.java.simpleName)
     }
 }

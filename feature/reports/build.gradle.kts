@@ -40,6 +40,10 @@ android {
 dependencies {
 
     implementation(project(":uikit"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":core"))
+    implementation(project(":common"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

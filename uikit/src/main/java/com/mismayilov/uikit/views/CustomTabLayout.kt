@@ -61,4 +61,10 @@ class CustomTabLayout @JvmOverloads constructor(
         }
     }
 
+    fun setTabEnabled(enabled: Boolean) {
+        for (i in 0 until binding.tabLayout.tabCount) {
+            binding.tabLayout.getTabAt(i)?.view?.isEnabled = enabled
+        }
+    }
+
 }

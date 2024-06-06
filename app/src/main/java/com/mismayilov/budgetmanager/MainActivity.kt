@@ -67,4 +67,12 @@ class MainActivity : AppCompatActivity(), NavigationManager {
         navController?.popBackStack()
     }
 
+    override fun onBackPressed() {
+        if (navController?.currentDestination?.id == R.id.home_navigation) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
 }

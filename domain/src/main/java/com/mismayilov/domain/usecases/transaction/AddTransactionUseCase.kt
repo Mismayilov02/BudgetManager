@@ -7,7 +7,9 @@ import javax.inject.Inject
 class AddTransactionUseCase @Inject constructor(
     private val transactionRepository: TransactionRepository
 ) {
-     suspend operator fun invoke(transaction: TransactionModel) {
-        transactionRepository.addTransaction(transaction)
+     suspend operator fun invoke(transaction: TransactionModel,isUpdate: Boolean) {
+        if (isUpdate) {
+            transactionRepository.updateTransaction(transaction)
+        }else transactionRepository.addTransaction(transaction)
     }
 }

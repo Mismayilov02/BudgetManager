@@ -14,18 +14,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-@Singleton
-class NotificationHelper @Inject constructor(@ApplicationContext private val context: Context) {
+class NotificationHelper  (val context: Context) {
+
+    companion object {
+        private const val CHANNEL_ID = "REMINDER_CHANNELMM"
+        private const val CHANNEL_NAME = "Reminder ChannelMM"
+        private const val CHANNEL_DESCRIPTION = "Channel for reminder notifications"
+    }
+
+    init {
+        createNotificationChannel()
+    }
 
     fun showNotification(title: String, message: String) {
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel("REMINDER_CHANNEL", "Reminder Channel", NotificationManager.IMPORTANCE_DEFAULT)
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        val notification = NotificationCompat.Builder(context, "YENI_CHANNEL_ID")
+        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(message)
             .setSmallIcon(androidx.core.R.drawable.notification_bg)
@@ -33,5 +37,20 @@ class NotificationHelper @Inject constructor(@ApplicationContext private val con
             .build()
 
         notificationManager.notify(1, notification)
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                description = CHANNEL_DESCRIPTION
+            }
+
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 }

@@ -74,15 +74,11 @@ class RecentTransactionAdapter constructor(val deleteItem: ((Long) -> Unit) ,val
                 val resID: Int = getResourceIdByName(context, transactionHistory.category.icon)
                 historyImage.setImageResource(resID)
 
-                (historyBaseCarview.layoutParams as? ViewGroup.MarginLayoutParams)?.bottomMargin =
-                    if (layoutPosition == itemCount - 1 && itemCount > 1) 220 else 15
-                historyBaseCarview.requestLayout()
-
             }
         }
     }
     fun deleteItem(position: Int) {
-        deleteItem?.invoke(getItem(position).id)
+        deleteItem.invoke(getItem(position).id)
         deleteItemPosition = position
     }
 

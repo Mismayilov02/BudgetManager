@@ -51,6 +51,7 @@ dependencies {
     implementation(project(":feature:create"))
     implementation(project(":feature:account"))
     implementation(project(":feature:icon"))
+    implementation(project(":common"))
     implementation(project(":uikit"))
     implementation(project(":data"))
     implementation(project(":core"))
@@ -61,7 +62,6 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(project(":common"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,4 +73,6 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    implementation ("androidx.work:work-runtime-ktx:2.7.0")
 }

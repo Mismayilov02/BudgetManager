@@ -8,13 +8,11 @@ import androidx.room.PrimaryKey
 data class TransactionModel(
     @ColumnInfo(name = "amount")
     val amount: Double,
-    @ColumnInfo(name = "amount_usd")
-    val amountUsd: Double,
-    @ColumnInfo(name = "account_id")
+    @ColumnInfo(name = "account")
     var account: AccountModel?,
     @ColumnInfo(name = "date")
     val date: Long,
-    @ColumnInfo(name = "category_id")
+    @ColumnInfo(name = "category")
     var category: IconModel,
     @ColumnInfo(name = "note")
     val note: String? =null,
@@ -22,6 +20,8 @@ data class TransactionModel(
     var accountTo: AccountModel? = null,
     @ColumnInfo(name = "amount_to")
     val amountTo: Double? = null,
+    @ColumnInfo(name = "ammount_to_usd")
+    val amountToUsd: Double? = null,
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0
 )

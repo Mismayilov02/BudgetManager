@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.mismayilov.common.extensions.toCurrencyString
 import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.core.base.fragment.BaseFragment
 import com.mismayilov.core.managers.NavigationManager
@@ -91,12 +92,13 @@ class HomeFragment :
     }
 
     override fun renderState(state: HomeState) {
-        binding.historyNotFoundImage.visibility =
-            if (state.transactionList.isNullOrEmpty()) View.VISIBLE else View.GONE
-        state.transactionList?.let { adapter.submitList(it) }
-        state.accountData?.let {
-            setAccountData(state)
-        }
+            binding.historyNotFoundImage.visibility =
+                if (state.transactionList.isNullOrEmpty()) View.VISIBLE else View.GONE
+            state.transactionList?.let { adapter.submitList(it) }
+            state.accountData?.let {
+                setAccountData(state)
+            }
+
     }
 
     private fun setAccountData(homeState: HomeState) {
@@ -104,11 +106,10 @@ class HomeFragment :
             val accountModel = homeState.accountData!!
             val incomeSum = homeState.incomeSum
             val expenseSum = homeState.expenseSum
-            val transferSum = homeState.transferSum
             val currencySymbol = CurrencyType.valueOf(accountModel.currency).symbol
-            amountPinnedAccount.text = "${accountModel.amount} $currencySymbol"
-            incomeTxt.text = "${incomeSum} $currencySymbol"
-            expenseTxt.text = "${expenseSum+transferSum} $currencySymbol"
+            amountPinnedAccount.text = "${accountModel.amount.toCurrencyString()} $currencySymbol"
+            incomeTxt.text = "${incomeSum.toCurrencyString()} $currencySymbol"
+            expenseTxt.text = "${expenseSum.toCurrencyString()} $currencySymbol"
         }
     }
 }

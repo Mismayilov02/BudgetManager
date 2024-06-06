@@ -12,6 +12,9 @@ data class IconModel (
     val icon: String,
     @ColumnInfo(name = "type")
     var type: String,
+    @ColumnInfo(name = "balance")
+    var balance: String?  = null,
+    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     val id: Long=0,
 )

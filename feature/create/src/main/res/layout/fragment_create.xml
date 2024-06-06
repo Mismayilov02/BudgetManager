@@ -175,7 +175,7 @@
                 android:background="@drawable/transfer_button_backround"
                 android:paddingStart="35dp"
                 android:paddingEnd="35dp"
-                android:text="@string/transfer_now"
+                android:text="@string/expense_now"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"

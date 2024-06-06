@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">PennyPlanner</string>
+    <string name="action_settings">Parametrlər</string>
+    <string name="get_started">Başlayın</string>
+    <string name="onboarding_title_1">Tətbiqimizlə <font color='#43D17E'>maliyyənizi</font> izləyin</string>
+    <string name="onboarding_title_2">Siz indi heç bir əməliyyat komissiyası olmadan asanlıqla pul göndərə və ya ala bilərsiniz Pul kisəsini unutmusunuz? Narahat olmayın scani və ödəyin</string>
+    <string name="available_balance">Mövcud Balans</string>
+    <string name="income">Gəlir</string>
+    <string name="Income_now">Gəliri indi əldə et</string>
+    <string name="expense">Xərc</string>
+    <string name="expense_now">İndi xərcləyin</string>
+    <string name="service">Xidmətlər</string>
+    <string name="fast_action">Sürətli Fəaliyyət</string>
+    <string name="transaction">Əməliyyatlar</string>
+    <string name="history">Tarix</string>
+    <string name="recent_transaction">Son əməliyyatlar</string>
+    <string name="see_all">Hamısına bax</string>
+    <string name="profile">Profil</string>
+    <string name="send">Göndər</string>
+    <string name="receive">Qəbul edin</string>
+    <string name="transfer">Köçürmə</string>
+    <string name="transfer_now">İndi köçür</string>
+    <string name="enter_amount">Məbləği daxil edin</string>
+    <string name="send_to">Göndər</string>
+    <string name="from">Kimdən</string>
+    <string name="scan">Skan</string>
+    <string name="top_up">Yüksək</string>
+    <string name="select_icon">İkonu seçin</string>
+    <string name="select">Seçin</string>
+    <string name="add">Əlavə edin</string>
+    <string name="manage_account">Hesabı idarə edin</string>
+    <string name="manage_icon">İdarəetmə nişanı</string>
+    <string name="accounts">Hesablar</string>
+    <string name="account">Hesab</string>
+    <string name="settings">Parametrlər</string>
+    <string name="details">Təfsilatlar</string>
+    <string name="edit">Redaktə edin</string>
+    <string name="yes">Bəli</string>
+    <string name="no">Xeyr</string>
+    <string name="are_you_sure">Əminsiniz?</string>
+    <string name="transaction_details">Əməliyyat Təfərrüatları</string>
+    <string name="transaction_history">Transaction Tarixçəsi</string>
+    <string name="reminder">Xatırlatma</string>
+    <string name="icons">İkonalar</string>
+    <string name="create_icon">İkon yarat</string>
+    <string name="create_account">Hesab yaradın</string>
+    <string name="icon_name">İkonanın adı</string>
+    <string name="account_name">Hesabın Adı</string>
+    <string name="account_type">Hesab Növü</string>
+    <string name="account_balance">Hesab balansı</string>
+    <string name="currency">Valyuta</string>
+    <string name="amount">Məbləğ</string>
+    <string name="update">Yenilə</string>
+    <string name="end_date">Bitmə tarixi</string>
+    <string name="start_date">Başlama tarixi</string>
+    <string name="date">Tarix</string>
+    <string name="note">Qeyd</string>
+    <string name="type">Növ</string>
+    <string name="transaction_detail">Əməliyyat Təfərrüatları</string>
+
+
+    <array name="tab_titles_three">
+        <item>Expense</item>
+        <item>Income</item>
+        <item>Transfer</item>
+    </array>
+
+    <array name="tab_titles_two">
+        <item>Expense</item>
+        <item>Income</item>
+    </array>
+
+
+    <array name="expense_icons">
+        <item>girlfriend</item>
+        <item>beauty</item>
+        <item>car</item>
+        <item>child</item>
+        <item>clothing</item>
+        <item>decor</item>
+        <item>education</item>
+        <item>electronic</item>
+        <item>food</item>
+        <item>fruit</item>
+        <item>gift</item>
+        <item>health</item>
+        <item>home</item>
+        <item>liquor</item>
+        <item>pet</item>
+        <item>repair</item>
+        <item>shopping</item>
+        <item>smoking</item>
+        <item>snacks</item>
+        <item>social</item>
+        <item>sport</item>
+        <item>telephone</item>
+        <item>transport</item>
+        <item>travel</item>
+        <item>vegetable</item>
+        <item>coin_bank</item>
+    </array>
+
+    <array name="income_icons">
+        <item>award</item>
+        <item>bank</item>
+        <item>investment</item>
+        <item>part_time</item>
+        <item>salary</item>
+        <item>tik_tok</item>
+    </array>
+
+    <array name="transfer_icons">
+        <item>bank</item>
+        <item>card</item>
+        <item>cash</item>
+        <item>paypal</item>
+        <item>bitcoin</item>
+        <item>sack_dollar</item>
+        <item>tax_alt</item>
+        <item>transfer</item>
+        <item>usd</item>
+        <item>wallet</item>
+    </array>
+
+    <array name="other_icon">
+        <item>android</item>
+        <item>basketball</item>
+        <item>bike</item>
+        <item>chat_gpt</item>
+        <item>bow_arrow</item>
+        <item>bowling_pins</item>
+        <item>cake</item>
+        <item>chart_dollar</item>
+        <item>chart_up_dollar</item>
+        <item>coffee</item>
+        <item>fish</item>
+        <item>flower_tulip</item>
+        <item>gamepad</item>
+        <item>graduation_cap</item>
+        <item>gym</item>
+        <item>hamburger</item>
+        <item>mode_landscape</item>
+        <item>money_edit</item>
+        <item>paw</item>
+        <item>pizza</item>
+        <item>restaurant</item>
+        <item>rings_wedding</item>
+        <item>rocket_launch</item>
+        <item>route</item>
+        <item>selling</item>
+        <item>spotify</item>
+        <item>tomato</item>
+        <item>umbrella_beach</item>
+        <item>world</item>
+        <item>youtube</item>
+    </array>
+
+</resources>

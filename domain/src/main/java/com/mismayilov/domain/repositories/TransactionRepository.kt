@@ -10,7 +10,11 @@ interface TransactionRepository {
     fun getTransactionByTimeRange(startDate: Long, endDate: Long): Flow<List<TransactionModel>>
     suspend fun addTransaction(transaction: TransactionModel)
     fun removeTransaction(transaction: TransactionModel)
-    fun updateTransaction(transaction: TransactionModel)
+    suspend fun updateTransaction(transaction: TransactionModel)
     suspend fun deleteTransaction(id: Long)
-     fun getSum(type: String): Double
+     fun getSumExpenseByAccount(): Flow<Double>
+     fun getSumIncomeByAccount(): Flow<Double>
+    fun  getSumExpense(): Flow<Double>
+    fun getSumIncome(): Flow<Double>
+    fun getSumTransfer(): Flow<Double>
 }

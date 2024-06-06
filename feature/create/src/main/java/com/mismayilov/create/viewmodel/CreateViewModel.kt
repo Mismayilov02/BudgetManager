@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.common.unums.IconType
 import com.mismayilov.core.base.viewmodel.BaseViewModel
-import com.mismayilov.core.generics.toEnum
 import com.mismayilov.create.flow.CreateEffect
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.usecases.transaction.AddTransactionUseCase
@@ -21,8 +20,6 @@ import com.mismayilov.domain.usecases.remote.GetExchangeUseCase
 import com.mismayilov.domain.usecases.transaction.GetTransactionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -40,13 +37,13 @@ class CreateViewModel @Inject constructor(
     private val updateAccountAmountUseCase: UpdateAccountAmountUseCase
 ) : BaseViewModel<CreateState, CreateEvent, CreateEffect>() {
 
+    private var updateAccountId: Long? = null
+    private var updateAccountToId: Long? = null
+    private var updateAccountAmount: Double = 0.0
+    private var updateAccountToAmount: Double = 0.0
     private var updateId: Long? = null
-    private var exchangeFrom = "USD"
-    private var exchangeTo = "USD"
-    private var to = "USD"
     private var exchangeRate = 1.0
-    private var currentUsdRate = 1.0
-    private var currencySymbol = CurrencyType.USD.symbol
+    private var exchangeRateUsd = 1.0
     private var currentIconType: IconType = IconType.EXPENSE
     private val _icons = MutableStateFlow<List<IconModel>>(emptyList())
     private val _accounts = MutableStateFlow<List<AccountModel>>(emptyList())
@@ -73,27 +70,70 @@ class CreateViewModel @Inject constructor(
 
     private fun getTransaction() {
         viewModelScope.launch(Dispatchers.IO) {
-            getTransactionUseCase(updateId!!)
-                .onEach { transaction ->
-                    currentIconType = IconType.valueOf(transaction.category.type)
-                    val accountModel = transaction.account
-                    val categoryModel = transaction.category
-                    val accountToModel = transaction.accountTo?: accountModel
-                    val topSelectedCard =
-                        if (currentIconType == IconType.INCOME) _icons.value.find { it.id == categoryModel.id } else _icons.value.find { it.type == IconType.ACCOUNT.name && it.name == accountModel!!.name }
-                    val bottomSelectedCard =
-                        if (currentIconType == IconType.EXPENSE) _icons.value.find { it.id == categoryModel.id } else _icons.value.find { it.type == IconType.ACCOUNT.name && it.name == accountToModel!!.name }
-                    setState(
-                        getCurrentState().copy(
-                            selectedTopCard = topSelectedCard,
-                            selectedBottomCard = bottomSelectedCard,
-                            amount = transaction.amount.toString(),
-                            note = transaction.note ?: ""
-                        )
+            getTransactionUseCase(updateId!!).collect { transaction ->
+                updateTransactionState(transaction)
+                val topSelectedCard = getTopCard(transaction)
+                val bottomSelectedCard = getBottomCard(transaction)
+
+                setCurrencyBasedOnCards(topSelectedCard, bottomSelectedCard)
+                setState(
+                    getCurrentState().copy(
+                        selectedTopCard = topSelectedCard,
+                        selectedBottomCard = bottomSelectedCard,
+                        amount = transaction.amount.toString(),
+                        note = transaction.note ?: "",
+                        selectTabPosition = getTabPosition()
                     )
-//                        validateAndSetCurrency()
-                }
-                .collect()
+                )
+            }
+        }
+    }
+
+    private fun getTopCard(transaction: TransactionModel): IconModel {
+        return if (currentIconType == IconType.INCOME) transaction.category else transaction.account?.let {
+            IconModel(
+                it.name,
+                it.icon,
+                IconType.ACCOUNT.name,
+                "${it.amount}${CurrencyType.valueOf(it.currency).symbol}",
+                it.id
+            )
+        }!!
+    }
+
+    private fun getBottomCard(transaction: TransactionModel): IconModel {
+        return if (currentIconType == IconType.EXPENSE) transaction.category else if (transaction.accountTo != null) {
+            IconModel(
+                transaction.accountTo!!.name,
+                transaction.accountTo!!.icon,
+                IconType.ACCOUNT.name,
+                "${transaction.accountTo!!.amount}${CurrencyType.valueOf(transaction.accountTo!!.currency).symbol}",
+                transaction.accountTo!!.id
+            )
+        } else {
+            IconModel(
+                transaction.account!!.name,
+                transaction.account!!.icon,
+                IconType.ACCOUNT.name,
+                "${transaction.account!!.amount}${CurrencyType.valueOf(transaction.account!!.currency).symbol}",
+                transaction.account!!.id
+            )
+        }
+    }
+
+    private fun updateTransactionState(transaction: TransactionModel) {
+        currentIconType = IconType.valueOf(transaction.category.type)
+        updateAccountId = transaction.account?.id
+        updateAccountToId = transaction.accountTo?.id
+        updateAccountAmount = transaction.amount
+        updateAccountToAmount = transaction.amountTo ?: 0.0
+    }
+
+    private fun getTabPosition(): Int {
+        return when (currentIconType) {
+            IconType.EXPENSE -> 0
+            IconType.INCOME -> 1
+            else -> 2
         }
     }
 
@@ -101,75 +141,129 @@ class CreateViewModel @Inject constructor(
         setEffect(CreateEffect.ShowBottomSheet(isTop, getCardData(isTop)))
     }
 
-    private suspend fun selectCardById(id: Long, isTopCard: Boolean) {
-        val determinedCardType = determineCardTypes(currentIconType)
-        val selectedCard = _icons.value.find {
-            it.id == id &&
-                    IconType.valueOf(it.type) == if (isTopCard) determinedCardType.first else determinedCardType.second
-        }
+    private fun selectCardById(id: Long, isTopCard: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val determinedCardType = determineCardTypes(currentIconType)
+            val selectedCard = _icons.value.find {
+                it.id == id && IconType.valueOf(it.type) == if (isTopCard) determinedCardType.first else determinedCardType.second
+            }
 
-        if (isTopCard) setState(getCurrentState().copy(selectedTopCard = selectedCard))
-        else setState(getCurrentState().copy(selectedBottomCard = selectedCard))
-
-        validateAndSetCurrency()
-    }
-
-    private fun validateAndSetCurrency() {
-        if (areBothCardsAccounts()) {
-            setCurrencyBasedOnCards()
-        } else {
-            setCurrencyBasedOnAccount()
+            if (isTopCard) {
+                setCurrencyBasedOnCards(selectedCard!!, getCurrentState().selectedBottomCard!!)
+                setState(getCurrentState().copy(selectedTopCard = selectedCard))
+            } else {
+                setCurrencyBasedOnCards(getCurrentState().selectedTopCard!!, selectedCard!!)
+                setState(getCurrentState().copy(selectedBottomCard = selectedCard))
+            }
         }
     }
+
 
     private suspend fun reverseSelectedCards() {
         viewModelScope.launch(Dispatchers.IO) {
             currentIconType = when (currentIconType) {
                 IconType.INCOME -> IconType.EXPENSE
                 IconType.EXPENSE -> IconType.INCOME
-                else -> IconType.EXPENSE
+                else -> IconType.ACCOUNT
             }
+            if (currentIconType == IconType.ACCOUNT) setCurrencyBasedOnCards(
+                getCurrentState().selectedBottomCard!!, getCurrentState().selectedTopCard!!
+            )
             setState(
                 getCurrentState().copy(
                     selectedTopCard = getCurrentState().selectedBottomCard,
                     selectedBottomCard = getCurrentState().selectedTopCard
                 )
             )
-            validateAndSetCurrency()
         }
     }
 
-    private suspend fun saveTransactionData(date: Long, note: String?) {
+    private fun saveTransactionData(date: Long, note: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             val amount = getCurrentState().amount.toDouble()
-            if (amount == 0.0) {
-                setEffect(CreateEffect.ShowToast("Amount cannot be 0"))
-                return@launch
-            }
-            val changedAmount = if (currentIconType == IconType.INCOME) amount else -amount
-            val accountId = getAccountId()
-            val accountModel = _accounts.value.find { it.id == accountId }
-            val categoryModel =
-                if (currentIconType == IconType.EXPENSE) getCurrentState().selectedBottomCard!! else getCurrentState().selectedTopCard!!
-            val accountToIconModel = getCurrentState().selectedBottomCard!!.id
-            val accountToModel = if (currentIconType == IconType.ACCOUNT)
-                _accounts.value.find { it.id == accountToIconModel }
-            else null
+            if (!isAmountValid(amount)) return@launch
+            if (!isTransferValid()) return@launch
 
-            val transaction = TransactionModel(
-                amount = amount,
-                amountUsd = amount / currentUsdRate,
-                account = accountModel,
-                date = date,
-                category = categoryModel,
-                note = note,
-                accountTo = accountToModel,
-                amountTo = amount * exchangeRate,
+            val changedAmount = getChangedAmount(amount)
+            val accountModel = getAccountModel()
+            val categoryModel = getCategoryModel()
+            val accountToModel = getAccountToModel()
+
+            val transaction = createTransactionModel(
+                amount, date, note, accountModel, categoryModel, accountToModel
             )
+            addTransactionUseCase(transaction, updateId != null)
 
-            addTransactionUseCase(transaction)
-            updateAccountAmountUseCase.invoke(accountModel!!.id, changedAmount)
+            updateAccountAmounts(accountModel!!.id, changedAmount)
+            accountToModel?.let {
+                updateAccountAmounts(it.id, amount * exchangeRate - updateAccountToAmount)
+            }
             setEffect(CreateEffect.CloseScreen)
+        }
+    }
+
+    private fun isAmountValid(amount: Double): Boolean {
+        return if (amount == 0.0) {
+            setEffect(CreateEffect.ShowToast("Amount cannot be 0"))
+            false
+        } else true
+    }
+
+    private fun isTransferValid(): Boolean {
+        return if (currentIconType == IconType.ACCOUNT && getCurrentState().selectedTopCard == getCurrentState().selectedBottomCard) {
+            setEffect(CreateEffect.ShowToast("Cannot transfer to the same account"))
+            false
+        } else true
+    }
+
+    private fun getChangedAmount(amount: Double): Double {
+        return if (currentIconType == IconType.INCOME) amount else -amount
+    }
+
+    private fun getAccountModel(): AccountModel? {
+        val accountId = getAccountId()
+        return _accounts.value.find { it.id == accountId }
+    }
+
+    private fun getCategoryModel(): IconModel {
+        return if (currentIconType == IconType.EXPENSE) {
+            getCurrentState().selectedBottomCard!!
+        } else {
+            getCurrentState().selectedTopCard!!
+        }
+    }
+
+    private fun getAccountToModel(): AccountModel? {
+        val accountToIconModel = getCurrentState().selectedBottomCard!!.id
+        return if (currentIconType == IconType.ACCOUNT) {
+            _accounts.value.find { it.id == accountToIconModel }
+        } else null
+    }
+
+    private fun createTransactionModel(
+        amount: Double,
+        date: Long,
+        note: String?,
+        accountModel: AccountModel?,
+        categoryModel: IconModel,
+        accountToModel: AccountModel?
+    ): TransactionModel {
+        return TransactionModel(
+            amount = amount,
+            account = accountModel,
+            date = date,
+            category = categoryModel,
+            note = note,
+            accountTo = accountToModel,
+            amountTo = amount * exchangeRate,
+            amountToUsd = amount * exchangeRateUsd,
+            id = updateId ?: 0
+        )
+    }
+
+    private fun updateAccountAmounts(accountId: Long, amount: Double) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateAccountAmountUseCase.invoke(accountId, amount + updateAccountAmount)
         }
     }
 
@@ -200,8 +294,7 @@ class CreateViewModel @Inject constructor(
     }
 
     private fun updateStateWithNewCardData(
-        topCardData: List<IconModel>,
-        bottomCardData: List<IconModel>
+        topCardData: List<IconModel>, bottomCardData: List<IconModel>
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
@@ -211,7 +304,7 @@ class CreateViewModel @Inject constructor(
                         selectedBottomCard = bottomCardData.firstOrNull()
                     )
                 )
-                validateAndSetCurrency()
+                setCurrencyBasedOnCards(topCardData.first(), bottomCardData.first())
             }
         }
     }
@@ -229,77 +322,79 @@ class CreateViewModel @Inject constructor(
 
     private fun fetchAllIcons() {
         viewModelScope.launch(Dispatchers.IO) {
-            getAllIconUseCase()
-                .onEach { icons ->
-                    _icons.value = icons
-                    fetchAllAccounts()
-                }
-                .collect()
+            getAllIconUseCase().onEach { icons ->
+                _icons.value = icons
+                fetchAllAccounts()
+            }.collect()
         }
     }
 
     private fun fetchAllAccounts() {
         viewModelScope.launch(Dispatchers.IO) {
-            getAllAccountUseCase()
-                .onEach { accounts ->
-                    _accounts.value = accounts
-                    _icons.value += accounts.map {
-                        IconModel(it.name, it.icon, IconType.ACCOUNT.name, it.id)
-                    }
-                    _icons.value = _icons.value.distinct()
-                    _accounts.value = _accounts.value.distinct()
-                    handleCategorySelected(currentIconType)
+            getAllAccountUseCase().onEach { accounts ->
+                _accounts.value = accounts
+                _icons.value += accounts.map {
+                    IconModel(
+                        it.name,
+                        it.icon,
+                        IconType.ACCOUNT.name,
+                        "${it.amount}${CurrencyType.valueOf(it.currency).symbol}",
+                        it.id
+                    )
                 }
-                .collect()
+                _icons.value = _icons.value.distinct()
+                _accounts.value = _accounts.value.distinct()
+                handleCategorySelected(currentIconType)
+            }.collect()
         }
     }
 
-    private fun setCurrencyBasedOnAccount() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val accountId = getAccountId() ?: return@launch
-            val fromCurrency = _accounts.value.find { it.id == accountId }!!.currency
-            fetchCurrencyRate(fromCurrency, "USD")
-        }
-    }
 
     private fun getAccountId(): Long? {
-        return if (getCurrentState().selectedTopCard?.type == IconType.ACCOUNT.name)
-            getCurrentState().selectedTopCard?.id
-        else if (getCurrentState().selectedBottomCard?.type == IconType.ACCOUNT.name)
-            getCurrentState().selectedBottomCard?.id
+        return if (getCurrentState().selectedTopCard?.type == IconType.ACCOUNT.name) getCurrentState().selectedTopCard?.id
+        else if (getCurrentState().selectedBottomCard?.type == IconType.ACCOUNT.name) getCurrentState().selectedBottomCard?.id
         else null
     }
 
-    private fun setCurrencyBasedOnCards() {
+    private fun setCurrencyBasedOnCards(selectedTopCard: IconModel, selectedBottomCard: IconModel) {
+        if (!areBothCardsAccounts(selectedTopCard, selectedBottomCard)) {
+            setUsdCurrency(selectedTopCard, selectedBottomCard)
+            return
+        }
         viewModelScope.launch(Dispatchers.IO) {
-            val topCardCurrency =
-                _accounts.value.find { it.id == getCurrentState().selectedTopCard?.id }?.currency
+            val topCardCurrency = _accounts.value.find { it.id == selectedTopCard.id }?.currency
             val bottomCardCurrency =
-                _accounts.value.find { it.id == getCurrentState().selectedBottomCard?.id }?.currency
+                _accounts.value.find { it.id == selectedBottomCard.id }?.currency
 
-            topCardCurrency?.let { fetchCurrencyRate(it, bottomCardCurrency!!) }
-            fetchCurrencyRate(topCardCurrency!!, "USD")
+            topCardCurrency?.let {
+                fetchCurrencyRate(it, bottomCardCurrency!!)
+                fetchCurrencyRate(it, CurrencyType.USD.name, true)
+            }
         }
     }
 
-    private fun fetchCurrencyRate(from: String, to: String) {
-        exchangeTo = to
-        exchangeFrom = from
+    private fun setUsdCurrency(topCard: IconModel, bottomCard: IconModel) {
+        val accountId = if (topCard.type == IconType.ACCOUNT.name) topCard.id else bottomCard.id
+        val currencyType = _accounts.value.find { it.id == accountId }?.currency.let {
+            CurrencyType.valueOf(it!!)
+        }
+        fetchCurrencyRate(currencyType.name, CurrencyType.USD.name, true)
+    }
+
+    private fun fetchCurrencyRate(from: String, to: String, isUsd: Boolean = false) {
         viewModelScope.launch(Dispatchers.IO) {
-            invoke(
-                kSuspendFunction = { getCurrencyUseCase(from, to) },
+            invoke(kSuspendFunction = { getCurrencyUseCase(from, to) },
                 onError = { e -> Log.e("FetchCurrencyRate", "Error: $e") },
                 onSuccess = { result ->
-                    if (to == "USD") currentUsdRate = result.toDouble()
+                    if (isUsd) exchangeRateUsd = result.toDouble()
                     else exchangeRate = result.toDouble()
-                    Log.d("FetchCurrencyRate", "Result: $result")
-                }
-            )
+                })
         }
     }
 
-    private fun areBothCardsAccounts(): Boolean {
-        return getCurrentState().selectedTopCard!!.type == IconType.ACCOUNT.name &&
-                getCurrentState().selectedBottomCard!!.type == IconType.ACCOUNT.name
+    private fun areBothCardsAccounts(
+        selectedTopCard: IconModel, selectedBottomCard: IconModel
+    ): Boolean {
+        return selectedTopCard.type == IconType.ACCOUNT.name && selectedBottomCard.type == IconType.ACCOUNT.name
     }
 }

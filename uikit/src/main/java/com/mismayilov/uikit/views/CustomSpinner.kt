@@ -37,7 +37,10 @@ class CustomSpinner @JvmOverloads constructor(
         val position = listData.indexOf(data)
         binding.spinner.setSelection(position)
     }
-//10:44
+
+    fun setSpinnerEnabled(isEnabled: Boolean) {
+        binding.spinner.isEnabled = isEnabled
+    }
 
     init {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.CustomSpinner)

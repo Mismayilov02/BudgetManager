@@ -31,6 +31,7 @@ class CreateFragment :
 
     private var selectedTabLayoutPosition = 0
     private var isNavigatedBack: Boolean = false
+    private var isUpdate: Boolean = false
 
     override fun getViewModelClass(): Class<CreateViewModel> = CreateViewModel::class.java
 
@@ -54,7 +55,9 @@ class CreateFragment :
     private fun checkIsUpdate() {
         val id = arguments?.getLong("id")
         if (id != null) {
+            isUpdate = true
             setEvent(CreateEvent.GetTransaction(id))
+            binding.tabLayout.setTabEnabled(false)
         }
     }
 
@@ -90,11 +93,11 @@ class CreateFragment :
         icons: List<IconModel>,
         onSelected: ((Long) -> Unit)
     ) {
-        val bottomSheet = CustomBottomSheetDialog(icons, onSelected) {
-                val iconType = icons.first().type
-                isNavigatedBack = true
-                (activity as NavigationManager).navigateByNavigationName(if (iconType == IconType.ACCOUNT.name) "account_navigation" else "icon_navigation")
-        }
+        val bottomSheet = CustomBottomSheetDialog(icons, onSelected = onSelected, addIconSelected = {
+            val iconType = icons.first().type
+            isNavigatedBack = true
+            (activity as NavigationManager).navigateByNavigationName(if (iconType == IconType.ACCOUNT.name) "account_navigation" else "icon_navigation")
+        })
         bottomSheet.show(parentFragmentManager, "CustomBottomSheet")
     }
 
@@ -115,7 +118,7 @@ class CreateFragment :
         if (isNavigatedBack) {
             isNavigatedBack = false
             return
-        }
+        }else if (isUpdate) return
         when (position) {
             0 -> {
                 setEvent(CreateEvent.CategorySelected(IconType.EXPENSE))
@@ -164,7 +167,7 @@ class CreateFragment :
                 val position = tabLayout.currentSelectedTabPosition
                 if (position == 2) {
                     setEvent(CreateEvent.ReverseCards)
-                } else tabLayout.selectTab(if (position == 0) 1 else 0)
+                } else if (!isUpdate) tabLayout.selectTab(if (position == 0) 1 else 0)
 
             }
         }
@@ -196,6 +199,7 @@ class CreateFragment :
             binding.bottomCardIcon.setImageResource(getResourceIdByName(requireContext(), it.icon))
         }
         state.amount.let { binding.txtAmount.text = it }
+        state.selectTabPosition?.let { binding.tabLayout.selectTab(it) }
     }
 
     override fun onResume() {
