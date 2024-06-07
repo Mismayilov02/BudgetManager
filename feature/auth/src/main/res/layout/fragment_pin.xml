@@ -1,7 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pin.PinFragment" />
+    android:background="@color/main_screen_white"
+    tools:context=".pin.PinFragment">
+
+    <RadioButton
+        android:id="@+id/radioButton4"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="@dimen/margin_large"
+        android:background="@drawable/custom_radio_button"
+        android:button="@null"
+        app:layout_constraintStart_toEndOf="@+id/radioButton3"
+        app:layout_constraintTop_toTopOf="@+id/radioButton3" />
+
+    <RadioButton
+        android:id="@+id/radioButton3"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:background="@drawable/custom_radio_button"
+        android:button="@null"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/radioButton2" />
+
+    <RadioButton
+        android:id="@+id/radioButton1"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="@dimen/margin_large"
+        android:background="@drawable/custom_radio_button"
+        android:button="@null"
+        app:layout_constraintEnd_toStartOf="@+id/radioButton2"
+        app:layout_constraintTop_toTopOf="@+id/radioButton2" />
+
+    <RadioButton
+        android:id="@+id/radioButton2"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/custom_radio_button"
+        android:button="@null"
+        android:checked="true"
+        app:layout_constraintBottom_toTopOf="@+id/iconCardview"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/iconCardview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-8dp"
+        app:cardBackgroundColor="@color/default_card_view"
+        app:cardCornerRadius="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelinee">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn9"
+                style="@style/custom_button_style"
+                android:text="9"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/btn7"
+                app:layout_constraintStart_toStartOf="@+id/btnDelete"
+                app:layout_constraintTop_toTopOf="@+id/btn7" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn8"
+                style="@style/custom_button_style"
+                android:text="8"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/btn7"
+                app:layout_constraintStart_toStartOf="@+id/btn0"
+                app:layout_constraintTop_toTopOf="@+id/btn7" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn7"
+                style="@style/custom_button_style"
+                android:text="7"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toTopOf="@+id/btnX"
+                app:layout_constraintStart_toStartOf="@+id/btnX"
+                app:layout_constraintTop_toBottomOf="@+id/btn4" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn6"
+                style="@style/custom_button_style"
+                android:text="6"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="@+id/btnDelete"
+                app:layout_constraintTop_toTopOf="@+id/btn5" />
+
+            <ImageButton
+                android:id="@+id/btnDelete"
+                style="@style/custom_button_style"
+                android:padding="22dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/delete"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn0"
+                app:layout_constraintTop_toTopOf="@+id/btn0"
+                app:tint="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn3"
+                style="@style/custom_button_style"
+                android:text="3"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/btn2"
+                app:layout_constraintStart_toStartOf="@+id/btn6" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn2"
+                style="@style/custom_button_style"
+                android:text="2"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/btn1"
+                app:layout_constraintEnd_toEndOf="@+id/btn5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn5"
+                style="@style/custom_button_style"
+                android:text="5"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="@+id/btn4"
+                app:layout_constraintStart_toStartOf="@+id/btn0" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn0"
+                style="@style/custom_button_style"
+                android:text="0"
+                app:backgroundTint="@null"
+                app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnX"
+                app:layout_constraintTop_toTopOf="@+id/btnX" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnX"
+                style="@style/custom_button_style"
+                android:layout_marginBottom="8dp"
+                android:text="X"
+                android:visibility="visible"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn0"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn7" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn4"
+                style="@style/custom_button_style"
+                android:text="4"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toTopOf="@+id/btn7"
+                app:layout_constraintStart_toStartOf="@+id/btnX"
+                app:layout_constraintTop_toBottomOf="@+id/btn1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn1"
+                style="@style/custom_button_style"
+                android:layout_marginTop="8dp"
+                android:text="1"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toTopOf="@+id/btn4"
+                app:layout_constraintStart_toStartOf="@+id/btn4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/security"
+        app:layout_constraintBottom_toTopOf="@+id/radioButton3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

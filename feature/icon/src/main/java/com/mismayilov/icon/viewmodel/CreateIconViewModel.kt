@@ -7,10 +7,12 @@ import com.mismayilov.common.unums.IconType
 import com.mismayilov.core.base.viewmodel.BaseViewModel
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.usecases.icon.AddIconUseCase
+import com.mismayilov.domain.usecases.transaction.GetTransactionIconUseCase
 import com.mismayilov.icon.flow.create_icon.CreateIconEffect
 import com.mismayilov.icon.flow.create_icon.CreateIconEvent
 import com.mismayilov.icon.flow.create_icon.CreateIconState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +25,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateIconViewModel @Inject constructor(
     private val addIconUseCase: AddIconUseCase,
-    private val context: Context
+    private val getTransactionIconUseCase: GetTransactionIconUseCase,
+    @ApplicationContext private val context: Context
 ) : BaseViewModel<CreateIconState, CreateIconEvent, CreateIconEffect>() {
 
     private val _icons = MutableStateFlow<List<IconModel>>(emptyList())
@@ -87,6 +90,7 @@ class CreateIconViewModel @Inject constructor(
             val icon = _icons.value[iconPosition]
             val iconModel = IconModel(name = name, icon.icon, iconType, id = id)
             addIconUseCase(iconModel)
+            getTransactionIconUseCase(iconModel)
             setEffect(CreateIconEffect.ShowToast(if (isEdit) "Icon updated" else "Icon added"))
             setEffect(CreateIconEffect.CloseFragment)
         }

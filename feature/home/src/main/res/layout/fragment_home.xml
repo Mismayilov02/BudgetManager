@@ -109,6 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
+                android:text="$0"
                 android:textColor="@color/text_main"
                 app:layout_constraintBottom_toBottomOf="@+id/historyCarview"
                 app:layout_constraintEnd_toEndOf="parent"

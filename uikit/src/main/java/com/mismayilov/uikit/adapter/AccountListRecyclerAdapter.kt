@@ -16,7 +16,7 @@ class AccountListRecyclerAdapter : ListAdapter<IconModel, AccountListRecyclerAda
     itemsTheSame = { oldItem, newItem -> oldItem == newItem },
     contentsTheSame = { oldItem, newItem -> oldItem == newItem }
 )) {
-    var selectedPosition =/* RecyclerView.NO_POSITION*/0
+    var selectedPosition = 0
 
     fun setSelectedPosition(iconName: String) {
         val position = currentList.indexOfFirst { it.icon == iconName }
@@ -41,7 +41,7 @@ class AccountListRecyclerAdapter : ListAdapter<IconModel, AccountListRecyclerAda
             binding.apply {
                 iconImage.setImageResource(getResourceIdByName(iconImage.context, iconModel.icon))
                 accountNameTxt.text = iconModel.name
-                balanceTxt.text = iconModel.balance.toString()
+                balanceTxt.text = iconModel.balance!!
                 iconCardview.background = iconCardview.context.getDrawable(if (layoutPosition == selectedPosition) R.drawable.icon_selected_backround else R.drawable.icon_unselected_backround)
                 iconCardview.setOnClickListener {
                     if (layoutPosition == selectedPosition) return@setOnClickListener
@@ -52,4 +52,9 @@ class AccountListRecyclerAdapter : ListAdapter<IconModel, AccountListRecyclerAda
             }
         }
     }
+}
+
+private fun String.toCurrencyString(): String {
+    if (this.toDouble() % 1 == 0.0) return String.format("%.0f", this.toDouble())
+    return String.format("%.2f", this.toDouble())
 }

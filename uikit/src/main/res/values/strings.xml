@@ -61,9 +61,12 @@
     <string name="report">Report</string>
     <string name="accounts_balance">Accounts Balance</string>
     <string name="total_balance">Total Balance</string>
-<string name="total_income">Total Income</string>
-<string name="total_expense">Total Expense</string>
-<string name="total_transfer">Total Transfer</string>
+    <string name="total_income">Total Income</string>
+    <string name="total_expense">Total Expense</string>
+    <string name="total_transfer">Total Transfer</string>
+    <string name="save">Save</string>
+    <string name="show_balance">Show Balance</string>
+    <string name="two_factor_auth">Two Factor Authentication</string>
 
 
     <array name="tab_titles_three">
@@ -79,7 +82,6 @@
 
 
     <array name="expense_icons">
-        <item>girlfriend</item>
         <item>beauty</item>
         <item>car</item>
         <item>child</item>
@@ -105,6 +107,10 @@
         <item>travel</item>
         <item>vegetable</item>
         <item>coin_bank</item>
+        <item>movie</item>
+        <item>party</item>
+        <item>petrol</item>
+        <item>girlfriend</item>
     </array>
 
     <array name="income_icons">
@@ -127,6 +133,12 @@
         <item>transfer</item>
         <item>usd</item>
         <item>wallet</item>
+        <item>coin_bank</item>
+        <item>cvv_card</item>
+        <item>euro</item>
+        <item>manat_sign</item>
+        <item>plant_invest</item>
+        <item>visa</item>
     </array>
 
     <array name="other_icon">
@@ -142,7 +154,7 @@
         <item>coffee</item>
         <item>fish</item>
         <item>flower_tulip</item>
-        <item>gamepad</item>
+        <item>game_pad</item>
         <item>graduation_cap</item>
         <item>gym</item>
         <item>hamburger</item>

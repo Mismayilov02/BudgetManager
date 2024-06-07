@@ -9,6 +9,30 @@
     tools:context=".fragment.SettingsFragment">
 
     <com.mismayilov.settings.view.CustomItemView
+        android:id="@+id/twoFactorAuthItemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:iconImage="@drawable/otp"
+        app:itemText="@string/two_factor_auth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/balanceShowItemView"
+        app:showSwitch="true" />
+
+    <com.mismayilov.settings.view.CustomItemView
+        android:id="@+id/balanceShowItemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:iconImage="@drawable/low_vision"
+        app:itemText="@string/show_balance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reminderItemView"
+        app:showSwitch="true" />
+
+    <com.mismayilov.settings.view.CustomItemView
         android:id="@+id/accountItemView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,8 +67,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iconItemView"
-        app:showTimer="true"
-        app:showSwitch="true" />
+        app:showSwitch="true"
+        app:showSubText="true" />
 
     <TextView
         android:id="@+id/textView5"

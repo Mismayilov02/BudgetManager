@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "482217946398",
+    "project_id": "budget-manager-c2321",
+    "storage_bucket": "budget-manager-c2321.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482217946398:android:3a4f2c262bddc8b2b1ed0f",
+        "android_client_info": {
+          "package_name": "com.mismayilov.budgetmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBev776rMjEULevi4Xf-m9rD4VAv5PtO2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

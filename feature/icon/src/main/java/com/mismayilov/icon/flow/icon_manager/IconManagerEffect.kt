@@ -1,4 +1,5 @@
 package com.mismayilov.icon.flow.icon_manager
 
-class IconManagerEffect {
+sealed class IconManagerEffect {
+    data class ShowToast(val message: String) : IconManagerEffect()
 }

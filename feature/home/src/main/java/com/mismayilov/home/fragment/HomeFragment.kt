@@ -74,9 +74,9 @@ class HomeFragment :
         binding.apply {
             val transactionBtn = mutableListOf(btnExpense, btnIncome, btnTransfer)
             transactionBtn.forEach {
-                it.setOnClickListener { view ->
+                it.setOnClickListener { _ ->
                     val bundle = Bundle()
-                    bundle.putString("tabSelectedIndex", transactionBtn.indexOf(it).toString())
+                    bundle.putInt("tabSelectedIndex", transactionBtn.indexOf(it))
                     (activity as NavigationManager).navigateByBundle(
                         "create_navigation",
                         bundle

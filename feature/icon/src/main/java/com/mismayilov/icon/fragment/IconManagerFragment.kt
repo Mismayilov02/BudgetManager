@@ -16,6 +16,7 @@ import com.mismayilov.icon.flow.icon_manager.IconManagerEvent
 import com.mismayilov.icon.flow.icon_manager.IconManagerState
 import com.mismayilov.icon.viewmodel.IconManagerViewModel
 import com.mismayilov.uikit.util.showDialog
+import com.mismayilov.uikit.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -93,6 +94,12 @@ class IconManagerFragment :
     override fun renderState(state: IconManagerState) {
         state.icons?.let {
             iconAdapter.submitList(it)
+        }
+    }
+
+    override fun renderEffect(effect: IconManagerEffect) {
+        when (effect) {
+            is IconManagerEffect.ShowToast -> showToast(effect.message)
         }
     }
 

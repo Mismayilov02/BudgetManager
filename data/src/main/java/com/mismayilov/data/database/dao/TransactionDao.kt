@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.mismayilov.domain.entities.local.AccountModel
+import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.entities.local.TransactionAmountsModel
 import com.mismayilov.domain.entities.local.TransactionModel
 import kotlinx.coroutines.flow.Flow
@@ -70,6 +72,13 @@ interface TransactionDao {
 
     @Query("UPDATE account SET amount = amount + :addAmount WHERE id = :accountId")
     suspend fun updateAccountAmount(accountId: Long, addAmount: Double)
+
+    @Query("""UPDATE `transaction` SET account = :account WHERE account LIKE '%"id":' || :accountId || '%' OR
+        account_to LIKE '%"id":' || :accountId || '%'""")
+    suspend fun updateTransactionAccount(account: AccountModel , accountId: Long)
+
+    @Query("""UPDATE `transaction` SET category = :icon WHERE category LIKE '%"id":' || :iconId || '%'""")
+    suspend fun updateTransactionIcon(icon: IconModel, iconId: Long)
 
 
     @Transaction

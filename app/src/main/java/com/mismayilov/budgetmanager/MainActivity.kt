@@ -10,6 +10,8 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.mismayilov.core.managers.NavigationManager
 import com.mismayilov.data.local.SharedPreferencesManager
 import com.mismayilov.uikit.util.getResourceIdByName

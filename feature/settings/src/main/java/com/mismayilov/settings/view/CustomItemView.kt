@@ -23,13 +23,13 @@ class CustomItemView @JvmOverloads constructor(
         get() = binding.itemSwitch.isChecked
         set(value) {
             binding.itemSwitch.isChecked = value
-            binding.itemTime.visibility = if (value) VISIBLE else GONE
+            binding.subText.visibility = if (value) VISIBLE else GONE
         }
 
 
     var setSwitchListener: (Boolean, TextView) -> Unit = { _, _ -> }
-    fun setTimerText(text: String) {
-        binding.itemTime.text = text
+    fun setSubText(text: String) {
+        binding.subText.text = text
     }
     init {
         attrs?.let {
@@ -42,10 +42,10 @@ class CustomItemView @JvmOverloads constructor(
                 )
             )
             val showSwitch = typedArray.getBoolean(R.styleable.CustomSettingsView_showSwitch, false)
-            val showTimer = typedArray.getBoolean(R.styleable.CustomSettingsView_showTimer, false)
+            val showTimer = typedArray.getBoolean(R.styleable.CustomSettingsView_showSubText, false)
             binding.itemSwitch.visibility = if (showSwitch) VISIBLE else GONE
             binding.rightIcon.visibility = if (showSwitch) GONE else VISIBLE
-            binding.itemTime.visibility = if (showTimer) VISIBLE else GONE
+            binding.subText.visibility = if (showTimer) VISIBLE else GONE
             if (!showSwitch) binding.rightIcon.setImageResource(
                 typedArray.getResourceId(
                     R.styleable.CustomSettingsView_rightIcon,
@@ -60,7 +60,7 @@ class CustomItemView @JvmOverloads constructor(
     private fun initListeners() {
         binding.itemSwitch.setOnCheckedChangeListener { _, isChecked ->
             if (!suppressSwitchListener) {
-                setSwitchListener(isChecked, binding.itemTime)
+                setSwitchListener(isChecked, binding.subText)
             }else suppressSwitchListener = false
         }
     }

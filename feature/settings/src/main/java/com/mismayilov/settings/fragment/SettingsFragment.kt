@@ -37,12 +37,33 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initReminder()
         initClickListeners()
+        initBalanceSowing()
+        initTwoFactorAuth()
+    }
+
+    private fun initTwoFactorAuth() {
+        val twoFactorAuth = SharedPreferencesManager.getValue("twoFactorAuth", false)
+        _binding?.twoFactorAuthItemView?.setChecked = twoFactorAuth
+       /* _binding?.twoFactorItemView?.apply {
+            isChecked = SharedPreferencesManager.getValue("twoFactorAuth", false)
+            setSwitchListener = { isChecked, _ ->
+                SharedPreferencesManager.setValue("twoFactorAuth", isChecked)
+            }
+        }*/
+    }
+
+    private fun initBalanceSowing() {
+        val showBalance = SharedPreferencesManager.getValue("showBalance", false)
+        _binding?.balanceShowItemView?.setChecked = showBalance
+        _binding?.balanceShowItemView?.setSwitchListener = { isChecked, _ ->
+            SharedPreferencesManager.setValue("showBalance", isChecked)
+        }
     }
 
     private fun initReminder() {
         _binding?.apply {
             reminderItemView.setChecked = SharedPreferencesManager.getValue("reminder", false)
-            reminderItemView.setTimerText(
+            reminderItemView.setSubText(
                 simpleDateFormat.format(SharedPreferencesManager.getValue("reminderTime", 0L))
             )
         }
@@ -72,7 +93,7 @@ class SettingsFragment : Fragment() {
                 textView.visibility = View.VISIBLE
                 val hours = simpleDateFormat.format(it).split(":")[0].toInt()
                 val minutes = simpleDateFormat.format(it).split(":")[1].toInt()
-                reminderManager.scheduleDailyReminder(hours, minutes)
+                reminderManager.scheduleDailyReminder(it)
             }, onCancel = {
                 _binding?.reminderItemView?.setChecked = false
             })

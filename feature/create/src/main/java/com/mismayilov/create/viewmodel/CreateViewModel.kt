@@ -3,6 +3,7 @@ package com.mismayilov.create.viewmodel
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.mismayilov.common.extensions.toCurrencyString
 import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.common.unums.IconType
 import com.mismayilov.core.base.viewmodel.BaseViewModel
@@ -95,7 +96,7 @@ class CreateViewModel @Inject constructor(
                 it.name,
                 it.icon,
                 IconType.ACCOUNT.name,
-                "${it.amount}${CurrencyType.valueOf(it.currency).symbol}",
+                "${it.amount.toCurrencyString()}${CurrencyType.valueOf(it.currency).symbol}",
                 it.id
             )
         }!!
@@ -338,7 +339,7 @@ class CreateViewModel @Inject constructor(
                         it.name,
                         it.icon,
                         IconType.ACCOUNT.name,
-                        "${it.amount}${CurrencyType.valueOf(it.currency).symbol}",
+                        "${it.amount.toCurrencyString()}${CurrencyType.valueOf(it.currency).symbol}",
                         it.id
                     )
                 }

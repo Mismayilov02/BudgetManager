@@ -14,7 +14,9 @@ import com.mismayilov.domain.entities.local.AccountModel
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.usecases.account.CreateAccountUseCase
 import com.mismayilov.domain.usecases.account.GetAccountByIDUseCase
+import com.mismayilov.domain.usecases.transaction.TransactionAccountUpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,9 +28,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateAccountViewModel @Inject constructor(
-    private val context: Context,
+    @ApplicationContext private val context: Context,
     private val createAccountUseCase: CreateAccountUseCase,
     private val getAccountByIDUseCase: GetAccountByIDUseCase,
+    private val getTransactionAccountUpdateUseCase: TransactionAccountUpdateUseCase
 ) :
     BaseViewModel<CreateAccountState, CreateAccountEvent, CreateAccountEffect>() {
     override fun getInitialState(): CreateAccountState = CreateAccountState()
@@ -117,17 +120,18 @@ class CreateAccountViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             val currencyName = CurrencyType.entries.find { it.value == currency }?.name!!
-            createAccountUseCase(
-                AccountModel(
-                    name = name,
-                    currency = currencyName,
-                    amount = balance.toDouble(),
-                    amountUsd = balance.toDouble(),
-                    icon = _icons.value[iconPosition].icon,
-                    type = type,
-                    id = _account.value?.id ?: 0
-                ), isUpdate
+            val accountModel = AccountModel(
+                name = name,
+                currency = currencyName,
+                amount = balance.toDouble(),
+                amountUsd = balance.toDouble(),
+                icon = _icons.value[iconPosition].icon,
+                type = type,
+                isPinned = _account.value?.isPinned ?: false,
+                id = _account.value?.id ?: 0
             )
+            createAccountUseCase(accountModel, isUpdate)
+            if (isUpdate) getTransactionAccountUpdateUseCase(accountModel)
             setEffect(CreateAccountEffect.ShowToast(if (isUpdate) "Account updated" else "Account created"))
             setEffect(CreateAccountEffect.CloseFragment)
         }

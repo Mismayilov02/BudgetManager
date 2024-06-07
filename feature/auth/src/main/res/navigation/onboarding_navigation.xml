@@ -18,5 +18,13 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_onboardingFragment"
             app:destination="@id/onboardingFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_pinFragment"
+            app:destination="@id/pinFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/pinFragment"
+        android:name="com.mismayilov.auth.pin.PinFragment"
+        android:label="fragment_pin"
+        tools:layout="@layout/fragment_pin" />
 </navigation>

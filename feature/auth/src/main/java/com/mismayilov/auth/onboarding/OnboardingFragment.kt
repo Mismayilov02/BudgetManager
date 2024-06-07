@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import com.mismayilov.auth.databinding.FragmentOnboardingBinding
 import com.mismayilov.core.managers.NavigationManager
 import com.mismayilov.data.local.SharedPreferencesManager
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardingFragment : Fragment() {
 
     private var binding: FragmentOnboardingBinding? = null

@@ -3,6 +3,8 @@ package com.mismayilov.data.repository
 import com.mismayilov.domain.repositories.TransactionRepository
 import com.mismayilov.domain.entities.local.TransactionModel
 import com.mismayilov.data.database.dao.TransactionDao
+import com.mismayilov.domain.entities.local.AccountModel
+import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.entities.local.TransactionAmountsModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -65,6 +67,14 @@ class TransactionRepositoryImpl @Inject constructor(
 
     override fun getSumTransfer(): Flow<Double> {
         return transactionDao.getTransferAmount()
+    }
+
+    override suspend fun updateTransactionAccount(account: AccountModel) {
+        transactionDao.updateTransactionAccount(account, account.id)
+    }
+
+    override suspend fun updateTransactionIcon(icon: IconModel) {
+        transactionDao.updateTransactionIcon(icon, icon.id)
     }
 
 

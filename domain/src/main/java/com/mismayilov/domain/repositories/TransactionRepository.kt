@@ -1,5 +1,7 @@
 package com.mismayilov.domain.repositories
 
+import com.mismayilov.domain.entities.local.AccountModel
+import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.entities.local.TransactionModel
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +19,6 @@ interface TransactionRepository {
     fun  getSumExpense(): Flow<Double>
     fun getSumIncome(): Flow<Double>
     fun getSumTransfer(): Flow<Double>
+    suspend fun updateTransactionAccount(account: AccountModel)
+    suspend fun updateTransactionIcon(icon: IconModel)
 }

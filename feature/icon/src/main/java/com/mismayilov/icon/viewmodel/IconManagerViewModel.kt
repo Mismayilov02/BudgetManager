@@ -21,8 +21,6 @@ class IconManagerViewModel @Inject constructor(
 ) : BaseViewModel<IconManagerState, IconManagerEvent, IconManagerEffect>() {
 
     private val _icons = MutableStateFlow<List<IconModel>>(emptyList())
-    val icons: Flow<List<IconModel>> = _icons
-
     private var currentIconType = IconType.EXPENSE
 
     init {
@@ -44,6 +42,10 @@ class IconManagerViewModel @Inject constructor(
     }
 
     private suspend fun deleteIcon(id: Long) {
+        if (_icons.value.filter { it.type == currentIconType.name }.size == 1) {
+            setEffect(IconManagerEffect.ShowToast("You can't delete all icons"))
+            return
+        }
         deleteIconUseCase(id)
         _icons.value = _icons.value.filter { it.id != id }
         setState(getCurrentState().copy(icons = _icons.value))

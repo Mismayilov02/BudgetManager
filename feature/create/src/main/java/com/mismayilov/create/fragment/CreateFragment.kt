@@ -13,6 +13,7 @@ import com.mismayilov.common.utility.Util.Companion.YEAR_FORMAT
 import com.mismayilov.common.utility.showDatePicker
 import com.mismayilov.core.base.fragment.BaseFragment
 import com.mismayilov.core.managers.NavigationManager
+import com.mismayilov.create.R
 import com.mismayilov.create.databinding.FragmentCreateBinding
 import com.mismayilov.create.flow.CreateEffect
 import com.mismayilov.create.flow.CreateEvent
@@ -54,15 +55,16 @@ class CreateFragment :
 
     private fun checkIsUpdate() {
         val id = arguments?.getLong("id")
-        if (id != null) {
+        if (id !=0L && id != null) {
             isUpdate = true
+            binding.btnTransfer.text = getString(com.mismayilov.uikit.R.string.update)
             setEvent(CreateEvent.GetTransaction(id))
             binding.tabLayout.setTabEnabled(false)
         }
     }
 
     private fun selectDefaultTab() {
-        val selectedIndex = arguments?.getString("tabSelectedIndex")?.toInt() ?: 0
+        val selectedIndex = arguments?.getInt("tabSelectedIndex")?: 0
         binding.tabLayout.selectTab(selectedIndex)
     }
 
@@ -120,20 +122,9 @@ class CreateFragment :
             return
         }else if (isUpdate) return
         when (position) {
-            0 -> {
-                setEvent(CreateEvent.CategorySelected(IconType.EXPENSE))
-                binding.btnTransfer.text = "Expense Now"
-            }
-
-            1 -> {
-                setEvent(CreateEvent.CategorySelected(IconType.INCOME))
-                binding.btnTransfer.text = "Income Now"
-            }
-
-            2 -> {
-                setEvent(CreateEvent.CategorySelected(IconType.ACCOUNT))
-                binding.btnTransfer.text = "Transfer Now"
-            }
+            0 -> setEvent(CreateEvent.CategorySelected(IconType.EXPENSE))
+            1 -> setEvent(CreateEvent.CategorySelected(IconType.INCOME))
+            2 -> setEvent(CreateEvent.CategorySelected(IconType.ACCOUNT))
         }
     }
 
@@ -204,8 +195,8 @@ class CreateFragment :
 
     override fun onResume() {
         super.onResume()
+        (activity as NavigationManager).bottomNavigationVisibility(false)
         if (isNavigatedBack) {
-            (activity as NavigationManager).bottomNavigationVisibility(false)
             binding.tabLayout.selectTab(selectedTabLayoutPosition)
         }
     }

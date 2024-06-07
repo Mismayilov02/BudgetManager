@@ -27,13 +27,19 @@ class SplashScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val isUserLoggedIn = SharedPreferencesManager.getValue("isUserLoggedIn", false)
+        val twoFactorAuth = SharedPreferencesManager.getValue("twoFactorAuth", true)
         Handler().postDelayed({
-            if (isUserLoggedIn) (activity as NavigationManager).navigateToMain()
+            if (isUserLoggedIn && twoFactorAuth) {
+                (activity as NavigationManager).navigateByNavigationName(
+                    "pinFragment",
+                    "splashScreenFragment"
+                )
+            } else if (isUserLoggedIn) (activity as NavigationManager).navigateToMain()
             else (activity as NavigationManager).navigateByNavigationName(
                     "onboardingFragment",
                     "splashScreenFragment"
                 )
-        }, 2500)
+        }, 2200)
     }
 
     override fun onDestroyView() {
