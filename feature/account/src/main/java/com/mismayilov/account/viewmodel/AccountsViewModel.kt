@@ -30,7 +30,6 @@ class AccountsViewModel @Inject constructor(
     override fun getInitialState(): AccountsState = AccountsState()
 
     private val _accounts = MutableStateFlow<List<AccountModel>>(emptyList())
-    val accounts: Flow<List<AccountModel>> = _accounts
 
     init {
         getAllAccount()
@@ -53,7 +52,6 @@ class AccountsViewModel @Inject constructor(
     private fun pinAccount(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             updateAccountPinUseCase.invoke(id)
-//            setState(getCurrentState().copy(accounts = _accounts.value))
         }
     }
 

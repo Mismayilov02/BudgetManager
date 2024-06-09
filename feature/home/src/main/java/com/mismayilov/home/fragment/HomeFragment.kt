@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.mismayilov.common.extensions.toBlurText
 import com.mismayilov.common.extensions.toCurrencyString
 import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.core.base.fragment.BaseFragment
 import com.mismayilov.core.managers.NavigationManager
+import com.mismayilov.data.local.SharedPreferencesManager
 import com.mismayilov.home.adapter.RecentTransactionAdapter
-import com.mismayilov.home.adapter.SwipeToDeleteCallback
+import com.mismayilov.common.generic.SwipeToDeleteCallback
 import com.mismayilov.home.databinding.FragmentHomeBinding
 import com.mismayilov.home.flow.home.HomeEffect
 import com.mismayilov.home.flow.home.HomeEvent
@@ -19,6 +21,7 @@ import com.mismayilov.home.flow.home.HomeState
 import com.mismayilov.home.viewmodel.HomeViewModel
 import com.mismayilov.uikit.util.showDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class HomeFragment :
@@ -30,18 +33,30 @@ class HomeFragment :
         }
 
     private lateinit var adapter: RecentTransactionAdapter
+    private var showBalance by Delegates.notNull<Boolean>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as? NavigationManager)?.bottomNavigationVisibility(true)
-
+        checkShowBalance()
         initClickListeners()
         initAdapter()
         initRecyclerView()
     }
 
+    private fun checkShowBalance() {
+        binding.apply {
+            showBalance = SharedPreferencesManager.getValue("hideBalance", true)
+            val textViewList = listOf(amountPinnedAccount, incomeTxt, expenseTxt)
+            textViewList.forEach {
+                it.toBlurText(showBalance)
+        }
+        }
+    }
+
     private fun initAdapter() {
-        adapter = RecentTransactionAdapter(
+        adapter = RecentTransactionAdapter( showBalance,
             deleteItem = {
                 showDialog(positiveButton = {
                     setEvent(HomeEvent.DeleteTransaction(it))
@@ -57,7 +72,9 @@ class HomeFragment :
                 (activity as NavigationManager).navigateByDirection(directions)
             }
         )
-        val swipeHandler = SwipeToDeleteCallback(requireContext(), adapter)
+        val swipeHandler = SwipeToDeleteCallback(requireContext()) {
+            adapter.deleteItem(it)
+        }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.transactionHistoryRecyclerView)
     }

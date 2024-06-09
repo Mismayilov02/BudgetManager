@@ -8,7 +8,6 @@ import javax.inject.Inject
 
 class CategoryRepositoryImpl @Inject constructor(
     private val iconModelDao: IconModelDao
-//    private val noteService: NoteService
 ) : IconRepository {
 
     override fun getIcons(): Flow<List<IconModel>> {

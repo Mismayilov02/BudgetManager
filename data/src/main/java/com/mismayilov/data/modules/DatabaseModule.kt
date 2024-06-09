@@ -67,15 +67,6 @@ object DatabaseModule {
     ): AccountDao {
         return appDatabase.accountDao()
     }
-
-    @Provides
-    @Singleton
-    fun provideContext(
-        @ApplicationContext context: Context
-    ): Context {
-        return context
-    }
-
     private fun insertInitialData(database: AppDatabase, context: Context) {
         val iconModelDao = database.iconModelDao()
         val accountDao = database.accountDao()

@@ -1,13 +1,16 @@
 package com.mismayilov.home.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.BlurMaskFilter
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mismayilov.common.extensions.toBlurText
 import com.mismayilov.common.unums.CurrencyType
 import com.mismayilov.core.generics.MyDiffUtil
 import com.mismayilov.common.unums.IconType
@@ -17,7 +20,7 @@ import com.mismayilov.uikit.databinding.TransactionHistoryItemDesignBinding
 import com.mismayilov.uikit.util.getResourceIdByName
 import java.text.SimpleDateFormat
 
-class RecentTransactionAdapter constructor(val deleteItem: ((Long) -> Unit) ,val viewItem:(Long)->Unit) : ListAdapter<TransactionModel, RecentTransactionAdapter.ViewHolder>(
+class RecentTransactionAdapter constructor(val showAmount:Boolean = false, val deleteItem: ((Long) -> Unit) ,val viewItem:(Long)->Unit) : ListAdapter<TransactionModel, RecentTransactionAdapter.ViewHolder>(
     MyDiffUtil<TransactionModel>(
         itemsTheSame = { oldItem, newItem -> oldItem == newItem },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
@@ -73,6 +76,8 @@ class RecentTransactionAdapter constructor(val deleteItem: ((Long) -> Unit) ,val
                 val context = historyImage.context
                 val resID: Int = getResourceIdByName(context, transactionHistory.category.icon)
                 historyImage.setImageResource(resID)
+
+                historyAmount.toBlurText(showAmount)
 
             }
         }

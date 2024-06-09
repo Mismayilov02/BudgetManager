@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_screen_white"
+    android:background="@color/white_off"
     tools:context=".fragment.ReportsFragment">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
         android:text="@string/report"
-        android:textColor="@color/text_main"
+        android:textColor="@color/dark_blue"
         android:textSize="@dimen/text_size_xxlarge"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         android:layout_marginStart="@dimen/margin_xlarge"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_xlarge"
-        app:cardBackgroundColor="@color/cardview"
+        app:cardBackgroundColor="@color/background_light_gray"
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/text_main"
+                android:textColor="@color/dark_blue"
                 android:textSize="@dimen/text_size_xlarge"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/texatView5"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_xxlarge"
                 android:text="@string/total_expense"
-                android:textColor="@color/text_main"
+                android:textColor="@color/dark_blue"
                 android:textSize="@dimen/margin_xlarge"
                 app:layout_constraintStart_toStartOf="@+id/reportIncome"
                 app:layout_constraintTop_toBottomOf="@+id/reportIncome" />
@@ -71,7 +71,7 @@
                 android:src="@drawable/coin_bank"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/text_main" />
+                app:tint="@color/dark_blue" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -80,7 +80,7 @@
                 android:layout_marginStart="@dimen/margin_xlarge"
                 android:layout_marginTop="@dimen/margin_xlarge"
                 android:text="@string/total_income"
-                android:textColor="@color/text_main"
+                android:textColor="@color/dark_blue"
                 android:textSize="@dimen/margin_xlarge"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/text_main"
+                android:textColor="@color/dark_blue"
                 android:textSize="@dimen/text_size_xlarge"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:text="@string/total_transfer"
-                android:textColor="@color/text_main"
+                android:textColor="@color/dark_blue"
                 android:textSize="@dimen/margin_xlarge"
                 app:layout_constraintEnd_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/imageView5" />
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/text_main"
+                android:textColor="@color/dark_blue"
                 android:textSize="@dimen/text_size_xlarge"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView7"
@@ -139,7 +139,7 @@
         android:layout_marginTop="@dimen/margin_large"
         android:text="@string/total_balance"
         android:textSize="@dimen/text_size_xlarge"
-        android:textColor="@color/text_main"
+        android:textColor="@color/dark_blue"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/cardView2"
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
@@ -149,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0 $"
-        android:textColor="@color/text_main"
+        android:textColor="@color/dark_blue"
         android:textSize="@dimen/text_size_xlarge"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"

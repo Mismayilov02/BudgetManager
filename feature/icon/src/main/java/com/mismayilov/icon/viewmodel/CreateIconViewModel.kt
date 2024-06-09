@@ -30,7 +30,6 @@ class CreateIconViewModel @Inject constructor(
 ) : BaseViewModel<CreateIconState, CreateIconEvent, CreateIconEffect>() {
 
     private val _icons = MutableStateFlow<List<IconModel>>(emptyList())
-    val icons: Flow<List<IconModel>> = _icons
 
     override fun getInitialState(): CreateIconState = CreateIconState()
 

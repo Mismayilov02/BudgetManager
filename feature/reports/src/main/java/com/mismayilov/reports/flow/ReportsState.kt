@@ -1,8 +1,6 @@
 package com.mismayilov.reports.flow
 
-import com.mismayilov.domain.entities.local.AccountModel
 import com.mismayilov.domain.entities.local.IconModel
-import com.mismayilov.domain.entities.local.TransactionModel
 
 data class ReportsState(
     val accounts: List<IconModel>? = null,

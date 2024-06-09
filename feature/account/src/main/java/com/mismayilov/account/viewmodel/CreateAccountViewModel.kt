@@ -37,7 +37,6 @@ class CreateAccountViewModel @Inject constructor(
     override fun getInitialState(): CreateAccountState = CreateAccountState()
 
     private val _icons = MutableStateFlow<List<IconModel>>(emptyList())
-    val icons: Flow<List<IconModel>> = _icons
 
     private val _account = MutableStateFlow<AccountModel?>(null)
     val account: Flow<AccountModel?> = _account

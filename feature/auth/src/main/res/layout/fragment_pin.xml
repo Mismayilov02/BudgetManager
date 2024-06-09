@@ -5,48 +5,51 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_screen_white"
-    tools:context=".pin.PinFragment">
+    android:background="@color/white_off"
+    tools:context=".fragment.PinFragment">
 
     <RadioButton
         android:id="@+id/radioButton4"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginStart="@dimen/margin_large"
         android:background="@drawable/custom_radio_button"
         android:button="@null"
+        android:enabled="false"
         app:layout_constraintStart_toEndOf="@+id/radioButton3"
         app:layout_constraintTop_toTopOf="@+id/radioButton3" />
 
     <RadioButton
         android:id="@+id/radioButton3"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginStart="@dimen/margin_medium"
         android:background="@drawable/custom_radio_button"
         android:button="@null"
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/radioButton2" />
 
     <RadioButton
         android:id="@+id/radioButton1"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginEnd="@dimen/margin_large"
         android:background="@drawable/custom_radio_button"
         android:button="@null"
+        android:enabled="false"
         app:layout_constraintEnd_toStartOf="@+id/radioButton2"
         app:layout_constraintTop_toTopOf="@+id/radioButton2" />
 
     <RadioButton
         android:id="@+id/radioButton2"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginEnd="@dimen/margin_medium"
         android:layout_marginBottom="48dp"
         android:background="@drawable/custom_radio_button"
         android:button="@null"
-        android:checked="true"
+        android:enabled="false"
         app:layout_constraintBottom_toTopOf="@+id/iconCardview"
         app:layout_constraintEnd_toStartOf="@+id/guideline2" />
 
@@ -62,7 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="-8dp"
-        app:cardBackgroundColor="@color/default_card_view"
+        app:cardBackgroundColor="@color/card_dark_green"
         app:cardCornerRadius="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

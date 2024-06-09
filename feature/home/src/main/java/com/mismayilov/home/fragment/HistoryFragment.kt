@@ -14,7 +14,7 @@ import com.mismayilov.common.utility.showDatePicker
 import com.mismayilov.core.base.fragment.BaseFragment
 import com.mismayilov.core.managers.NavigationManager
 import com.mismayilov.home.adapter.RecentTransactionAdapter
-import com.mismayilov.home.adapter.SwipeToDeleteCallback
+import com.mismayilov.common.generic.SwipeToDeleteCallback
 import com.mismayilov.home.databinding.FragmentHistoryBinding
 import com.mismayilov.home.flow.history.HistoryEffect
 import com.mismayilov.home.flow.history.HistoryEvent
@@ -59,7 +59,9 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding,HistoryViewModel,His
                 (activity as NavigationManager).navigateByDirection(directions)
             }
         )
-        val swipeHandler = SwipeToDeleteCallback(requireContext(),adapter)
+        val swipeHandler = SwipeToDeleteCallback(requireContext()){
+            adapter.deleteItem(it)
+        }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(binding.historyRecyclerView)
     }

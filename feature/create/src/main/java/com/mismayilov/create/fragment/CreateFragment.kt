@@ -13,7 +13,6 @@ import com.mismayilov.common.utility.Util.Companion.YEAR_FORMAT
 import com.mismayilov.common.utility.showDatePicker
 import com.mismayilov.core.base.fragment.BaseFragment
 import com.mismayilov.core.managers.NavigationManager
-import com.mismayilov.create.R
 import com.mismayilov.create.databinding.FragmentCreateBinding
 import com.mismayilov.create.flow.CreateEffect
 import com.mismayilov.create.flow.CreateEvent
@@ -22,9 +21,11 @@ import com.mismayilov.create.viewmodel.CreateViewModel
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.uikit.util.getResourceIdByName
 import com.mismayilov.uikit.util.showToast
-import com.mismayilov.uikit.views.CustomBottomSheetDialog
+import com.mismayilov.create.view.CustomBottomSheetDialog
+import com.mismayilov.data.local.SharedPreferencesManager
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class CreateFragment :
@@ -33,6 +34,7 @@ class CreateFragment :
     private var selectedTabLayoutPosition = 0
     private var isNavigatedBack: Boolean = false
     private var isUpdate: Boolean = false
+    private var showBalance by Delegates.notNull<Boolean>()
 
     override fun getViewModelClass(): Class<CreateViewModel> = CreateViewModel::class.java
 
@@ -44,6 +46,7 @@ class CreateFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as NavigationManager).bottomNavigationVisibility(false)
+        showBalance = SharedPreferencesManager.getValue("hideBalance", false)
 
         setTime()
         initClickListeners()
@@ -95,7 +98,7 @@ class CreateFragment :
         icons: List<IconModel>,
         onSelected: ((Long) -> Unit)
     ) {
-        val bottomSheet = CustomBottomSheetDialog(icons, onSelected = onSelected, addIconSelected = {
+        val bottomSheet = CustomBottomSheetDialog(showBalance ,icons = icons, onSelected = onSelected, addIconSelected = {
             val iconType = icons.first().type
             isNavigatedBack = true
             (activity as NavigationManager).navigateByNavigationName(if (iconType == IconType.ACCOUNT.name) "account_navigation" else "icon_navigation")
@@ -142,7 +145,7 @@ class CreateFragment :
             }
             btnTransfer.setOnClickListener {
                 val date = SimpleDateFormat(MULTILINE_DATE_FORMAT).parse(txtDate.text.toString())
-                val note = null
+                val note = transactionNote.text.toString()
                 setEvent(CreateEvent.SaveData(date!!.time, note))
             }
 
@@ -190,6 +193,7 @@ class CreateFragment :
             binding.bottomCardIcon.setImageResource(getResourceIdByName(requireContext(), it.icon))
         }
         state.amount.let { binding.txtAmount.text = it }
+        state.note.let { binding.transactionNote.setText(it) }
         state.selectTabPosition?.let { binding.tabLayout.selectTab(it) }
     }
 

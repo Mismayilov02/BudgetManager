@@ -9,7 +9,6 @@ import androidx.room.Transaction
 import androidx.room.Update
 import com.mismayilov.domain.entities.local.AccountModel
 import com.mismayilov.domain.entities.local.IconModel
-import com.mismayilov.domain.entities.local.TransactionAmountsModel
 import com.mismayilov.domain.entities.local.TransactionModel
 import kotlinx.coroutines.flow.Flow
 

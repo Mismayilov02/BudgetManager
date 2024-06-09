@@ -5,19 +5,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.mismayilov.common.extensions.toBlurText
 import com.mismayilov.core.generics.MyDiffUtil
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.reports.databinding.ReportAccountListItemDesignBinding
 import com.mismayilov.uikit.R
-import com.mismayilov.uikit.databinding.AccountListItemDesignBinding
-import com.mismayilov.uikit.databinding.IconviewItemDesignBinding
 import com.mismayilov.uikit.util.getResourceIdByName
 
-class ReportAccountListRecyclerAdapter: ListAdapter<IconModel, ReportAccountListRecyclerAdapter.AccountListViewHolder>(MyDiffUtil<IconModel>(
+class ReportAccountListRecyclerAdapter constructor(val showBalance:Boolean = false): ListAdapter<IconModel, ReportAccountListRecyclerAdapter.AccountListViewHolder>(MyDiffUtil<IconModel>(
     itemsTheSame = { oldItem, newItem -> oldItem == newItem },
     contentsTheSame = { oldItem, newItem -> oldItem == newItem }
 )) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountListViewHolder {
         val binding = ReportAccountListItemDesignBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AccountListViewHolder(binding)
@@ -35,6 +33,8 @@ class ReportAccountListRecyclerAdapter: ListAdapter<IconModel, ReportAccountList
                 accountNameTxt.text = iconModel.name
                 balanceTxt.text = iconModel.balance.toString()
                iconCardview.background =  iconCardview.context.getDrawable( R.drawable.icon_unselected_backround)
+
+                balanceTxt.toBlurText(showBalance)
             }
         }
     }

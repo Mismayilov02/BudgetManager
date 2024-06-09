@@ -49,9 +49,7 @@ class AccountsFragment :
               setEvent(AccountsEvent.DeleteAccount(it))
           })
         }, onViewClick = { id ->
-            val directions =
                 AccountsFragmentDirections.actionSettingsFragmentToAccountManagerFragment(id)
-//            (activity as NavigationManager).navigateByDirection(directions)
         },
             onPinClick = {
                 setEvent(AccountsEvent.PinAccount(it))

@@ -1,16 +1,17 @@
-package com.mismayilov.uikit.views
+package com.mismayilov.create.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.mismayilov.create.databinding.CustomBottomSheetDialogBinding
 import com.mismayilov.domain.entities.local.IconModel
-import com.mismayilov.uikit.adapter.AccountListRecyclerAdapter
+import com.mismayilov.create.adapter.AccountListRecyclerAdapter
 import com.mismayilov.uikit.adapter.IconListRecyclerAdapter
-import com.mismayilov.uikit.databinding.CustomBottomSheetDialogBinding
+import kotlin.properties.Delegates
 
-class CustomBottomSheetDialog constructor(private val icons:List<IconModel>, private val onSelected: ((Long) -> Unit),
+class CustomBottomSheetDialog constructor(val showBalance:Boolean = false,private val icons:List<IconModel>, private val onSelected: ((Long) -> Unit),
                                           private val addIconSelected:(()->Unit)) : BottomSheetDialogFragment() {
     private var _binding: CustomBottomSheetDialogBinding? = null
     override fun onCreateView(
@@ -23,7 +24,6 @@ class CustomBottomSheetDialog constructor(private val icons:List<IconModel>, pri
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         _binding?.iconRecyclerView?.setHasFixedSize(true)
         if (icons[0].balance!=null) initAccountRecycler() else initIconRecycler()
 
@@ -34,7 +34,7 @@ class CustomBottomSheetDialog constructor(private val icons:List<IconModel>, pri
     }
 
     private fun initAccountRecycler() {
-        val adapter =  AccountListRecyclerAdapter()
+        val adapter =  AccountListRecyclerAdapter(showBalance)
         _binding?.apply {
             iconRecyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, 1)
             iconRecyclerView.adapter = adapter

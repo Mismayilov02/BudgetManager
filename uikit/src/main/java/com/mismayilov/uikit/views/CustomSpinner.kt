@@ -1,17 +1,13 @@
 package com.mismayilov.uikit.views
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SpinnerAdapter
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import com.mismayilov.uikit.R
 import com.mismayilov.uikit.databinding.CustomSpinnerDesignBinding
 
@@ -60,7 +56,7 @@ class CustomSpinner @JvmOverloads constructor(
             ) {
 
                 spinnerText = parent?.getItemAtPosition(position).toString()
-                (view as? TextView)?.setTextColor(resources.getColor(R.color.text_main, null))
+                (view as? TextView)?.setTextColor(resources.getColor(R.color.dark_blue, null))
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }

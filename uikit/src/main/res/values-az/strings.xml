@@ -58,6 +58,16 @@
     <string name="note">Qeyd</string>
     <string name="type">Növ</string>
     <string name="transaction_detail">Əməliyyat Təfərrüatları</string>
+    <string name="report">Hesabat</string>
+    <string name="accounts_balance">Hesab balansı</string>
+    <string name="total_balance">Ümumi Balans</string>
+    <string name="total_income">Ümumi Gəlir</string>
+    <string name="total_expense">Ümumi xərc</string>
+    <string name="total_transfer">Ümumi Transfer</string>
+    <string name="save">Saxla</string>
+    <string name="show_balance">Məbləği göstər</string>
+    <string name="hide_balance">Balansı gizlədin</string>
+    <string name="two_factor_auth">PIN qoruması</string>
 
 
     <array name="tab_titles_three">
@@ -73,7 +83,6 @@
 
 
     <array name="expense_icons">
-        <item>girlfriend</item>
         <item>beauty</item>
         <item>car</item>
         <item>child</item>
@@ -99,6 +108,10 @@
         <item>travel</item>
         <item>vegetable</item>
         <item>coin_bank</item>
+        <item>movie</item>
+        <item>party</item>
+        <item>petrol</item>
+        <item>girlfriend</item>
     </array>
 
     <array name="income_icons">
@@ -121,6 +134,12 @@
         <item>transfer</item>
         <item>usd</item>
         <item>wallet</item>
+        <item>coin_bank</item>
+        <item>cvv_card</item>
+        <item>euro</item>
+        <item>manat_sign</item>
+        <item>plant_invest</item>
+        <item>visa</item>
     </array>
 
     <array name="other_icon">
@@ -136,7 +155,7 @@
         <item>coffee</item>
         <item>fish</item>
         <item>flower_tulip</item>
-        <item>gamepad</item>
+        <item>game_pad</item>
         <item>graduation_cap</item>
         <item>gym</item>
         <item>hamburger</item>
@@ -155,5 +174,6 @@
         <item>world</item>
         <item>youtube</item>
     </array>
+
 
 </resources>

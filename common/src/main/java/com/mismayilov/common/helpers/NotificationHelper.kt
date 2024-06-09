@@ -5,8 +5,11 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
+import android.provider.CalendarContract.Colors
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.mismayilov.common.R
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -14,11 +17,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-class NotificationHelper  (val context: Context) {
+class NotificationHelper @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
 
     companion object {
-        private const val CHANNEL_ID = "REMINDER_CHANNELMM"
-        private const val CHANNEL_NAME = "Reminder ChannelMM"
+        private const val CHANNEL_ID = "PennyPlanner Channel"
+        private const val CHANNEL_NAME = "Reminder Channel"
         private const val CHANNEL_DESCRIPTION = "Channel for reminder notifications"
     }
 
@@ -32,7 +37,7 @@ class NotificationHelper  (val context: Context) {
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(message)
-            .setSmallIcon(androidx.core.R.drawable.notification_bg)
+            .setSmallIcon(R.drawable.money_edit)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
 

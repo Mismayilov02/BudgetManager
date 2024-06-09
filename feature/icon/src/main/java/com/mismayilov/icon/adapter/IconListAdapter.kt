@@ -17,8 +17,6 @@ class IconListAdapter constructor(
         itemsTheSame = { oldItem, newItem -> oldItem == newItem },
         contentsTheSame = { oldItem, newItem -> oldItem == newItem }
     )) {
-
-    public var pinningPosition = 0
     override fun onBindViewHolder(holder: IconViewHolder, position: Int) {
         holder.bind(getItem(position))
     }

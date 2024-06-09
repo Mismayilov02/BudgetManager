@@ -65,8 +65,9 @@
     <string name="total_expense">Total Expense</string>
     <string name="total_transfer">Total Transfer</string>
     <string name="save">Save</string>
-    <string name="show_balance">Show Balance</string>
-    <string name="two_factor_auth">Two Factor Authentication</string>
+    <string name="show_balance">Show amount</string>
+    <string name="hide_balance">Hide balance</string>
+    <string name="two_factor_auth">PIN protection</string>
 
 
     <array name="tab_titles_three">

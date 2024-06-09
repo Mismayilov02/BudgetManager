@@ -12,13 +12,17 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+import com.mismayilov.auth.fragment.PinFragment.Companion.isLockedScreen
+import com.mismayilov.auth.fragment.PinFragment.Companion.twoFactorAuth
 import com.mismayilov.core.managers.NavigationManager
+import com.mismayilov.core.managers.TwoFactorAuthManager
 import com.mismayilov.data.local.SharedPreferencesManager
 import com.mismayilov.uikit.util.getResourceIdByName
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavigationManager {
+class MainActivity : AppCompatActivity(), NavigationManager,TwoFactorAuthManager {
     private lateinit var bottomNavigationView: BottomNavigationView
     private var navController: NavController? = null
 
@@ -27,6 +31,7 @@ class MainActivity : AppCompatActivity(), NavigationManager {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         SharedPreferencesManager.init(this)
+        twoFactorAuth = SharedPreferencesManager.getValue("twoFactorAuth", false)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         navController = (supportFragmentManager.findFragmentById(
             R.id.fragmentContainerView
@@ -64,17 +69,33 @@ class MainActivity : AppCompatActivity(), NavigationManager {
         navController?.navigate(res, bundle)
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (twoFactorAuth) {
+            isLockedScreen = true
+            navigateByNavigationName("pinFragment")
+        }
+    }
 
     override fun back() {
         navController?.popBackStack()
     }
 
     override fun onBackPressed() {
-        if (navController?.currentDestination?.id == R.id.home_navigation) {
+        if (navController?.currentDestination?.id == R.id.home_navigation || isLockedScreen) {
             finish()
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun isTwoFactorAuthEnabled(): Boolean {
+        return twoFactorAuth
+    }
+
+    override fun setTwoFactorAuthEnabled(isEnabled: Boolean) {
+        twoFactorAuth = isEnabled
+        SharedPreferencesManager.setValue("twoFactorAuth", isEnabled)
     }
 
 }

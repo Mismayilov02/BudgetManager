@@ -5,8 +5,25 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_screen_white"
+    android:background="@color/white_off"
     tools:context=".fragment.CreateFragment">
+
+    <EditText
+        android:id="@+id/transactionNote"
+        style="@style/text_input_style"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:hint="@string/note"
+        android:layout_marginStart="@dimen/margin_xlarge"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:drawableEnd="@drawable/pencil"
+        android:paddingEnd="@dimen/margin_large"
+        android:background="@drawable/textview_backround"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAmount" />
 
     <com.mismayilov.uikit.views.CustomTabLayout
         android:id="@+id/tabLayout"
@@ -38,7 +55,7 @@
         android:id="@+id/iconCardview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardBackgroundColor="@color/default_card_view"
+        app:cardBackgroundColor="@color/card_dark_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +204,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:layout_marginStart="24dp"
-                app:cardBackgroundColor="@color/btn_default"
+                app:cardBackgroundColor="@color/button_dark_green"
                 app:cardCornerRadius="50dp"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_transfer"
                 app:layout_constraintStart_toStartOf="parent"
@@ -230,7 +247,7 @@
         android:layout_height="160dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
-        app:cardBackgroundColor="@color/cardview"
+        app:cardBackgroundColor="@color/background_light_gray"
         app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelinee"
         app:layout_constraintEnd_toEndOf="parent"
@@ -261,7 +278,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/bottomCardTitle"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout5"
-                    app:tint="@color/hint_text" />
+                    app:tint="@color/hint_gray" />
 
                 <TextView
                     android:id="@+id/textView4a"
@@ -269,7 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="@string/from"
-                    android:textColor="@color/hint_text"
+                    android:textColor="@color/hint_gray"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView7a"
                     app:layout_constraintStart_toEndOf="@+id/imageView7a"
@@ -282,7 +299,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="Home Decor"
-                    android:textColor="@color/text_main"
+                    android:textColor="@color/dark_blue"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout5"
@@ -356,7 +373,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/topCardTitle"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout3"
                     app:layout_constraintTop_toTopOf="@+id/constraintLayout3"
-                    app:tint="@color/hint_text" />
+                    app:tint="@color/hint_gray" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -364,7 +381,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="@string/send_to"
-                    android:textColor="@color/hint_text"
+                    android:textColor="@color/hint_gray"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView7"
                     app:layout_constraintStart_toEndOf="@+id/imageView7"
@@ -377,7 +394,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:text="Muhammed Ismayilov"
-                    android:textColor="@color/text_main"
+                    android:textColor="@color/dark_blue"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/constraintLayout3"
@@ -390,7 +407,7 @@
                 android:id="@+id/btnReverseCard"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
-                android:background="@color/black_10"
+                android:background="@color/black_translucent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -406,7 +423,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.5"
-                    app:tint="@color/text_main" />
+                    app:tint="@color/dark_blue" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
@@ -419,7 +436,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/btnReverseCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/hint_text" />
+                app:tint="@color/hint_gray" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -429,7 +446,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:text="@string/enter_amount"
-        android:textColor="@color/text_main"
+        android:textColor="@color/dark_blue"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -445,7 +462,7 @@
         android:layout_marginEnd="25dp"
         android:gravity="center"
         android:text="150.00"
-        android:textColor="@color/text_main"
+        android:textColor="@color/dark_blue"
         android:textSize="42sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

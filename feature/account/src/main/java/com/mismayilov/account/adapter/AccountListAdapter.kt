@@ -21,7 +21,6 @@ class AccountListAdapter constructor(
     )) {
 
     private var pinningPosition = 0
-    fun getPinnedPosition() = pinningPosition
     override fun onBindViewHolder(holder: AccountViewHolder, position: Int) {
         holder.bind(getItem(position))
     }

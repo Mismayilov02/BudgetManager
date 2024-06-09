@@ -47,7 +47,7 @@ class IconListRecyclerAdapter constructor(
                 if (!showItemName){
                     iconName.visibility = ViewGroup.GONE
                 }
-                iconName.setTextColor(iconName.context.getColor(if (layoutPosition == selectedPosition) R.color.green else R.color.text_main))
+                iconName.setTextColor(iconName.context.getColor(if (layoutPosition == selectedPosition) R.color.green else R.color.dark_blue))
                 iconCardview.background = iconCardview.context.getDrawable(if (layoutPosition == selectedPosition) R.drawable.icon_selected_backround else R.drawable.icon_unselected_backround)
                 iconCardview.setOnClickListener {
                     if (layoutPosition == selectedPosition) return@setOnClickListener

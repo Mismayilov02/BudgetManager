@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    tools:context=".views.CustomBottomSheetDialog">
+    tools:context="com.mismayilov.create.view.CustomBottomSheetDialog">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:visibility="visible"
-        app:cardBackgroundColor="@color/cardview"
+        app:cardBackgroundColor="@color/background_light_gray"
         app:cardCornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
                 android:background="@drawable/transfer_button_backround"
                 android:text="@string/select"
                 android:textAllCaps="false"
-                android:textColor="@color/cardview"
+                android:textColor="@color/background_light_gray"
                 android:textSize="16sp"
                 app:backgroundTint="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:text="@string/select_icon"
-                android:textColor="@color/text_main"
+                android:textColor="@color/dark_blue"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="18dp"
                 android:background="@android:color/transparent"
-                android:tint="@color/text_main"
+                android:tint="@color/dark_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/add" />
@@ -83,7 +83,7 @@
                 android:layout_marginTop="-28dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/horizontal_rule"
-                android:tint="@color/text_main"
+                android:tint="@color/dark_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

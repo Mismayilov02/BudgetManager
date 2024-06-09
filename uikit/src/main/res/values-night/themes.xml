@@ -2,16 +2,16 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.BudgetManager" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-         <item name="colorPrimary">@color/main_white</item>
-        <item name="android:statusBarColor">@color/main_screen_white</item>
+         <item name="colorPrimary">@color/gray_light</item>
+        <item name="android:statusBarColor">@color/white_off</item>
     </style>
 
     <style name="text_input_style" parent="Theme.BudgetManager">
         <item name="android:layout_width">0dp</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:textColor">@color/text_main</item>
-        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textColorHint">@color/hint_gray</item>
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:maxLength">20</item>
         <item name="maxLines">1</item>

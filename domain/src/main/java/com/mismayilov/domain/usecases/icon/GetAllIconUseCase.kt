@@ -1,6 +1,5 @@
 package com.mismayilov.domain.usecases.icon
 
-import androidx.core.graphics.drawable.IconCompat
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.repositories.IconRepository
 import kotlinx.coroutines.flow.Flow

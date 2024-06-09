@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import com.mismayilov.common.utility.Util.Companion.TIME_FORMAT
 import com.mismayilov.common.utility.showTimePicker
 import com.mismayilov.core.managers.NavigationManager
+import com.mismayilov.core.managers.TwoFactorAuthManager
 import com.mismayilov.data.local.SharedPreferencesManager
 import com.mismayilov.manager.ReminderManager
 import com.mismayilov.settings.databinding.FragmentSettingsBinding
@@ -20,52 +21,73 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
+
     private var _binding: FragmentSettingsBinding? = null
+    private val simpleDateFormat = SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
+
+    @Inject
+    lateinit var reminderManager: ReminderManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return _binding?.root
+        return  _binding!!.root
     }
-    @Inject
-    lateinit var reminderManager: ReminderManager
-
-    private val simpleDateFormat = SimpleDateFormat(TIME_FORMAT, Locale.getDefault())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initReminder()
         initClickListeners()
-        initBalanceSowing()
+        initBalanceSwitch()
         initTwoFactorAuth()
     }
 
     private fun initTwoFactorAuth() {
-        val twoFactorAuth = SharedPreferencesManager.getValue("twoFactorAuth", false)
-        _binding?.twoFactorAuthItemView?.setChecked = twoFactorAuth
-       /* _binding?.twoFactorItemView?.apply {
-            isChecked = SharedPreferencesManager.getValue("twoFactorAuth", false)
-            setSwitchListener = { isChecked, _ ->
-                SharedPreferencesManager.setValue("twoFactorAuth", isChecked)
+         _binding!!.otpSwitch.isChecked = SharedPreferencesManager.getValue("twoFactorAuth", false)
+         _binding!!.otpSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                (activity as NavigationManager).navigateByNavigationName("pinFragment")
+            } else {
+                (activity as TwoFactorAuthManager).setTwoFactorAuthEnabled(false)
             }
-        }*/
+        }
     }
 
-    private fun initBalanceSowing() {
-        val showBalance = SharedPreferencesManager.getValue("showBalance", false)
-        _binding?.balanceShowItemView?.setChecked = showBalance
-        _binding?.balanceShowItemView?.setSwitchListener = { isChecked, _ ->
-            SharedPreferencesManager.setValue("showBalance", isChecked)
+    private fun initBalanceSwitch() {
+        val showBalance = SharedPreferencesManager.getValue("hideBalance", false)
+         _binding!!.balanceSwitch.isChecked = showBalance
+         _binding!!.balanceSwitch.setOnCheckedChangeListener { _, isChecked ->
+            SharedPreferencesManager.setValue("hideBalance", isChecked)
         }
     }
 
     private fun initReminder() {
         _binding?.apply {
-            reminderItemView.setChecked = SharedPreferencesManager.getValue("reminder", false)
-            reminderItemView.setSubText(
-                simpleDateFormat.format(SharedPreferencesManager.getValue("reminderTime", 0L))
-            )
+            reminderSwitch.isChecked = SharedPreferencesManager.getValue("reminder", false)
+            reminderSubText.text = simpleDateFormat.format(SharedPreferencesManager.getValue("reminderTime", 0L))
+            reminderSwitch.setOnCheckedChangeListener { _, isChecked ->
+                handleReminderSwitch(isChecked, reminderSubText)
+            }
+        }
+    }
+
+    private fun handleReminderSwitch(isChecked: Boolean, textView: TextView) {
+        if (isChecked) {
+            showTimePicker(requireContext(), onTimeSelected = {
+                SharedPreferencesManager.setValue("reminderTime", it)
+                SharedPreferencesManager.setValue("reminder", true)
+                textView.text = simpleDateFormat.format(it)
+                textView.isVisible = true
+                reminderManager.scheduleDailyReminder(it)
+            }, onCancel = {
+                 _binding!!.reminderSwitch.isChecked = false
+            })
+        } else {
+            reminderManager.cancelDailyReminder()
+            SharedPreferencesManager.setValue("reminder", false)
+            textView.isVisible = false
         }
     }
 
@@ -77,38 +99,11 @@ class SettingsFragment : Fragment() {
             iconItemView.setOnClickListener {
                 (activity as NavigationManager).navigateByNavigationName("icon_navigation")
             }
-            reminderItemView.setSwitchListener = { isChecked, textView ->
-                getTimePicker(isChecked, textView)
-
-            }
         }
     }
-
-    private fun getTimePicker(checked: Boolean, textView: TextView) {
-        if (checked) {
-            showTimePicker(requireContext(), onTimeSelected = {
-                SharedPreferencesManager.setValue("reminderTime", it)
-                SharedPreferencesManager.setValue("reminder", true)
-                textView.text = simpleDateFormat.format(it)
-                textView.visibility = View.VISIBLE
-                val hours = simpleDateFormat.format(it).split(":")[0].toInt()
-                val minutes = simpleDateFormat.format(it).split(":")[1].toInt()
-                reminderManager.scheduleDailyReminder(it)
-            }, onCancel = {
-                _binding?.reminderItemView?.setChecked = false
-            })
-        } else {
-            reminderManager.cancelDailyReminder()
-            SharedPreferencesManager.setValue("reminder", false)
-            textView.visibility = View.GONE
-        }
-
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+         _binding = null
     }
-
 }

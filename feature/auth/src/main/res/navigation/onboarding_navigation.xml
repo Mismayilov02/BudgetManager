@@ -24,7 +24,12 @@
     </fragment>
     <fragment
         android:id="@+id/pinFragment"
-        android:name="com.mismayilov.auth.pin.PinFragment"
+        android:name="com.mismayilov.auth.fragment.PinFragment"
         android:label="fragment_pin"
-        tools:layout="@layout/fragment_pin" />
+        tools:layout="@layout/fragment_pin" >
+        <argument
+            android:name="isDeactive"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
 </navigation>

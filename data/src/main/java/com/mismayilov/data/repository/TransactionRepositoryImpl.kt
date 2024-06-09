@@ -5,7 +5,6 @@ import com.mismayilov.domain.entities.local.TransactionModel
 import com.mismayilov.data.database.dao.TransactionDao
 import com.mismayilov.domain.entities.local.AccountModel
 import com.mismayilov.domain.entities.local.IconModel
-import com.mismayilov.domain.entities.local.TransactionAmountsModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
