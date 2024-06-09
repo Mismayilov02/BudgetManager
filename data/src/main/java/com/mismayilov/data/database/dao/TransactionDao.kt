@@ -18,7 +18,7 @@ interface TransactionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg note: TransactionModel)
 
-    @Query("SELECT * FROM 'transaction' ORDER BY date DESC")
+    @Query("SELECT * FROM 'transaction' ORDER BY id DESC")
     fun getAll(): Flow<List<TransactionModel>>
 
     @Query("SELECT * FROM 'transaction' WHERE id=:id")
