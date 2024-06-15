@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AlarmReceiver : BroadcastReceiver() {
+class NotificationReceiver : BroadcastReceiver() {
     @Inject
     lateinit var notificationHelper: NotificationHelper
     override fun onReceive(context: Context, intent: Intent) {

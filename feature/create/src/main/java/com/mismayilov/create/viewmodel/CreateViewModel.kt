@@ -179,12 +179,13 @@ class CreateViewModel @Inject constructor(
         }
     }
 
-    private fun saveTransactionData(date: Long, note: String?) {
+    private fun saveTransactionData(date: Long, _note: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             val amount = getCurrentState().amount.toDouble()
             if (!isAmountValid(amount)) return@launch
             if (!isTransferValid()) return@launch
-
+           if (!isNoteValid(_note)) return@launch
+            val note = if ((_note?.trim() ?: "") == "") null else _note
             val changedAmount = getChangedAmount(amount)
             val accountModel = getAccountModel()
             val categoryModel = getCategoryModel()
@@ -201,6 +202,13 @@ class CreateViewModel @Inject constructor(
             }
             setEffect(CreateEffect.CloseScreen)
         }
+    }
+
+    private fun isNoteValid(note: String?): Boolean {
+        return if (note != null && note.length > 35) {
+            setEffect(CreateEffect.ShowToast("Note cannot be longer than 35 characters"))
+            false
+        } else true
     }
 
     private fun isAmountValid(amount: Double): Boolean {

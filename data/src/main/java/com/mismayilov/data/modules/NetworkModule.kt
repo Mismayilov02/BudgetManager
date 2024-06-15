@@ -18,11 +18,7 @@ object NetworkModule {
     private const val BASE_URL = "https://currency-exchange.p.rapidapi.com"
     private const val TIMEOUT = 30L
 
-    @Provides
-    @Singleton
-    fun provideHttpLogger() = HttpLoggingInterceptor().also { httpLoggingInterceptor ->
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-    }
+
 
     @Provides
     @Singleton
@@ -41,8 +37,6 @@ object NetworkModule {
         }
     }
 
-
-
     @Provides
     @Singleton
     fun provideRetrofit(
@@ -53,6 +47,12 @@ object NetworkModule {
             .client(onHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHttpLogger() = HttpLoggingInterceptor().also { httpLoggingInterceptor ->
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     }
 
     @Provides

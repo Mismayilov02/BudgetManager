@@ -1,4 +1,4 @@
-package com.abbtech.firstabbtechapp.modules
+package com.mismayilov.data.modules
 
 import com.mismayilov.data.repository.AccountRepositoryImpl
 import com.mismayilov.data.repository.CategoryRepositoryImpl

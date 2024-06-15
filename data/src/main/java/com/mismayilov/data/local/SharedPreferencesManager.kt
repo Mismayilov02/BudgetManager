@@ -6,7 +6,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
 object SharedPreferencesManager {
-    private val PREFERANCE_NAME = "BUDGET_MANAGER"
+    private const val PREFERANCE_NAME = "BUDGET_MANAGER"
     private lateinit var preferences: SharedPreferences
     private lateinit var editor:SharedPreferences.Editor
 

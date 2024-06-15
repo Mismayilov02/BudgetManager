@@ -51,6 +51,7 @@ dependencies {
     implementation(project(":feature:create"))
     implementation(project(":feature:account"))
     implementation(project(":feature:icon"))
+    implementation(project(":feature:widget"))
     implementation(project(":common"))
     implementation(project(":uikit"))
     implementation(project(":data"))

@@ -32,7 +32,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name="com.mismayilov.common.worker.AlarmReceiver" android:enabled="true" android:exported="true"/>
+        <receiver android:name="com.mismayilov.common.worker.NotificationReceiver" android:enabled="true" android:exported="true"/>
+        <receiver
+            android:name=".widget.FastActionWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/fast_action_widget_info" />
+        </receiver>
     </application>
 
 </manifest>
