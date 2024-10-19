@@ -5,20 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.mismayilov.create.databinding.CustomBottomSheetDialogBinding
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.create.adapter.AccountListRecyclerAdapter
+import com.mismayilov.create.databinding.IconsBottomSheetDialogBinding
 import com.mismayilov.uikit.adapter.IconListRecyclerAdapter
 import kotlin.properties.Delegates
 
-class CustomBottomSheetDialog constructor(val showBalance:Boolean = false,private val icons:List<IconModel>, private val onSelected: ((Long) -> Unit),
-                                          private val addIconSelected:(()->Unit)) : BottomSheetDialogFragment() {
-    private var _binding: CustomBottomSheetDialogBinding? = null
+class CustomBottomSheetDialog constructor(
+    private val showBalance:Boolean = false, private val icons:List<IconModel>, private val onSelected: ((Long) -> Unit),
+    private val addIconSelected:(()->Unit)) : BottomSheetDialogFragment() {
+    private var _binding: IconsBottomSheetDialogBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = CustomBottomSheetDialogBinding.inflate(inflater, container, false)
+        _binding = IconsBottomSheetDialogBinding.inflate(inflater, container, false)
         return _binding!!.root
     }
 

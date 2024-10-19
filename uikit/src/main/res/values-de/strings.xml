@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">PennyPlanner</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="get_started">Erste Schritte</string>
+    <string name="onboarding_title_1">Behalten Sie mit unserer App den Überblick über Ihre <font color='#43D17E'>Finanzen</font></string>
+    <string name="onboarding_title_2">Sie können jetzt ganz einfach Geld senden oder empfangen, ohne dass Transaktionsgebühren anfallen. Haben Sie Ihr Portemonnaie vergessen?? Keine Sorge, scannen und bezahlen</string>
+    <string name="available_balance">Verfügbarer Saldo</string>
+    <string name="income">Einnahme</string>
+    <string name="Income_now">Einnahme jetzt</string>
+    <string name="expense">Ausgabe</string>
+    <string name="expense_now">Ausgabe jetzt</string>
+    <string name="service">Dienste</string>
+    <string name="fast_action">Schnelle Aktion</string>
+    <string name="transaction">Transaktionen</string>
+    <string name="history">Verlauf</string>
+    <string name="recent_transaction">Letzte Transaktionen</string>
+    <string name="see_all">Alle anzeigen</string>
+    <string name="profile">Profil</string>
+    <string name="send">Senden</string>
+    <string name="receive">Empfangen</string>
+    <string name="transfer">Überweisen</string>
+    <string name="transfer_now">Überweisen Jetzt</string>
+    <string name="enter_amount">Betrag eingeben</string>
+    <string name="send_to">Senden an</string>
+    <string name="from">Von</string>
+    <string name="scan">Scannen</string>
+    <string name="top_up">Aufladen</string>
+    <string name="select_icon">Symbol auswählen</string>
+    <string name="select">Auswählen</string>
+    <string name="add">Hinzufügen</string>
+    <string name="manage_account">Konto verwalten</string>
+    <string name="manage_icon">Symbol verwalten</string>
+    <string name="accounts">Konten</string>
+    <string name="account">Konto</string>
+    <string name="settings">Einstellungen</string>
+    <string name="details">Details</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="are_you_sure">Sind Sie sicher?</string>
+    <string name="transaction_details">Transaktionsdetails</string>
+    <string name="transaction_history">Transaktionsverlauf</string>
+    <string name="reminder">Erinnerung</string>
+    <string name="icons">Symbole</string>
+    <string name="create_icon">Symbol erstellen</string>
+    <string name="create_account">Konto erstellen</string>
+    <string name="icon_name">Symbolname</string>
+    <string name="account_name">Kontoname</string>
+    <string name="account_type">Kontotyp</string>
+    <string name="account_balance">Kontostand</string>
+    <string name="currency">Währung</string>
+    <string name="amount">Betrag</string>
+    <string name="update">Aktualisieren</string>
+    <string name="end_date">Enddatum</string>
+    <string name="start_date">Startdatum</string>
+    <string name="date">Datum</string>
+    <string name="note">Hinweis</string>
+    <string name="type">Typ</string>
+    <string name="transaction_detail">Transaktionsdetails</string>
+    <string name="report">Bericht</string>
+    <string name="accounts_balance">Kontostand</string>
+    <string name="total_balance">Gesamtsaldo</string>
+    <string name="total_income">Gesamteinnahmen</string>
+    <string name="total_expense">Gesamtausgaben</string>
+    <string name="total_transfer">Gesamtüberweisung</string>
+    <string name="save">Speichern</string>
+    <string name="show_balance">Betrag anzeigen</string>
+    <string name="hide_balance">Saldo verbergen</string>
+    <string name="two_factor_auth">PIN-Schutz</string>
+    <string name="dark_mode">Dunkelmodus</string>
+    <string name="language">Sprache</string>
+    <string name="azerbaijan">Aserbaidschan</string>
+    <string name="select_language">Sprache auswählen</string>
+    <string name="cant_delete_icon">Sie können nicht alle Symbole löschen</string>
+    <string name="fill_all_fields">Bitte füllen Sie alle Felder aus</string>
+    <string name="account_updated">Konto aktualisiert</string>
+    <string name="account_created">Konto erstellt</string>
+    <string name="amount_0_error">Betrag kann nicht 0 sein</string>
+    <string name="cannot_transfer">Sie können nicht auf dasselbe Konto überweisen</string>
+    <string name="start_date_error">Startdatum kann nicht nach Enddatum liegen</string>
+    <string name="end_date_error">Enddatum kann nicht vor Startdatum liegen</string>
+    <string name="pin_incorrect">PIN ist falsch</string>
+    <string name="pin_not_match">PIN stimmt nicht überein</string>
+
+    <array name="languages">
+        <item>Englisch</item>
+        <item>Aserbaidschanisch</item>
+        <item>Türkisch</item>
+        <item>Russisch</item>
+        <item>Deutsch</item>
+        <item>Französisch</item>
+    </array>
+
+    <array name="tab_titles_three">
+        <item>Ausgaben</item>
+        <item>Einnahmen</item>
+        <item>Überweisung</item>
+    </array>
+
+    <array name="tab_titles_two">
+        <item>Ausgaben</item>
+        <item>Einnahmen</item>
+    </array>
+
+</resources>

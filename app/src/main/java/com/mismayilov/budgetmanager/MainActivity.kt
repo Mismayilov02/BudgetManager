@@ -1,22 +1,23 @@
 package com.mismayilov.budgetmanager
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
 import com.mismayilov.auth.fragment.PinFragment.Companion.isLockedScreen
 import com.mismayilov.auth.fragment.PinFragment.Companion.twoFactorAuth
 import com.mismayilov.core.managers.NavigationManager
 import com.mismayilov.core.managers.TwoFactorAuthManager
 import com.mismayilov.data.local.SharedPreferencesManager
+import com.mismayilov.manager.LanguageManager
 import com.mismayilov.uikit.util.getResourceIdByName
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
@@ -28,15 +29,31 @@ class MainActivity : AppCompatActivity(), NavigationManager,TwoFactorAuthManager
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+        SharedPreferencesManager.init(this)
+        checkLanguage()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        SharedPreferencesManager.init(this)
         twoFactorAuth = SharedPreferencesManager.getValue("twoFactorAuth", false)
+        checkDarkMode()
+
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         navController = (supportFragmentManager.findFragmentById(
             R.id.fragmentContainerView
         ) as NavHostFragment).navController
+        navController?.setGraph(R.navigation.base_navigation)
+        bottomNavigationView.setupWithNavController(navController!!)
+    }
 
+    private fun checkLanguage() {
+        val language = SharedPreferencesManager.getValue("languageCode", "en")
+        LanguageManager.setLocale(this, language)
+    }
+
+    private fun checkDarkMode() {
+        val darkMode = SharedPreferencesManager.getValue("darkMode", false)
+        if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK != if (darkMode) Configuration.UI_MODE_NIGHT_YES else Configuration.UI_MODE_NIGHT_NO) {
+            AppCompatDelegate.setDefaultNightMode(if (darkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     override fun bottomNavigationVisibility(isVisible: Boolean) {
@@ -44,8 +61,7 @@ class MainActivity : AppCompatActivity(), NavigationManager,TwoFactorAuthManager
     }
 
     override fun navigateToMain() {
-        navController?.setGraph(R.navigation.base_navigation)
-        bottomNavigationView.setupWithNavController(navController!!)
+        navController?.navigate(R.id.home_navigation, null, NavOptions.Builder().setPopUpTo(com.mismayilov.auth.R.id.onboarding_navigation, true).build())
     }
 
     override fun navigateByNavigationName(navigationName: String, startDestination: String?) {

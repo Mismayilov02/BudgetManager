@@ -18,9 +18,21 @@ class CustomItemView @JvmOverloads constructor(
     private val binding = CustomSettingsItemDesignBinding.inflate(
         LayoutInflater.from(context), this, true
     )
+
+    fun setSubText(subText: String) {
+        binding.subText.text = subText
+    }
+
     init {
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.CustomSettingsView)
+            val subText = typedArray.getString(R.styleable.CustomSettingsView_subText)
+            if (subText.isNullOrEmpty()) {
+                binding.subText.visibility = GONE
+            } else {
+                binding.subText.visibility = VISIBLE
+                binding.subText.text = subText
+            }
             binding.itemName.text = typedArray.getString(R.styleable.CustomSettingsView_itemText)
             binding.iconImageView.setImageResource(
                 typedArray.getResourceId(

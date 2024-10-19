@@ -80,7 +80,7 @@ class CreateAccountViewModel @Inject constructor(
         when (event) {
             is CreateAccountEvent.CreateAccount -> {
                 if (event.accountName.isEmpty() || event.accountType.isEmpty() || event.currency.isEmpty() || event.balance.isEmpty()) {
-                    setEffect(CreateAccountEffect.ShowToast("Please fill all fields"))
+                    setEffect(CreateAccountEffect.ShowToast(context.getString(com.mismayilov.uikit.R.string.fill_all_fields)))
                 } else {
                     createAccount(
                         event.accountName,
@@ -131,7 +131,7 @@ class CreateAccountViewModel @Inject constructor(
             )
             createAccountUseCase(accountModel, isUpdate)
             if (isUpdate) getTransactionAccountUpdateUseCase(accountModel)
-            setEffect(CreateAccountEffect.ShowToast(if (isUpdate) "Account updated" else "Account created"))
+            setEffect(CreateAccountEffect.ShowToast(if (isUpdate) context.getString(com.mismayilov.uikit.R.string.account_updated) else context.getString(com.mismayilov.uikit.R.string.account_created)))
             setEffect(CreateAccountEffect.CloseFragment)
         }
     }

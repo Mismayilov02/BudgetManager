@@ -1,5 +1,6 @@
 package com.mismayilov.auth.viewmodel
 
+import android.content.Context
 import com.mismayilov.auth.flow.pin.PinEffect
 import com.mismayilov.auth.flow.pin.PinEvent
 import com.mismayilov.auth.flow.pin.PinState
@@ -7,9 +8,12 @@ import com.mismayilov.auth.fragment.PinFragment.Companion.isLockedScreen
 import com.mismayilov.auth.fragment.PinFragment.Companion.twoFactorAuth
 import com.mismayilov.core.base.viewmodel.BaseViewModel
 import com.mismayilov.data.local.SharedPreferencesManager
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class PinViewModel @Inject constructor() : BaseViewModel<PinState, PinEvent, PinEffect>() {
+class PinViewModel @Inject constructor(
+    @ApplicationContext private val context: Context
+) : BaseViewModel<PinState, PinEvent, PinEffect>() {
     override fun getInitialState(): PinState = PinState()
 
     private val _twoFactorAuthPinCode =
@@ -48,7 +52,8 @@ class PinViewModel @Inject constructor() : BaseViewModel<PinState, PinEvent, Pin
             handleTwoFactorAuth()
         } else if (_pinCodeFirst.length == 4 && _pinCodeSecond.length == 4) {
             handlePinMatch()
-        } else if (_pinCodeFirst.length == 4) {
+        } else if (_pinCodeLength == 4) {
+            _pinCodeLength = 0
             setState(getCurrentState().copy(pinLength = 0))
         }
     }
@@ -58,7 +63,7 @@ class PinViewModel @Inject constructor() : BaseViewModel<PinState, PinEvent, Pin
             navigateToAppropriateScreen()
         } else {
             resetPin()
-            setEffect(PinEffect.ShowToast("Pin code is incorrect"))
+            setEffect(PinEffect.ShowToast(context.getString(com.mismayilov.uikit.R.string.pin_incorrect)))
         }
     }
 
@@ -70,7 +75,7 @@ class PinViewModel @Inject constructor() : BaseViewModel<PinState, PinEvent, Pin
             setEffect(PinEffect.NavigateToHome)
         } else {
             resetPin()
-            setEffect(PinEffect.ShowToast("Pin codes do not match"))
+            setEffect(PinEffect.ShowToast(context.getString(com.mismayilov.uikit.R.string.pin_not_match)))
         }
     }
 

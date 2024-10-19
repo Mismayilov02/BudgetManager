@@ -1,15 +1,19 @@
 package com.mismayilov.icon.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.mismayilov.common.unums.IconType
 import com.mismayilov.core.base.viewmodel.BaseViewModel
 import com.mismayilov.domain.entities.local.IconModel
 import com.mismayilov.domain.usecases.icon.DeleteIconUseCase
 import com.mismayilov.domain.usecases.icon.GetAllIconUseCase
+import com.mismayilov.icon.R
 import com.mismayilov.icon.flow.icon_manager.IconManagerEffect
 import com.mismayilov.icon.flow.icon_manager.IconManagerEvent
 import com.mismayilov.icon.flow.icon_manager.IconManagerState
+import com.mismayilov.uikit.util.getResourceIdByName
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class IconManagerViewModel @Inject constructor(
     private val getAllIconUseCase: GetAllIconUseCase,
-    private val deleteIconUseCase: DeleteIconUseCase
+    private val deleteIconUseCase: DeleteIconUseCase,
+    @ApplicationContext private val context: Context
 ) : BaseViewModel<IconManagerState, IconManagerEvent, IconManagerEffect>() {
 
     private val _icons = MutableStateFlow<List<IconModel>>(emptyList())
@@ -43,7 +48,7 @@ class IconManagerViewModel @Inject constructor(
 
     private suspend fun deleteIcon(id: Long) {
         if (_icons.value.filter { it.type == currentIconType.name }.size == 1) {
-            setEffect(IconManagerEffect.ShowToast("You can't delete all icons"))
+            setEffect(IconManagerEffect.ShowToast(context.getString(com.mismayilov.uikit.R.string.cant_delete_icon)))
             return
         }
         deleteIconUseCase(id)

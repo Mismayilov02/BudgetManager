@@ -12,7 +12,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="5dp"
-        app:cardBackgroundColor="@color/white_off"
+        app:cardBackgroundColor="@color/background_light_gray"
         app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/btnTrash"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5"
-                app:srcCompat="@drawable/pencil" />
+                app:srcCompat="@drawable/pencil"
+                app:tint="@color/icon_tint" />
 
             <TextView
                 android:id="@+id/accountName"

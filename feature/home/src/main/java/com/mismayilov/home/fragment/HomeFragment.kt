@@ -47,7 +47,7 @@ class HomeFragment :
 
     private fun checkShowBalance() {
         binding.apply {
-            showBalance = SharedPreferencesManager.getValue("hideBalance", true)
+            showBalance = SharedPreferencesManager.getValue("hideBalance", false)
             val textViewList = listOf(amountPinnedAccount, incomeTxt, expenseTxt)
             textViewList.forEach {
                 it.toBlurText(showBalance)

@@ -68,6 +68,29 @@
     <string name="show_balance">Məbləği göstər</string>
     <string name="hide_balance">Balansı gizlədin</string>
     <string name="two_factor_auth">PIN qoruması</string>
+    <string name="dark_mode">Qaranlıq Rejim</string>
+    <string name="language">Dil</string>
+    <string name="azerbaijan">Azərbaycan</string>
+    <string name="select_language">Dil seçin</string>
+    <string name="cant_delete_icon">Bütün nişanları silə bilməzsiniz</string>
+    <string name="fill_all_fields">Lütfən, bütün sahələri doldurun</string>
+    <string name="account_updated">Hesab yeniləndi</string>
+    <string name="account_created">Hesab yaradıldı</string>
+    <string name="amount_0_error">Məbləğ 0 ola bilməz</string>
+    <string name="cannot_transfer">Siz eyni hesaba köçürə bilməzsiniz</string>
+    <string name="start_date_error">Başlama tarixi bitmə tarixindən sonra ola bilməz</string>
+    <string name="end_date_error">Bitmə tarixi başlama tarixindən əvvəl ola bilməz</string>
+    <string name="pin_incorrect">PIN səhvdir</string>
+    <string name="pin_not_match">PIN kod uyğun gəlmir</string>
+
+    <array name="languages">
+        <item>İngilis dili</item>
+        <item>Azərbaycanca</item>
+        <item>Türkcə</item>
+        <item>Rus dili</item>
+        <item>Almanca</item>
+        <item>Fransız</item>
+    </array>
 
 
     <array name="tab_titles_three">
@@ -79,100 +102,6 @@
     <array name="tab_titles_two">
         <item>Expense</item>
         <item>Income</item>
-    </array>
-
-
-    <array name="expense_icons">
-        <item>beauty</item>
-        <item>car</item>
-        <item>child</item>
-        <item>clothing</item>
-        <item>decor</item>
-        <item>education</item>
-        <item>electronic</item>
-        <item>food</item>
-        <item>fruit</item>
-        <item>gift</item>
-        <item>health</item>
-        <item>home</item>
-        <item>liquor</item>
-        <item>pet</item>
-        <item>repair</item>
-        <item>shopping</item>
-        <item>smoking</item>
-        <item>snacks</item>
-        <item>social</item>
-        <item>sport</item>
-        <item>telephone</item>
-        <item>transport</item>
-        <item>travel</item>
-        <item>vegetable</item>
-        <item>coin_bank</item>
-        <item>movie</item>
-        <item>party</item>
-        <item>petrol</item>
-        <item>girlfriend</item>
-    </array>
-
-    <array name="income_icons">
-        <item>award</item>
-        <item>bank</item>
-        <item>investment</item>
-        <item>part_time</item>
-        <item>salary</item>
-        <item>tik_tok</item>
-    </array>
-
-    <array name="transfer_icons">
-        <item>bank</item>
-        <item>card</item>
-        <item>cash</item>
-        <item>paypal</item>
-        <item>bitcoin</item>
-        <item>sack_dollar</item>
-        <item>tax_alt</item>
-        <item>transfer</item>
-        <item>usd</item>
-        <item>wallet</item>
-        <item>coin_bank</item>
-        <item>cvv_card</item>
-        <item>euro</item>
-        <item>manat_sign</item>
-        <item>plant_invest</item>
-        <item>visa</item>
-    </array>
-
-    <array name="other_icon">
-        <item>android</item>
-        <item>basketball</item>
-        <item>bike</item>
-        <item>chat_gpt</item>
-        <item>bow_arrow</item>
-        <item>bowling_pins</item>
-        <item>cake</item>
-        <item>chart_dollar</item>
-        <item>chart_up_dollar</item>
-        <item>coffee</item>
-        <item>fish</item>
-        <item>flower_tulip</item>
-        <item>game_pad</item>
-        <item>graduation_cap</item>
-        <item>gym</item>
-        <item>hamburger</item>
-        <item>mode_landscape</item>
-        <item>money_edit</item>
-        <item>paw</item>
-        <item>pizza</item>
-        <item>restaurant</item>
-        <item>rings_wedding</item>
-        <item>rocket_launch</item>
-        <item>route</item>
-        <item>selling</item>
-        <item>spotify</item>
-        <item>tomato</item>
-        <item>umbrella_beach</item>
-        <item>world</item>
-        <item>youtube</item>
     </array>
 
 

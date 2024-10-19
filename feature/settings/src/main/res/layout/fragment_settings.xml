@@ -8,6 +8,75 @@
     android:background="@color/white_off"
     tools:context=".fragment.SettingsFragment">
 
+    <com.mismayilov.settings.view.CustomItemView
+        android:id="@+id/languageItemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        app:iconImage="@drawable/language"
+        app:itemText="@string/language"
+        app:subText="@string/azerbaijan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconItemView" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnDarkMode"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginEnd="24dp"
+        app:cardBackgroundColor="@color/background_light_gray"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAccounts">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iconnImageVieww"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/low_vision"
+                android:tint="@color/icon_tint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/iitemNamee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/hide_balance"
+                android:textColor="@color/dark_blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/iconnImageVieww"
+                app:layout_constraintStart_toEndOf="@+id/iconnImageVieww"
+                app:layout_constraintTop_toTopOf="@+id/iconnImageVieww" />
+
+            <Switch
+                android:id="@+id/balanceSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:thumbTint="@color/dark_blue"
+                android:trackTint="@color/green"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/btnAcaacounts"
         android:layout_width="0dp"
@@ -19,7 +88,7 @@
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iconItemView">
+        app:layout_constraintTop_toBottomOf="@+id/languageItemView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,18 +100,19 @@
                 android:layout_height="32dp"
                 android:layout_marginStart="@dimen/margin_large"
                 android:src="@drawable/calendar"
+                android:tint="@color/icon_tint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5" />
 
             <TextView
-                android:id="@+id/reminderSubText"
+                android:id="@+id/reminderSubtext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18:55"
                 android:textColor="@color/green"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/iconImageVieww"
                 app:layout_constraintStart_toStartOf="@+id/itemNamee"
                 app:layout_constraintTop_toBottomOf="@+id/itemNamee" />
@@ -56,7 +126,7 @@
                 android:textColor="@color/dark_blue"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/reminderSubText"
+                app:layout_constraintBottom_toTopOf="@+id/reminderSubtext"
                 app:layout_constraintStart_toEndOf="@+id/iconImageVieww"
                 app:layout_constraintTop_toTopOf="@+id/iconImageVieww" />
 
@@ -82,11 +152,12 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="@dimen/margin_medium"
         android:layout_marginEnd="24dp"
+        android:visibility="visible"
         app:cardBackgroundColor="@color/background_light_gray"
         app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAccounts">
+        app:layout_constraintTop_toBottomOf="@+id/btnDarkMode">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -97,7 +168,8 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
-                android:src="@drawable/low_vision"
+                android:src="@drawable/moon"
+                android:tint="@color/icon_tint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -108,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/hide_balance"
+                android:text="@string/dark_mode"
                 android:textColor="@color/dark_blue"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -117,7 +189,7 @@
                 app:layout_constraintTop_toTopOf="@+id/iconImageView" />
 
             <Switch
-                android:id="@+id/balanceSwitch"
+                android:id="@+id/darkModeSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
@@ -154,6 +226,7 @@
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
                 android:src="@drawable/otp"
+                android:tint="@color/icon_tint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

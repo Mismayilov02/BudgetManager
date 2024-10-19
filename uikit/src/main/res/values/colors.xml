@@ -7,6 +7,7 @@
     <color name="primary_green">#43D17E</color>
     <color name="gray_light">#E7E8E8</color>
     <color name="dark_gray">#050505</color>
+    <color name="icon_tint">#000000</color>
     <color name="dark_blue">#373C53</color>
     <color name="hint_gray">#A0A0A0</color>
     <color name="background_light_gray">#F9F9FA</color>

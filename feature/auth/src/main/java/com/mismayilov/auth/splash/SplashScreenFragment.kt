@@ -36,13 +36,11 @@ class SplashScreenFragment : Fragment() {
                 isUserLoggedIn && twoFactorAuth -> {
                     (activity as NavigationManager).navigateByNavigationName(
                         "pinFragment",
-                        "splashScreenFragment"
                     )
                 }
-                isUserLoggedIn -> (activity as NavigationManager).navigateToMain()
+                isUserLoggedIn -> (activity as? NavigationManager)?.navigateToMain()
                 else -> (activity as NavigationManager).navigateByNavigationName(
                     "onboardingFragment",
-                    "splashScreenFragment"
                 )
             }
         }, 2200)

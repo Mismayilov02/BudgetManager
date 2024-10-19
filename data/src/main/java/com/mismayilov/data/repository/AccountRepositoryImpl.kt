@@ -8,8 +8,7 @@ import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
-)
-    : AccountRepository {
+):AccountRepository {
     override fun getAccounts(): Flow<List<AccountModel>> {
         return accountDao.getAll()
     }

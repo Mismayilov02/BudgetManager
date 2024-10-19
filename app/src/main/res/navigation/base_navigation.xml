@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/home_navigation"
+    app:startDestination="@id/onboarding_navigation"
     android:id="@+id/base_navigation">
 
     <include app:graph="@navigation/home_navigation" />
@@ -14,5 +14,6 @@
         android:id="@+id/pinFragment"
         android:name="com.mismayilov.auth.fragment.PinFragment"
         android:label="PinFragment" />
+    <include app:graph="@navigation/onboarding_navigation" />
 
 </navigation>

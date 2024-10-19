@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">PennyPlanner</string>
+    <string name="action_settings">Настройки</string>
+    <string name="get_started">Начать</string>
+    <string name="onboarding_title_1">Отслеживайте свои <font color='#43D17E'>финансы</font> с помощью нашего приложения</string>
+    <string name="onboarding_title_2">Теперь вы можете легко отправлять и получать деньги без комиссии за транзакцию. Забыли свой кошелек?? Не волнуйтесь, сканируйте и платите</string>
+    <string name="available_balance">Доступный баланс</string>
+    <string name="income">Доход</string>
+    <string name="Income_now">Доход сейчас</string>
+    <string name="expense">Расход</string>
+    <string name="expense_now">Расходовать сейчас</string>
+    <string name="service">Услуги</string>
+    <string name="fast_action">Быстрое действие</string>
+    <string name="transaction">Транзакции</string>
+    <string name="history">История</string>
+    <string name="recent_transaction">Недавние транзакции</string>
+    <string name="see_all">Просмотреть все</string>
+    <string name="profile">Профиль</string>
+    <string name="send">Отправить</string>
+    <string name="receive">Получить</string>
+    <string name="transfer">Перенос</string>
+    <string name="transfer_now">Перевести сейчас</string>
+    <string name="enter_amount">Введите сумму</string>
+    <string name="send_to">Отправить</string>
+    <string name="from">От</string>
+    <string name="scan">Сканировать</string>
+    <string name="top_up">Пополнение</string>
+    <string name="select_icon">Выбрать значок</string>
+    <string name="select">Выбрать</string>
+    <string name="add">Добавить</string>
+    <string name="manage_account">Управление аккаунтом</string>
+    <string name="manage_icon">Значок управления</string>
+    <string name="accounts">Аккаунты</string>
+    <string name="account">Аккаунт</string>
+    <string name="settings">Настройки</string>
+    <string name="details">Подробности</string>
+    <string name="edit">Изменить</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="are_you_sure">Вы уверены?</string>
+    <string name="transaction_details">Детали транзакции</string>
+    <string name="transaction_history">История транзакций</string>
+    <string name="reminder">Напоминание</string>
+    <string name="icons">Значки</string>
+    <string name="create_icon">Создать значок</string>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="icon_name">Имя значка</string>
+    <string name="account_name">Имя учетной записи</string>
+    <string name="account_type">Тип учетной записи</string>
+    <string name="account_balance">Баланс аккаунта</string>
+    <string name="currency">Валюта</string>
+    <string name="amount">Сумма</string>
+    <string name="update">Обновить</string>
+    <string name="end_date">Дата окончания</string>
+    <string name="start_date">Дата начала</string>
+    <string name="date">Дата</string>
+    <string name="note">Примечание</string>
+    <string name="type">Тип</string>
+    <string name="transaction_detail">Детали транзакции</string>
+    <string name="report">Отчет</string>
+    <string name="accounts_balance">Баланс аккаунта</string>
+    <string name="total_balance">Общий баланс</string>
+    <string name="total_income">Общий доход</string>
+    <string name="total_expense">Общая сумма расходов</string>
+    <string name="total_transfer">Общая сумма перевода</string>
+    <string name="save">Сохранить</string>
+    <string name="show_balance">Показать сумму</string>
+    <string name="hide_balance">Скрыть баланс</string>
+    <string name="two_factor_auth">Защита PIN-кодом</string>
+    <string name="dark_mode">Темный режим</string>
+    <string name="language">Язык</string>
+    <string name="azerbaijan">Азербайджан</string>
+    <string name="select_language">Выбрать язык</string>
+    <string name="cant_delete_icon">Вы не можете удалить все значки</string>
+    <string name="fill_all_fields">Пожалуйста, заполните все поля</string>
+    <string name="account_updated">Аккаунт обновлен</string>
+    <string name="account_created">Аккаунт создан</string>
+    <string name="amount_0_error">Сумма не может быть равна 0</string>
+    <string name="cannot_transfer">Вы не можете перенести на тот же аккаунт</string>
+    <string name="start_date_error">Дата начала не может быть позже даты окончания</string>
+    <string name="end_date_error">Дата окончания не может быть раньше даты начала</string>
+    <string name="pin_incorrect">ПИН-код неверен</string>
+    <string name="pin_not_match">ПИН-код не соответствует</string>
+
+    <array name="languages">
+        <item>Английский</item>
+        <item>Азербайджанский</item>
+        <item>Турецкий</item>
+        <item>Русский</item>
+        <item>Немецкий</item>
+        <item>Французский</item>
+    </array>
+
+    <array name="tab_titles_three">
+        <item>Расход</item>
+        <item>Доход</item>
+        <item>Перенос</item>
+    </array>
+
+    <array name="tab_titles_two">
+        <item>Расход</item>
+        <item>Доход</item>
+    </array>
+</resources>

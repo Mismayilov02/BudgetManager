@@ -1,6 +1,7 @@
 package com.mismayilov.create.viewmodel
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.mismayilov.common.extensions.toCurrencyString
@@ -20,6 +21,7 @@ import com.mismayilov.domain.usecases.account.UpdateAccountAmountUseCase
 import com.mismayilov.domain.usecases.remote.GetExchangeUseCase
 import com.mismayilov.domain.usecases.transaction.GetTransactionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
@@ -35,7 +37,8 @@ class CreateViewModel @Inject constructor(
     private val getAllIconUseCase: GetAllIconUseCase,
     private val getAllAccountUseCase: GetAllAccountUseCase,
     private val getCurrencyUseCase: GetExchangeUseCase,
-    private val updateAccountAmountUseCase: UpdateAccountAmountUseCase
+    private val updateAccountAmountUseCase: UpdateAccountAmountUseCase,
+    @ApplicationContext private val context: Context
 ) : BaseViewModel<CreateState, CreateEvent, CreateEffect>() {
 
     private var updateAccountId: Long? = null
@@ -184,7 +187,6 @@ class CreateViewModel @Inject constructor(
             val amount = getCurrentState().amount.toDouble()
             if (!isAmountValid(amount)) return@launch
             if (!isTransferValid()) return@launch
-           if (!isNoteValid(_note)) return@launch
             val note = if ((_note?.trim() ?: "") == "") null else _note
             val changedAmount = getChangedAmount(amount)
             val accountModel = getAccountModel()
@@ -204,23 +206,17 @@ class CreateViewModel @Inject constructor(
         }
     }
 
-    private fun isNoteValid(note: String?): Boolean {
-        return if (note != null && note.length > 35) {
-            setEffect(CreateEffect.ShowToast("Note cannot be longer than 35 characters"))
-            false
-        } else true
-    }
 
     private fun isAmountValid(amount: Double): Boolean {
         return if (amount == 0.0) {
-            setEffect(CreateEffect.ShowToast("Amount cannot be 0"))
+            setEffect(CreateEffect.ShowToast(context.getString(com.mismayilov.uikit.R.string.amount_0_error)))
             false
         } else true
     }
 
     private fun isTransferValid(): Boolean {
         return if (currentIconType == IconType.ACCOUNT && getCurrentState().selectedTopCard == getCurrentState().selectedBottomCard) {
-            setEffect(CreateEffect.ShowToast("Cannot transfer to the same account"))
+            setEffect(CreateEffect.ShowToast(context.getString(com.mismayilov.uikit.R.string.cannot_transfer)))
             false
         } else true
     }

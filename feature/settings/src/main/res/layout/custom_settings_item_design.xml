@@ -24,19 +24,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/subText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/azerbaijan"
+                android:textColor="@color/green"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+                app:layout_constraintStart_toStartOf="@+id/itemName"
+                app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
             <ImageView
                 android:id="@+id/iconImageView"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="12dp"
                 android:src="@drawable/account"
+                app:tint="@color/icon_tint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                />
+                app:layout_constraintVertical_bias="0.5" />
 
             <ImageView
+                app:tint="@color/icon_tint"
                 android:id="@+id/rightIcon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -58,7 +70,7 @@
                 android:textColor="@color/dark_blue"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+                app:layout_constraintBottom_toTopOf="@+id/subText"
                 app:layout_constraintStart_toEndOf="@+id/iconImageView"
                 app:layout_constraintTop_toTopOf="@+id/iconImageView"
                 app:layout_constraintVertical_bias="0.5" />

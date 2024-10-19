@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_settings">Ayarlar</string>
+    <string name="get_started">Başlayın</string>
+    <string name="onboarding_title_1">Uygulamamızla <font color='#43D17E'>finansal durumunuzu</font> takip edin</string>
+    <string name="onboarding_title_2">Artık herhangi bir işlem ücreti ödemeden kolayca para gönderebilir veya alabilirsiniz. Cüzdanınızı mı unuttunuz? Endişelenmeyin tarayın ve ödeme yapın</string>
+    <string name="available_balance">Kullanılabilir Bakiye</string>
+    <string name="income">Gelir</string>
+    <string name="Income_now">Şimdi Gelir</string>
+    <string name="expense">Gider</string>
+    <string name="expense_now">Şimdiki Gider</string>
+    <string name="service">Hizmetler</string>
+    <string name="fast_action">Hızlı İşlem</string>
+    <string name="transaction">İşlemler</string>
+    <string name="history">Geçmiş</string>
+    <string name="recent_transaction">Son İşlemler</string>
+    <string name="see_all">Tümünü Gör</string>
+    <string name="profile">Profil</string>
+    <string name="send">Gönder</string>
+    <string name="receive">Al</string>
+    <string name="transfer">Aktar</string>
+    <string name="transfer_now">Şimdi Aktar</string>
+    <string name="enter_amount">Tutarını Girin</string>
+    <string name="send_to">Gönder</string>
+    <string name="from">Gönderen</string>
+    <string name="scan">Tara</string>
+    <string name="top_up">Yükleme</string>
+    <string name="select_icon">Simge seç</string>
+    <string name="select">Seç</string>
+    <string name="add">Ekle</string>
+    <string name="manage_account">Hesabı Yönet</string>
+    <string name="manage_icon">Simgeyi Yönet</string>
+    <string name="accounts">Hesaplar</string>
+    <string name="account">Hesap</string>
+    <string name="settings">Ayarlar</string>
+    <string name="details">Ayrıntılar</string>
+    <string name="edit">Düzenle</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="are_you_sure">Emin misiniz?</string>
+    <string name="transaction_details">İşlem Ayrıntıları</string>
+    <string name="transaction_history">İşlem Geçmişi</string>
+    <string name="reminder">Hatırlatıcı</string>
+    <string name="icons">Simgeler</string>
+    <string name="create_icon">Simge Oluştur</string>
+    <string name="create_account">Hesap Oluştur</string>
+    <string name="icon_name">Simge Adı</string>
+    <string name="account_name">Hesap Adı</string>
+    <string name="account_type">Hesap Türü</string>
+    <string name="account_balance">Hesap Bakiyesi</string>
+    <string name="currency">Para birimi</string>
+    <string name="amount">Tutar</string>
+    <string name="update">Güncelle</string>
+    <string name="end_date">Bitiş Tarihi</string>
+    <string name="start_date">Başlangıç ​​Tarihi</string>
+    <string name="date">Tarih</string>
+    <string name="note">Not</string>
+    <string name="type">Tür</string>
+    <string name="transaction_detail">İşlem Ayrıntıları</string>
+    <string name="report">Rapor</string>
+    <string name="accounts_balance">Hesap Bakiyesi</string>
+    <string name="total_balance">Toplam Bakiye</string>
+    <string name="total_income">Toplam Gelir</string>
+    <string name="total_expense">Toplam Gider</string>
+    <string name="total_transfer">Toplam Transfer</string>
+    <string name="save">Kaydet</string>
+    <string name="show_balance">Tutarı göster</string>
+    <string name="hide_balance">Bakiyeyi gizle</string>
+    <string name="two_factor_auth">PIN koruması</string>
+    <string name="dark_mode">Karanlık Mod</string>
+    <string name="language">Dil</string>
+    <string name="azerbaijan">Azerbaycan</string>
+    <string name="select_language">Dil Seçin</string>
+    <string name="cant_delete_icon">Tüm simgeleri silemezsiniz</string>
+    <string name="fill_all_fields">Lütfen tüm alanları doldurun</string>
+    <string name="account_updated">Hesap güncellendi</string>
+    <string name="account_created">Hesap oluşturuldu</string>
+    <string name="amount_0_error">Tutar 0 olamaz</string>
+    <string name="cannot_transfer">Aynı hesaba aktarım yapamazsınız</string>
+    <string name="start_date_error">Başlangıç tarihi bitiş tarihinden sonra olamaz</string>
+    <string name="end_date_error">Bitiş tarihi başlangıç tarihinden önce olamaz</string>
+    <string name="pin_incorrect">PIN hatalı</string>
+    <string name="pin_not_match">PIN eşleşmiyor</string>
+
+    <array name="languages">
+        <item>İngilizce</item>
+        <item>Azerbaycan</item>
+        <item>Türkçe</item>
+        <item>Rusça</item>
+        <item>Almanca</item>
+        <item>Fransızca</item>
+    </array>
+
+    <array name ="tab_titles_three">
+        <item>Gider</item>
+        <item>Gelir</item>
+        <item>Aktar</item>
+    </array>
+
+    <array name="tab_titles_two">
+        <item>Gider</item>
+        <item>Gelir</item>
+    </array>
+
+</resources>
